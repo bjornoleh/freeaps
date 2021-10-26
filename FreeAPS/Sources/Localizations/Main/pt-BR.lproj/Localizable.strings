@@ -4,414 +4,402 @@
 */
 /* Bolus screen when adding insulin */
 
-"Add insulin without actually bolusing" = "Legg til insulin uten å gi bolus";
+"Add insulin without actually bolusing" = "Adicionar insulina sem tomar bolus";
 
 /* Add insulin from source outside of pump */
-"Add %@ without bolusing" = "Registrer %@ uten å gi bolus";
+"Add %@ without bolusing" = "Adicionar %@ sem tomar bolus";
 
 "Bolus" = "Bolus";
 
-"Close" = "Lukk";
+"Close" = "Fechar";
 
 /* Continue after added carbs without bolus */
-"Continue without bolus" = "Fortsett uten å gi bolus";
+"Continue without bolus" = "Continuar sem tomar bolus";
 
 /* Header */
-"Enact Bolus" = "Gi bolus";
+"Enact Bolus" = "Aplicar Bolus";
 
 /* Button */
-"Enact bolus" = "Gi bolus";
+"Enact bolus" = "Aplicar bolus";
 
 /*  */
-"Insulin recommended" = "Anbefalt insulindose";
+"Insulin recommended" = "Insulina recomendada";
 
 /*  */
-"Insulin required" = "Insulinbehov";
+"Insulin required" = "Insulina necessária";
 
 /* Bolus screen */
-"Recommendation" = "Anbefaling";
+"Recommendation" = "Recomendação";
 
 /* Button */
-"Clear" = "Fjern";
+"Clear" = "Apagar";
 
 /* Button */
-"Done" = "Ferdig";
+"Done" = "OK";
 
 /*  */
-"Wait please" = "Vennligst vent";
+"Wait please" = "Aguarde";
 
 /*  */
-"Agree and continue" = "Godta og fortsett";
+"Agree and continue" = "Concordar e Continuar";
 
 /* Disclaimer when opening app for first time*/
-"Disclaimer" = "Ansvarsfraskrivelse";
+"Disclaimer" = "Termo de responsabilidade";
 
 /* Disclaimer Description */
-"FreeAPS X is in an active development state. We do not recommend to use the system for everyday control of blood glucose! Use it for testing purposes only at your own risk. We are not responsible for your decisions and actions." = "FreeAPS X er under utvikling. Vi anbefaler ikke å bruke systemet for daglig blodsukkerregulering! Bruk det for testformål og på egen risiko. Vi er ikke ansvarlige for dine beslutninger og handlinger.";
+"FreeAPS X is in an active development state. We do not recommend to use the system for everyday control of blood glucose! Use it for testing purposes only at your own risk. We are not responsible for your decisions and actions." = "FreeAPS X ainda está em estágio de desenvolvimento. Nós não recomendamos o uso deste aplicativo para controle diário da glicemia! Use somente para testes por sua conta e risco. Nós não somos responsáveis por suas decisões e ações.";
 
 /* Enacted at a date */
-"Enacted at %@" = "Utført kl. %@";
+"Enacted at %@" = "Executado em %@";
 
 /* Home title */
-"Home" = "Hjem";
+"Home" = "Tela inicial";
 
 /* Looping in progress */
-"looping" = "looper";
+"looping" = "looping";
 
 /* min ago since last loop */
-"min ago" = "min siden";
+"min ago" = "min atrás";
 
 /* Status Title */
-"No suggestion" = "Ingen forslag";
+"No suggestion" = "Sem sugestão";
 
 /* Replace pod text in Header */
-"Replace pod" = "Bytt pod";
+"Replace pod" = "Substituir pod";
 
 /* Suggested at a date */
-"Suggested at %@" = "Foreslått kl. %@";
+"Suggested at %@" = "Sugerido %@";
 
 /* Add carbs screen */
-"Add Carbs" = "Legg til karbo";
+"Add Carbs" = "Adicionar carboidratos";
 
 /*  */
-"Amount Carbs" = "Mengde karbo";
+"Amount Carbs" = "Quantidade de Carboidratos";
 
 /* Grams unit */
-"grams" = "gram";
+"grams" = "gramas";
 
 /*  */
-"Carbs required" = "Karbo nødvendig";
+"Carbs required" = "Carbos necessários";
 
 /* */
-"Are you sure?" = "Er du sikker?";
+"Are you sure?" = "Tem certeza?";
 
 /* Bottom target temp */
-"Bottom target" = "Nedre mål";
+"Bottom target" = "Limite baixo";
 
 /* Cancel preset name */
-"Cancel" = "Avbryt";
+"Cancel" = "Cancelar";
 
 /*  */
-"Cancel Temp Target" = "Avbryt midlertidig mål";
+"Cancel Temp Target" = "Cancelar Meta Temporária";
 
 /* Custom temp target */
-"Custom" = "Egendefinert";
+"Custom" = "Definir";
 
 /*  */
-"Date" = "Dato";
+"Date" = "Data";
 
 /*  */
-"Delete" = "Slett";
+"Delete" = "Apagar";
 
 /* Delete preset temp target */
-"Delete preset \"%@\"" = "Slett forhåndsinnstilling \"%@\"";
+"Delete preset \"%@\"" = "Apagar predefinido \"%@\"";
 
 /* Duration of target temp or temp basal */
-"Duration" = "Varighet";
+"Duration" = "Duração";
 
 /*  */
-"Enact Temp Target" = "Start midlertidig mål";
+"Enact Temp Target" = "Executar Meta Temporária";
 
 /*  */
-"Enter preset name" = "Angi navn på forhåndsinnstilling";
+"Enter preset name" = "Nomear predefinido";
 
 /* Preset name */
-"Name" = "Navn";
+"Name" = "Nome";
 
 /* minutes of target temp */
-"minutes" = "minutter";
+"minutes" = "minutos";
 
 /*  */
-"Presets" = "Forhåndsinnstillinger";
+"Presets" = "Predefinidos";
 
 /* Save preset name */
-"Save" = "Lagre";
+"Save" = "Salvar";
 
 /*  */
-"Save as preset" = "Lagre som forhåndsinnstilling";
+"Save as preset" = "Salvar como predefinido";
 
 /* Upper temp target limit */
-"Top target" = "Øvre mål";
+"Top target" = "Limite alto";
 
 /*  */
 "Autotune" = "Autotune";
 
 /*  */
-"Basal profile" = "Basalprofil";
+"Basal profile" = "Perfil Basal";
 
 /*  */
-"Carb ratio" = "Karbohydratforhold";
+"Carb ratio" = "Taxas carboidratos";
 
 /*  */
-"Delete autotune data" = "Slett autotune data";
+"Delete autotune data" = "Apagar dados autotune";
 
 /*  */
-"Run now" = "Kjør nå";
+"Run now" = "Executar agora";
 
 /*  */
-"Last run" = "Siste kjøring";
+"Last run" = "Ultima execução";
 
 /*  */
-"Sensitivity" = "Insulinfølsomhet";
+"Sensitivity" = "Fator de sensibilidade";
 
 /*  */
-"Use Autotune" = "Bruk Autotune";
+"Use Autotune" = "usar Autotune";
 
 /* Add profile basal */
-"Add" = "Legg til";
+"Add" = "Adicionar";
 
 /*  */
-"Basal Profile" = "Basalprofil";
+"Basal Profile" = "Perfil Basal";
 
 /* Rate basal profile */
-"Rate" = "Rate";
+"Rate" = "Taxa";
 
 /*  */
-"Save on Pump" = "Lagre på pumpen";
+"Save on Pump" = "Salvar na Bomba";
 
 /*  */
-"Saving..." = "Lagrer...";
+"Saving..." = "Salvando...";
 
 /*  */
-"Schedule" = "Tidsplan";
+"Schedule" = "Agenda";
 
 /*  */
-"starts at" = "starter kl.";
+"starts at" = "começa";
 
 /* Time basal profile */
-"Time" = "Tidspunkt";
+"Time" = "Hora";
 
 /* */
-"Calculated Ratio" = "Beregnet karbohydratforhold";
+"Calculated Ratio" = "Taxa calculada";
 
 /* Carb Ratios header */
-"Carb Ratios" = "Karbohydratforhold";
+"Carb Ratios" = "Taxas de carbo";
 
 /*  */
-"Ratio" = "Forhold";
+"Ratio" = "Taxa";
 
 /*  */
 "Autosens" = "Autosens";
 
 /*  */
-"Calculated Sensitivity" = "Beregnet insulinfølsomhet";
+"Calculated Sensitivity" = "Sensibilidade Calculada";
 
 /*  */
-"Insulin Sensitivities" = "Insulinfølsomhet";
+"Insulin Sensitivities" = "Sensibilidade a Insulina";
 
 /* */
-"Sensitivity Ratio" = "Sensitivitetsratio";
+"Sensitivity Ratio" = "Taxa de Sensibilidade";
 
 /*  */
-"Dismiss" = "Avskjedige";
+"Dismiss" = "Ignorar";
 
 /*  */
-"Important message" = "Viktig melding";
+"Important message" = "Mensagem importante";
 
 /*  */
-"Amount" = "Mengde";
+"Amount" = "Quantidade";
 
 /* */
-"Cancel Temp Basal" = "Avbryt midlertidig basal";
+"Cancel Temp Basal" = "Cancelar Basal Temporária";
 
 /* Enact
 Enact a temp Basal or a temp target */
-"Enact" = "Start";
+"Enact" = "Executar";
 
 /* */
-"Manual Temp Basal" = "Manuell basal";
+"Manual Temp Basal" = "Basal Temporária Manual";
 
 /* Allow uploads tp NS */
-"Allow uploads" = "Tillat opplastinger";
+"Allow uploads" = "Permitir uploads";
 
 /* API secret in NS */
-"API secret" = "API nøkkel";
+"API secret" = "API secret";
 
 /* Connect to NS */
-"Connect" = "Koble til";
+"Connect" = "Conectar";
 
 /* Connected to NS */
-"Connected!" = "Tilkoblet!";
+"Connected!" = "Conectado!";
 
 /* Connecting to NS */
-"Connecting..." = "Kobler til...";
+"Connecting..." = "Conectando...";
 
 /*  */
-"Invalid URL" = "Ugyldig nettadresse (URL)";
+"Invalid URL" = "URL inválida";
 
 /*  */
-"Local glucose source" = "Lokal glukosekilde";
+"Local glucose source" = "Glicose local";
 
 /* Header */
-"Nightscout Config" = "Nightscout";
+"Nightscout Config" = "Ajustes Nightscout";
 
 /*  */
-"Port" = "Port";
+"Port" = "Porta";
 
 /*  */
-"URL" = "Nettadresse";
+"URL" = "Endereço da URL";
 
 /**/
-"Use local glucose server" = "Bruk lokal glukoseserver";
+"Use local glucose server" = "Usar servidor de glicose local";
 
 /*  */
-"Edit settings json" = "Rediger \"freeaps_settings.json\"";
+"Edit settings json" = "Editar json de configurações";
 
 /* */
-"Glucose units" = "Glukoseenheter";
+"Glucose units" = "Unidades de glicose";
 
 /*  */
-"Preferences" = "Innstillinger";
+"Preferences" = "Preferências";
 
 /* Recommended Insulin Fraction in preferences */
-"Recommended Insulin Fraction" = "Anbefalt insulin-fraksjon";
+"Recommended Insulin Fraction" = "Fração de insulina recomendada";
 
 /* Do you want to show bolus screen after added carbs? */
-"Skip Bolus screen after carbs" = "Hopp over Bolus-skjerm etter karbo";
+"Skip Bolus screen after carbs" = "Pular tela de bolus depois de carbo";
 
 /* Allow remote control from NS */
-"Remote control" = "Fjernstyring";
+"Remote control" = "Controle remoto";
 
 /* Add Medtronic pump */
-"Add Medtronic" = "Legge til Medtronic";
+"Add Medtronic" = "Adicionar Medtronic";
 
 /* Add Omnipod pump */
-"Add Omnipod" = "Legg til Omnipod";
+"Add Omnipod" = "Adicionar Omnipod";
 
 /* Add Simulator pump */
-"Add Simulator" = "Legg til Simulator";
+"Add Simulator" = "Adicionar Simulador";
 
 /* Insulin model */
-"Model" = "Modell";
+"Model" = "Modelo";
 
 /*  */
-"Pump config" = "Pumpe";
+"Pump config" = "Ajustes bomba";
 
 /*  */
-"Delivery limits" = "Leveringsgrenser";
+"Delivery limits" = "Limites de entrega";
 
 /*  */
-"Duration of Insulin Action" = "Varighet av insulinaktivitet (DIA)";
+"Duration of Insulin Action" = "Duração da ação da Insulina";
 
 /* hours of duration of insulin activity */
-"hours" = "timer";
+"hours" = "horas";
 
 /* Max setting */
-"Max Basal" = "Maks basal";
+"Max Basal" = "Basal Maxima";
 
 /* Max setting */
-"Max Bolus" = "Maks bolus";
+"Max Bolus" = "Bolus Máximo";
 
 /* */
-"Pump Settings" = "Pumpeinnstillinger";
+"Pump Settings" = "Ajustes Bomba";
 
 /* Insulin unit per hour */
-"U/hr" = "E/t";
+"U/hr" = "U/hr";
 
 /* Unit in number of units delivered (keep the space character!) */
-" U" = " E";
+" U" = " U";
 
 /* /Insulin unit */
-"/U" = "/E";
+"/U" = "/U";
 
 /* Insulin unit */
-"U" = "E";
+"U" = "U";
 
 /* Unit per hour with space */
-" U/hr" = " E/t";
+" U/hr" = " U/hr";
 
 /* Number of units per hour*/
-"%@ U/hr" = "%@ E/t";
+"%@ U/hr" = "%@ U/hr";
 
 /* Number of units insulin delivered */
-"%@ U" = "%@ E";
+"%@ U" = "%@ U";
 
 /*Carb ratio unit */
-"g/U" = "g/E";
+"g/U" = "g/U";
 
 /* grams */
 " g" = " g";
 
 /* when 0 U/hr */
-"0 U/hr" = "0 E/t";
+"0 U/hr" = "0 U/hr";
 
 /* abbreviation for days */
 "d" = "d";
 
 /* abbreviation for hours */
-"h" = "t";
+"h" = "h";
 
 /* abbreviation for minutes */
-"m" = "min";
-<<<<<<< HEAD
+"m" = "m";
+
+/*  */
+"Closed loop" = "Loop fechado";
 
 /* */
-"Autotune Conf" = "Autotune";
-
-/*  */
-"Basal Profile Conf" = "Basalprofil";
-
-/*  */
-"Carb Ratios Conf" = "Karbohydratforhold";
-=======
->>>>>>> dev
-
-/*  */
-"Closed loop" = "Lukket loop";
+"Configuration" = "Ajustes";
 
 /* */
-"Configuration" = "Oppsett";
-
-/* */
-"Devices" = "Enheter";
+"Devices" = "Dispositivos";
 
 /*  */
-"Pump" = "Pumpe";
+"Pump" = "Bomba";
 
 /*  */
-"Services" = "Tjenester";
+"Services" = "Serviços";
 
 /*  */
-"Settings" = "Innstillinger";
+"Settings" = "Configurações";
 
 /* 2 log files to share */
-"Share logs" = "Del logger";
+"Share logs" = "Compartilhar logs";
 
 /* Upper target */
-"High target" = "Øvre mål";
+"High target" = "Meta alta";
 
 /* Lower target */
-"Low target" = "Nedre mål";
+"Low target" = "Meta baixa";
 
 /*  */
-"Target Ranges" = "Målområder";
+"Target Ranges" = "Limites da meta";
 
 /* When bolusing */
-"Bolusing" = "Leverer bolus";
+"Bolusing" = "Aplicando bolus";
 
 /* */
-"Pump suspended" = "Pumpe satt på pause";
+"Pump suspended" = "Bomba suspensa";
 
 /* */
-"Middleware" = "Middelware";
+"Middleware" = "Middleware";
 
 /* Header */
-"History" = "Historikk";
+"History" = "Histórico";
 
 /* CGM option */
-"Upload glucose to Nightscout" = "Last opp blodsukker til Nightscout";
+"Upload glucose to Nightscout" = "Upload glicose para o Nightscout";
 
 /* Type of CGM or glucose source */
-"Type" = "Type";
+"Type" = "Tipo";
 
 /* CGM */
-"CGM" = "CGM";
+"CGM" = "MCG";
 
 /* CGM Transmitter ID */
-"Transmitter ID" = "Sender-ID";
+"Transmitter ID" = "ID do transmissor";
 
 /* Other CGM setting */
-"Other" = "Andre";
+"Other" = "Outro";
 
 /*
   Infotexts from openaps.docs and androidaps.docs

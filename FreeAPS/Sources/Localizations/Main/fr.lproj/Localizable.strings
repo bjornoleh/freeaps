@@ -110,7 +110,7 @@
 "Duration" = "Durée";
 
 /*  */
-"Enact Temp Target" = "Activer cible temp";
+"Enact Temp Target" = "Activer la cible temporaire";
 
 /*  */
 "Enter preset name" = "Entrer le nom du préréglage";
@@ -149,10 +149,13 @@
 "Run now" = "Lancer maintenant";
 
 /*  */
+"Last run" = "Dernière exécution";
+
+/*  */
 "Sensitivity" = "Sensibilité";
 
 /*  */
-"Use Autotune" = "utiliser Autotune";
+"Use Autotune" = "Utiliser Autotune";
 
 /* Add profile basal */
 "Add" = "Ajouter";
@@ -213,7 +216,7 @@
 
 /* Enact
 Enact a temp Basal or a temp target */
-"Enact" = "Activer";
+"Enact" = "Injecter";
 
 /* */
 "Manual Temp Basal" = "Basal temporaire manuel";
@@ -341,15 +344,6 @@ Enact a temp Basal or a temp target */
 /* abbreviation for minutes */
 "m" = "m";
 
-/* */
-"Autotune Conf" = "Autotune";
-
-/*  */
-"Basal Profile Conf" = "Profil Basal";
-
-/*  */
-"Carb Ratios Conf" = "Ratio de Glucides";
-
 /*  */
 "Closed loop" = "Boucle fermée";
 
@@ -359,17 +353,8 @@ Enact a temp Basal or a temp target */
 /* */
 "Devices" = "Appareils";
 
-/* */
-"Insulin Sensitivities Conf" = "Sensibilité à l'Insuline";
-
-/* */
-"Preferences Conf" = "Préférences";
-
 /*  */
 "Pump" = "Pompe";
-
-/*  */
-"Pump Settings Conf" = "Paramètres de la pompe";
 
 /*  */
 "Services" = "Services";
@@ -379,9 +364,6 @@ Enact a temp Basal or a temp target */
 
 /* 2 log files to share */
 "Share logs" = "Partager les logs";
-
-/*  */
-"Target Ranges Conf" = "Zone cible";
 
 /* Upper target */
 "High target" = "Cible haute";
@@ -405,7 +387,11 @@ Enact a temp Basal or a temp target */
 "History" = "Historique";
 
 /* CGM option */
+<<<<<<< HEAD
 "Upload glucose to Nightscout" = "Upload glucose to Nightscout";
+=======
+"Upload glucose to Nightscout" = "Transférer la glycémie dans Nightscout";
+>>>>>>> dev
 
 /* Type of CGM or glucose source */
 "Type" = "Type";
@@ -414,10 +400,17 @@ Enact a temp Basal or a temp target */
 "CGM" = "CGM";
 
 /* CGM Transmitter ID */
+<<<<<<< HEAD
 "Transmitter ID" = "Transmitter ID";
 
 /* Other CGM setting */
 "Other" = "Other";
+=======
+"Transmitter ID" = "ID du transmetteur";
+
+/* Other CGM setting */
+"Other" = "Autre";
+>>>>>>> dev
 
 /*
   Infotexts from openaps.docs and androidaps.docs
@@ -440,7 +433,7 @@ Enact a temp Basal or a temp target */
 "Defaults to false. When true, will lower BG target when autosens detects resistance" = "Faux par défaut. Quand vrai, réduira la cible de glycémie lorsque l'autosens détecte une résistance à l'insuline";
 
 /* ”Advanced Target Adjustments" */
-"This feature was previously enabled by default but will now default to false (will NOT be enabled automatically) in oref0 0.6.0 and beyond. (There is no need for this with 0.6.0). This feature lowers oref0’s target BG automatically when current BG and eventualBG are high. This helps prevent and mitigate high BG, but automatically switches to low-temping to ensure that BG comes down smoothly toward your actual target. If you find this behavior too aggressive, you can disable this feature. If you do so, please let us know so we can better understand what settings work best for everyone." = "This feature was previously enabled by default but will now default to false (will NOT be enabled automatically) in oref0 0.6.0 and beyond. (There is no need for this with 0.6.0). This feature lowers oref0’s target BG automatically when current BG and eventualBG are high. This helps prevent and mitigate high BG, but automatically switches to low-temping to ensure that BG comes down smoothly toward your actual target. If you find this behavior too aggressive, you can disable this feature. If you do so, please let us know so we can better understand what settings work best for everyone.";
+"This feature was previously enabled by default but will now default to false (will NOT be enabled automatically) in oref0 0.6.0 and beyond. (There is no need for this with 0.6.0). This feature lowers oref0’s target BG automatically when current BG and eventualBG are high. This helps prevent and mitigate high BG, but automatically switches to low-temping to ensure that BG comes down smoothly toward your actual target. If you find this behavior too aggressive, you can disable this feature. If you do so, please let us know so we can better understand what settings work best for everyone." = "Cette fonctionnalité a été précédemment activée par défaut, mais sera maintenant par défaut à false (ne sera PAS activée automatiquement) dans oref0 0.6.0 et au-delà. Cette fonctionnalité réduit automatiquement la glycémie cible d’oref0 lorsque la glycémie actuelle et éventuellement la glycémie sont élevées. Cela aide à prévenir et à atténuer la glycémie élevée, mais passe automatiquement à la glycémie basse pour s'assurer que la glycémie descend en douceur vers votre cible réelle. Si vous trouvez ce comportement trop agressif, vous pouvez désactiver cette fonctionnalité. Si vous le faites, faites-le nous savoir afin que nous puissions mieux comprendre les paramètres qui conviennent le mieux à tout le monde.";
 
 /* "Exercise Mode" */
 "Defaults to false. When true, > 105 mg/dL high temp target adjusts sensitivityRatio for exercise_mode. Synonym for high_temptarget_raises_sensitivity" = "Defaults to false. When true, > 105 mg/dL high temp target adjusts sensitivityRatio for exercise_mode. Synonym for high_temptarget_raises_sensitivity";
@@ -449,7 +442,11 @@ Enact a temp Basal or a temp target */
 "Defaults to false, which means by default only the low end of the pump’s BG target range is used as OpenAPS target. This is a safety feature to prevent too-wide targets and less-optimal outcomes. Therefore the higher end of the target range is used only for avoiding bolus wizard overcorrections. Use wide_bg_target_range: true to force neutral temps over a wider range of eventualBGs." = "Defaults to false, which means by default only the low end of the pump’s BG target range is used as OpenAPS target. This is a safety feature to prevent too-wide targets and less-optimal outcomes. Therefore the higher end of the target range is used only for avoiding bolus wizard overcorrections. Use wide_bg_target_range: true to force neutral temps over a wider range of eventualBGs.";
 
 /* "Skip Neutral Temps" */
+<<<<<<< HEAD
 "Defaults to false, so that FreeAPS X will set temps whenever it can, so it will be easier to see if the system is working, even when you are offline. This means FreeAPS X will set a “neutral” temp (same as your default basal) if no adjustments are needed. This is an old setting for OpenAPS to have the options to minimise sounds and notifications from the 'rig', that may wake you up during the night." = "Defaults to false, so that FreeAPS X will set temps whenever it can, so it will be easier to see if the system is working, even when you are offline. This means OpenAPS will set a “neutral” temp (same as your default basal) if no adjustments are needed. This is an old setting for OpenAPS to have the options to minimise sounds and notifications form the 'rig', that may wake you up during the night. ";
+=======
+"Defaults to false, so that FreeAPS X will set temps whenever it can, so it will be easier to see if the system is working, even when you are offline. This means FreeAPS X will set a “neutral” temp (same as your default basal) if no adjustments are needed. This is an old setting for OpenAPS to have the options to minimise sounds and notifications from the 'rig', that may wake you up during the night." = "La valeur par défaut est faux, de sorte que FreeAPS X définisse une valeur basal dès qu'il le peut, donc il sera plus facile de voir si le système fonctionne, même lorsque vous êtes hors ligne. Cela signifie qu'OpenAPS définira une valeur basale « neutre » (identique à votre basal par défaut) si aucun ajustement n'est nécessaire. Ceci est un ancien paramètre d'OpenAPS afin de minimiser les sons et les notifications de la 'rig', qui pouvaient vous réveiller pendant la nuit. ";
+>>>>>>> dev
 
 /* "Unsuspend If No Temp” */
 "Many people occasionally forget to resume / unsuspend their pump after reconnecting it. If you’re one of them, and you are willing to reliably set a zero temp basal whenever suspending and disconnecting your pump, this feature has your back. If enabled, it will automatically resume / unsuspend the pump if you forget to do so before your zero temp expires. As long as the zero temp is still running, it will leave the pump suspended." = "Many people occasionally forget to resume / unsuspend their pump after reconnecting it. If you’re one of them, and you are willing to reliably set a zero temp basal whenever suspending and disconnecting your pump, this feature has your back. If enabled, it will automatically resume / unsuspend the pump if you forget to do so before your zero temp expires. As long as the zero temp is still running, it will leave the pump suspended.";
@@ -522,7 +519,7 @@ Enact a temp Basal or a temp target */
 "Defaults to start at 30. This is the maximum minutes of basal that can be delivered by UAM as a single SMB when IOB exceeds COB. This gives the ability to make UAM more or less aggressive if you choose. It is recommended that the value is set to start at 30, in line with the default, and if you choose to increase this value, do so in no more than 15 minute increments, keeping a close eye on the effects of the changes. Reducing the value will cause UAM to dose less insulin for each SMB. It is not recommended to set this value higher than 60 mins, as this may affect the ability for the algorithm to safely zero temp. It is also recommended that pushover is used when setting the value to be greater than default, so that alerts are generated for any predicted lows or highs." = "Defaults to start at 30. This is the maximum minutes of basal that can be delivered by UAM as a single SMB when IOB exceeds COB. This gives the ability to make UAM more or less aggressive if you choose. It is recommended that the value is set to start at 30, in line with the default, and if you choose to increase this value, do so in no more than 15 minute increments, keeping a close eye on the effects of the changes. Reducing the value will cause UAM to dose less insulin for each SMB. It is not recommended to set this value higher than 60 mins, as this may affect the ability for the algorithm to safely zero temp. It is also recommended that pushover is used when setting the value to be greater than default, so that alerts are generated for any predicted lows or highs.";
 
 /* "SMB Interval" */
-"Minimum duration in minutes between two enacted SMBs" = "Durée minimale en minutes entre deux SMB activés";
+"Minimum duration in minutes between two enacted SMBs" = "Durée minimale en minutes entre deux SMB injectés";
 
 /* "Bolus Increment" */
 "Smallest possible bolus amount" = "Plus petite quantité de bolus possible";
