@@ -11,7 +11,7 @@ import RileyLinkKit
 import RileyLinkBLEKit
 import os.log
 
-public protocol MinimedPumpManagerStateObserver: class {
+public protocol MinimedPumpManagerStateObserver: AnyObject {
     func didUpdatePumpManagerState(_ state: MinimedPumpManagerState)
 }
 
@@ -33,7 +33,7 @@ public class MinimedPumpManager: RileyLinkPumpManager {
         super.init(rileyLinkDeviceProvider: rileyLinkDeviceProvider, rileyLinkConnectionManager: rileyLinkConnectionManager)
 
         // Pump communication
-        let idleListeningEnabled = state.pumpModel.hasMySentry
+        let idleListeningEnabled = state.pumpModel.hasMySentry && state.useMySentry
         self.pumpOps = pumpOps ?? PumpOps(pumpSettings: state.pumpSettings, pumpState: state.pumpState, delegate: self)
 
         self.rileyLinkDeviceProvider.idleListeningState = idleListeningEnabled ? MinimedPumpManagerState.idleListeningEnabledDefaults : .disabled
@@ -382,6 +382,8 @@ extension MinimedPumpManager {
         pumpDateComponents.timeZone = timeZone
         glucoseDateComponents?.timeZone = timeZone
 
+        checkRileyLinkBattery()
+
         // The pump sends the same message 3x, so ignore it if we've already seen it.
         guard status != recents.latestPumpStatusFromMySentry, let pumpDate = pumpDateComponents.date else {
             return
@@ -428,6 +430,14 @@ extension MinimedPumpManager {
         // Sentry packets are sent in groups of 3, 5s apart. Wait 11s before allowing the loop data to continue to avoid conflicting comms.
         device.sessionQueueAsyncAfter(deadline: .now() + .seconds(11)) { [weak self] in
             self?.updateReservoirVolume(status.reservoirRemainingUnits, at: pumpDate, withTimeLeft: TimeInterval(minutes: Double(status.reservoirRemainingMinutes)))
+        }
+    }
+
+    private func checkRileyLinkBattery() {
+        rileyLinkDeviceProvider.getDevices { devices in
+            for device in devices {
+                device.updateBatteryLevel()
+            }
         }
     }
 
@@ -735,7 +745,24 @@ extension MinimedPumpManager {
             }
         }
     }
-    
+
+    /// Whether to use MySentry packets on capable pumps:
+    public var useMySentry: Bool {
+        get {
+            return state.useMySentry
+        }
+        set {
+            let oldValue = state.useMySentry
+            setState { (state) in
+                state.useMySentry = newValue
+            }
+            if oldValue != newValue {
+                let useIdleListening = state.pumpModel.hasMySentry && state.useMySentry
+                self.rileyLinkDeviceProvider.idleListeningState = useIdleListening ? MinimedPumpManagerState.idleListeningEnabledDefaults : .disabled
+            }
+        }
+    }
+
 }
 
 
