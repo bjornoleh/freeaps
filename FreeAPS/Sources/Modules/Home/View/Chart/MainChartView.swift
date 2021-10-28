@@ -31,6 +31,8 @@ struct MainChartView: View {
         static let bolusScale: CGFloat = 2.5
         static let carbsSize: CGFloat = 10
         static let carbsScale: CGFloat = 0.3
+        static let upperTarget: CGFloat = 180
+        static let lowerTarget: CGFloat = 70
     }
 
     @Binding var glucose: [BloodGlucose]
@@ -151,14 +153,32 @@ struct MainChartView: View {
     }
 
     private func yGridView(fullSize: CGSize) -> some View {
-        Path { path in
-            let range = glucoseYGange
-            let step = (range.maxY - range.minY) / CGFloat(Config.yLinesCount)
-            for line in 0 ... Config.yLinesCount {
-                path.move(to: CGPoint(x: 0, y: range.minY + CGFloat(line) * step))
-                path.addLine(to: CGPoint(x: fullSize.width, y: range.minY + CGFloat(line) * step))
-            }
-        }.stroke(Color.secondary, lineWidth: 0.2)
+        ZStack {
+            Path { path in
+                let range = glucoseYGange
+                let step = (range.maxY - range.minY) / CGFloat(Config.yLinesCount)
+                for line in 0 ... Config.yLinesCount {
+                    path.move(to: CGPoint(x: 0, y: range.minY + CGFloat(line) * step))
+                    path.addLine(to: CGPoint(x: fullSize.width, y: range.minY + CGFloat(line) * step))
+                }
+            }.stroke(Color.secondary, lineWidth: 0.2)
+            // horizontal limits
+            Path { path in
+                let range = glucoseYGange
+                let topstep = (range.maxY - range.minY) / CGFloat(range.maxValue - range.minValue) *
+                    (CGFloat(range.maxValue) - Config.upperTarget)
+                path.move(to: CGPoint(x: 0, y: range.minY + topstep))
+                path.addLine(to: CGPoint(x: fullSize.width, y: range.minY + topstep))
+            }.stroke(Color.loopYellow, lineWidth: 0.3)
+
+            Path { path in
+                let range = glucoseYGange
+                let bottomstep = (range.maxY - range.minY) / CGFloat(range.maxValue - range.minValue) *
+                    (CGFloat(range.maxValue) - Config.lowerTarget)
+                path.move(to: CGPoint(x: 0, y: range.minY + bottomstep))
+                path.addLine(to: CGPoint(x: fullSize.width, y: range.minY + bottomstep))
+            }.stroke(Color.loopRed, lineWidth: 0.3)
+        }
     }
 
     private func glucoseLabelsView(fullSize: CGSize) -> some View {
