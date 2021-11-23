@@ -163,21 +163,24 @@ struct MainChartView: View {
                 }
             }.stroke(Color.secondary, lineWidth: 0.2)
             // horizontal limits
-            Path { path in
-                let range = glucoseYGange
-                let topstep = (range.maxY - range.minY) / CGFloat(range.maxValue - range.minValue) *
-                    (CGFloat(range.maxValue) - Config.upperTarget)
-                path.move(to: CGPoint(x: 0, y: range.minY + topstep))
-                path.addLine(to: CGPoint(x: fullSize.width, y: range.minY + topstep))
-            }.stroke(Color.loopYellow, lineWidth: 0.3)
-
-            Path { path in
-                let range = glucoseYGange
-                let bottomstep = (range.maxY - range.minY) / CGFloat(range.maxValue - range.minValue) *
-                    (CGFloat(range.maxValue) - Config.lowerTarget)
-                path.move(to: CGPoint(x: 0, y: range.minY + bottomstep))
-                path.addLine(to: CGPoint(x: fullSize.width, y: range.minY + bottomstep))
-            }.stroke(Color.loopRed, lineWidth: 0.3)
+            let range = glucoseYGange
+            let topstep = (range.maxY - range.minY) / CGFloat(range.maxValue - range.minValue) *
+                (CGFloat(range.maxValue) - Config.upperTarget)
+            if CGFloat(range.maxValue) > Config.upperTarget {
+                Path { path in
+                    path.move(to: CGPoint(x: 0, y: range.minY + topstep))
+                    path.addLine(to: CGPoint(x: fullSize.width, y: range.minY + topstep))
+                }.stroke(Color.loopYellow, lineWidth: 0.3)
+            }
+            let range = glucoseYGange
+            let bottomstep = (range.maxY - range.minY) / CGFloat(range.maxValue - range.minValue) *
+                (CGFloat(range.maxValue) - Config.lowerTarget)
+            if bottomstep > 0 {
+                Path { path in
+                    path.move(to: CGPoint(x: 0, y: range.minY + bottomstep))
+                    path.addLine(to: CGPoint(x: fullSize.width, y: range.minY + bottomstep))
+                }.stroke(Color.loopRed, lineWidth: 0.3)
+            }
         }
     }
 
