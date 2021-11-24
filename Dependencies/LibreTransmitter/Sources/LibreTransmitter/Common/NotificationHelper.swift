@@ -12,7 +12,6 @@ import HealthKit
 import UserNotifications
 import os.log
 import UIKit
-import AudioToolbox
 
 fileprivate var logger = Logger(forType: "NotificationHelper")
 
@@ -44,7 +43,7 @@ public enum NotificationHelper {
             return
         }
 
-        AudioServicesPlaySystemSoundWithCompletion(SystemSoundID(1336)) {
+        AudioServicesPlaySystemSoundWithCompletion(1336) {
             playSound(times: times - 1)
         }
     }
@@ -218,6 +217,7 @@ public enum NotificationHelper {
                 titles.append(NSLocalizedString("(Snoozed)", comment: "(Snoozed)"))
             } else if alarm.isAlarming() {
                 content.sound = .default
+                content.userInfo = ["action": "snooze"]
                 playSoundIfNeeded()
             }
             titles.append(glucoseDesc)
@@ -435,7 +435,7 @@ public enum NotificationHelper {
 
             let hours = minutesLeft == 0 ? 0 : round(minutesLeft/60)
 
-            let dynamicText =  hours <= 1 ?  "minutes: \(minutesLeft.twoDecimals)" : "hours: \(hours.twoDecimals)"
+            let dynamicText =  hours <= 1 ?  NSLocalizedString("minutes", comment: "minutes") + ": \(minutesLeft.twoDecimals)" : NSLocalizedString("hours", comment: "hours") + ": \(hours.twoDecimals)"
 
             let content = UNMutableNotificationContent()
             content.title = NSLocalizedString("Sensor Ending Soon", comment: "Sensor Ending Soon")
