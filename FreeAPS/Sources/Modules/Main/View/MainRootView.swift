@@ -5,13 +5,19 @@ extension Main {
     struct RootView: BaseView {
         let resolver: Resolver
         @StateObject var state = StateModel()
-        @EnvironmentObject var appDelegate: AppDelegate
 
         var body: some View {
             router.view(for: .home)
                 .sheet(isPresented: $state.isModalPresented) {
                     NavigationView { self.state.modal!.view }
                         .navigationViewStyle(StackNavigationViewStyle())
+                }
+                .sheet(isPresented: $state.isSecondaryModalPresented) {
+                    if let view = state.secondaryModalView {
+                        view
+                    } else {
+                        EmptyView()
+                    }
                 }
                 .alert(isPresented: $state.isAlertPresented) {
                     Alert(
@@ -24,13 +30,6 @@ extension Main {
                     )
                 }
                 .onAppear(perform: configureView)
-                .onReceive(appDelegate.$notificationAction) { action in
-                    switch action {
-                    case .snoozeAlert:
-                        state.showModal(for: .libreConfig)
-                    default: break
-                    }
-                }
         }
     }
 }

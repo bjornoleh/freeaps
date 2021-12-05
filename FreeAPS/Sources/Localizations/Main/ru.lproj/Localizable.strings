@@ -67,6 +67,9 @@
 /* Add carbs screen */
 "Add Carbs" = "Ввод углеводов";
 
+/* Add carbs header and button in Watch app. You can skip the last " " space. It's just for differentiation */
+"Add Carbs " = "Ввод углеводов";
+
 /*  */
 "Amount Carbs" = "Кол-во углеводов";
 
@@ -326,6 +329,9 @@ Enact a temp Basal or a temp target */
 /* grams */
 " g" = " г";
 
+/* The short unit display string for grams */
+"g" = "г";
+
 /* when 0 U/hr */
 "0 U/hr" = "0 Ед/час";
 
@@ -394,6 +400,15 @@ Enact a temp Basal or a temp target */
 
 /* Other CGM setting */
 "Other" = "Прочее";
+
+/* Whatch app alert */
+"Set temp targets presets on iPhone first" = "Сначала установите временные цели в приложении на iPhone";
+
+/* Updating Watch app */
+"Updating..." = "Обновление...";
+
+/* Header for Temp targets in Watch app */
+"Temp Targets" = "Временные цели";
 
 
 /* Calendar and Libre transmitter settings --------------*/
@@ -817,6 +832,29 @@ Enact a temp Basal or a temp target */
 /* */
 "Battery" = "Батарея";
 
+/* */
+"Also add source info" = "Дополнительная информация об истонике";
+
+/* */
+"Carbs Required Threshold" = "Порог необходимых углеводов";
+
+/* */
+"Carbs required: %d g" = "Необходимы углеводы: %d г";
+
+/* */
+"To prevent LOW required %d g of carbs" = "Для избежания ГИПО необходимо %d г углеводов";
+
+/* */
+"FreeAPS X not active" = "FreeAPS X неактивен";
+
+/* */
+"Last loop was more then %d min ago" = "Последний цикл был более %d минут назад";
+
+/* Glucose badge */
+"Show glucose on the app badge" = "Показывать глюкозу на значке приложения";
+
+/* */
+"Backfill glucose" = "Скачать глюкозу";
 
 
 /* Headers for settings ------------------- */
@@ -954,3 +992,12 @@ Enact a temp Basal or a temp target */
 
 /* "Noisy CGM Target Multiplier" */
 "Defaults to 1.3. Increase target by this amount when looping off raw/noisy CGM data" = "По умолчанию 1,3. Увеличивает цель на эту величину, когда цикл отключается из за шума сенсора";
+
+/* */
+"Apple Health" = "Apple Health";
+
+/* */
+"Connect to Apple Health" = "Подключить к Apple Health";
+
+/* Show when have not permissions for writing to Health */
+"For write data to Apple Health you must give permissions in Settings > Health > Data Access" = "Чтобы записывать данные в Apple Health вам необходимо дать соответствующие разрешения, перейдя к меню Настройки > Здоровье > Доступ к данным";

@@ -11,20 +11,13 @@ import HealthKit
 
 extension UserDefaults {
     private enum Key: String {
-        case glucoseSchedules = "no.bjorninge.glucoseschedules"
-
-        case mmAlwaysDisplayGlucose = "no.bjorninge.mmAlwaysDisplayGlucose"
-        case mmNotifyEveryXTimes = "no.bjorninge.mmNotifyEveryXTimes"
-        case mmGlucoseAlarmsVibrate = "no.bjorninge.mmGlucoseAlarmsVibrate"
         case mmAlertLowBatteryWarning = "no.bjorninge.mmLowBatteryWarning"
         case mmAlertInvalidSensorDetected = "no.bjorninge.mmInvalidSensorDetected"
-        //case mmAlertalarmNotifications
         case mmAlertNewSensorDetected = "no.bjorninge.mmNewSensorDetected"
         case mmAlertNoSensorDetected = "no.bjorninge.mmNoSensorDetected"
         case mmGlucoseUnit = "no.bjorninge.mmGlucoseUnit"
         case mmAlertSensorSoonExpire = "no.bjorninge.mmAlertSensorSoonExpire"
         case mmSnoozedUntil = "no.bjorninge.mmSnoozedUntil"
-        case mmShowTransmitterBattery = "no.bjorninge.mmShowTransmitterBattery"
     }
     /*
      case always
@@ -40,23 +33,6 @@ extension UserDefaults {
             return value as? Bool
         }
         return nil
-    }
-
-    var mmAlwaysDisplayGlucose: Bool {
-        get {
-            optionalBool(forKey: Key.mmAlwaysDisplayGlucose.rawValue) ?? true
-        }
-        set {
-            set(newValue, forKey: Key.mmAlwaysDisplayGlucose.rawValue)
-        }
-    }
-    var mmNotifyEveryXTimes: Int {
-        get {
-            integer(forKey: Key.mmNotifyEveryXTimes.rawValue)
-        }
-        set {
-            set(newValue, forKey: Key.mmNotifyEveryXTimes.rawValue)
-        }
     }
 
     var mmAlertLowBatteryWarning: Bool {
@@ -103,26 +79,8 @@ extension UserDefaults {
         }
     }
 
-    var mmGlucoseAlarmsVibrate: Bool {
-        get {
-            optionalBool(forKey: Key.mmGlucoseAlarmsVibrate.rawValue) ?? true
-        }
-        set {
-            set(newValue, forKey: Key.mmGlucoseAlarmsVibrate.rawValue)
-        }
-    }
-
-    var mmShowTransmitterBattery: Bool {
-        get {
-            optionalBool(forKey: Key.mmShowTransmitterBattery.rawValue) ?? true
-        }
-        set {
-            set(newValue, forKey: Key.mmShowTransmitterBattery.rawValue)
-        }
-    }
-
     var allNotificationToggles: [Bool] {
-        [mmAlwaysDisplayGlucose, mmAlertLowBatteryWarning, mmAlertInvalidSensorDetected, mmAlertNewSensorDetected, mmAlertNoSensorDetected, mmAlertWillSoonExpire, mmGlucoseAlarmsVibrate, mmShowTransmitterBattery]
+        [mmAlertLowBatteryWarning, mmAlertInvalidSensorDetected, mmAlertNewSensorDetected, mmAlertNoSensorDetected, mmAlertWillSoonExpire]
     }
 
     //intentionally only supports mgdl and mmol
@@ -147,38 +105,12 @@ extension UserDefaults {
         }
     }
 
-    var enabledSchedules: [GlucoseSchedule]? {
-        glucoseSchedules?.schedules.compactMap({ schedule -> GlucoseSchedule? in
-            if schedule.enabled ?? false {
-                return schedule
-            }
-            return nil
-        })
-    }
     var snoozedUntil: Date? {
         get {
             object(forKey: Key.mmSnoozedUntil.rawValue) as? Date
         }
         set {
             set(newValue, forKey: Key.mmSnoozedUntil.rawValue)
-        }
-    }
-    var glucoseSchedules: GlucoseScheduleList? {
-        get {
-            if let savedGlucoseSchedules = object(forKey: Key.glucoseSchedules.rawValue) as? Data {
-                let decoder = JSONDecoder()
-                if let loadedGlucoseSchedules = try? decoder.decode(GlucoseScheduleList.self, from: savedGlucoseSchedules) {
-                    return loadedGlucoseSchedules
-                }
-            }
-
-            return GlucoseScheduleList()
-        }
-        set {
-            let encoder = JSONEncoder()
-            if let val = newValue, let encoded = try? encoder.encode(val) {
-                set(encoded, forKey: Key.glucoseSchedules.rawValue)
-            }
         }
     }
 }

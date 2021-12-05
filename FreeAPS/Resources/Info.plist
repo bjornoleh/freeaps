@@ -60,10 +60,14 @@
 	<string>Calendar is used to create a new glucose events.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>For authorized acces to bolus</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Health App is used to store blood glucose data</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Health App is used to store blood glucose data</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
-		<true/>
+		<false/>
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
@@ -80,9 +84,12 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

@@ -94,8 +94,6 @@ class SettingsModel : ObservableObject {
 }
 
 struct SettingsView: View {
-    @State var openSnooze = false
-
     //@ObservedObject private var displayGlucoseUnitObservable: DisplayGlucoseUnitObservable
     @ObservedObject private var transmitterInfo: LibreTransmitter.TransmitterInfo
     @ObservedObject private var sensorInfo: LibreTransmitter.SensorInfo
@@ -109,7 +107,6 @@ struct SettingsView: View {
     //most of the settings are now retrieved from the cgmmanager observables instead
     @StateObject var model = SettingsModel()
     @State private var presentableStatus: StatusMessage?
-    @ObservedObject var alarmStatus: LibreTransmitter.AlarmStatus
 
     @State private var showingDestructQuestion = false
     @State private var showingExporter = false
@@ -118,18 +115,15 @@ struct SettingsView: View {
 
     static func asHostedViewController(
         glucoseUnit: HKUnit,
-        openSnooze: Bool,
         //displayGlucoseUnitObservable: DisplayGlucoseUnitObservable,
         notifyComplete: GenericObservableObject,
         notifyDelete: GenericObservableObject,
         transmitterInfoObservable:LibreTransmitter.TransmitterInfo,
         sensorInfoObervable: LibreTransmitter.SensorInfo,
-        glucoseInfoObservable: LibreTransmitter.GlucoseInfo,
-        alarmStatus: LibreTransmitter.AlarmStatus) -> UIHostingController<SettingsView> {
+        glucoseInfoObservable: LibreTransmitter.GlucoseInfo) -> UIHostingController<SettingsView> {
         UIHostingController(rootView: self.init(
             //displayGlucoseUnitObservable: displayGlucoseUnitObservable,
-            openSnooze: openSnooze,
-            transmitterInfo: transmitterInfoObservable, sensorInfo: sensorInfoObervable, glucoseMeasurement: glucoseInfoObservable, notifyComplete: notifyComplete, notifyDelete: notifyDelete, alarmStatus: alarmStatus, glucoseUnit: glucoseUnit
+            transmitterInfo: transmitterInfoObservable, sensorInfo: sensorInfoObervable, glucoseMeasurement: glucoseInfoObservable, notifyComplete: notifyComplete, notifyDelete: notifyDelete, glucoseUnit: glucoseUnit
 
         ))
     }
@@ -157,7 +151,7 @@ struct SettingsView: View {
         overview
             //.navigationViewStyle(StackNavigationViewStyle())
             .navigationBarTitle(Text("Libre Bluetooth"), displayMode: .inline)
-            .navigationBarItems(trailing: dismissButton)
+            .navigationBarItems(leading: dismissButton)
             .onAppear{
                 print("dabear:: settingsview appeared")
                 //While loop does this request on our behalf, freeaps does not
@@ -186,21 +180,6 @@ struct SettingsView: View {
             }
 
     }
-
-    var snoozeSection: some View {
-        Section {
-            NavigationLink(destination: SnoozeView(isAlarming: $alarmStatus.isAlarming, activeAlarms: $alarmStatus.glucoseScheduleAlarmResult), isActive: $openSnooze) {
-                if alarmStatus.isAlarming {
-                    Text("Snooze Alerts").frame(alignment: .center)
-                        .padding(.top, 30)
-                        .padding(.bottom, 30)
-                } else {
-                    Text("Snooze Alerts").frame(alignment: .center)
-                }
-            }
-        }
-    }
-
 
     var measurementSection : some View {
         Section(header: Text("Last measurement")) {
@@ -290,7 +269,7 @@ struct SettingsView: View {
             // to notify the parent to close the cgmviewcontrollers navigation
             notifyComplete.notify()
         }) {
-            Text("Done")
+            Text("Close")
         }
     }
 
@@ -318,13 +297,6 @@ struct SettingsView: View {
     //todo: replace sub with navigationlinks
     var advancedSection: some View {
         Section(header: Text("Advanced")) {
-            //these subviews don't really need to be notified once glucose unit changes
-            // so we just pass glucoseunit directly on init
-            ZStack {
-                NavigationLink(destination: AlarmSettingsView(glucoseUnit: self.glucoseUnit)) {
-                    SettingsItem(title: "Alarms", detail: .constant(""))
-                }
-            }
             ZStack {
                 NavigationLink(destination: GlucoseSettingsView(glucoseUnit: self.glucoseUnit)) {
                     SettingsItem(title: "Glucose Settings", detail: .constant(""))
@@ -354,7 +326,6 @@ struct SettingsView: View {
 
     var overview: some View {
         List {
-            snoozeSection
             measurementSection
 //            if !glucoseMeasurement.predictionDate.isEmpty{
 //                predictionSection

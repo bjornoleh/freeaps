@@ -4,7 +4,7 @@ import Swinject
 import UIKit
 
 protocol NightscoutManager: GlucoseSource {
-    func fetchGlucose() -> AnyPublisher<[BloodGlucose], Never>
+    func fetchGlucose(since date: Date) -> AnyPublisher<[BloodGlucose], Never>
     func fetchCarbs() -> AnyPublisher<[CarbsEntry], Never>
     func fetchTempTargets() -> AnyPublisher<[TempTarget], Never>
     func fetchAnnouncements() -> AnyPublisher<[Announcement], Never>
@@ -27,6 +27,7 @@ final class BaseNightscoutManager: NightscoutManager, Injectable {
     @Injected() private var reachabilityManager: ReachabilityManager!
 
     private let processQueue = DispatchQueue(label: "BaseNetworkManager.processQueue")
+    private var ping: TimeInterval?
 
     private var lifetime = Lifetime()
 
@@ -66,6 +67,13 @@ final class BaseNightscoutManager: NightscoutManager, Injectable {
         }
     }
 
+    func sourceInfo() -> [String: Any]? {
+        if let ping = ping {
+            return [GlucoseSourceKey.nightscoutPing.rawValue: ping]
+        }
+        return nil
+    }
+
     var cgmURL: URL? {
         if let url = settingsManager.settings.cgm.appURL {
             return url
@@ -80,8 +88,9 @@ final class BaseNightscoutManager: NightscoutManager, Injectable {
         return maybeNightscout?.url
     }
 
-    func fetchGlucose() -> AnyPublisher<[BloodGlucose], Never> {
+    func fetchGlucose(since date: Date) -> AnyPublisher<[BloodGlucose], Never> {
         let useLocal = settingsManager.settings.useLocalGlucoseSource
+        ping = nil
 
         if !useLocal {
             guard isNetworkReachable else {
@@ -97,18 +106,23 @@ final class BaseNightscoutManager: NightscoutManager, Injectable {
             return Just([]).eraseToAnyPublisher()
         }
 
-        let since = glucoseStorage.syncDate()
-        return nightscout.fetchLastGlucose(sinceDate: since)
+        let startDate = Date()
+
+        return nightscout.fetchLastGlucose(sinceDate: date)
             .tryCatch({ (error) -> AnyPublisher<[BloodGlucose], Error> in
                 print(error.localizedDescription)
                 return Just([]).setFailureType(to: Error.self).eraseToAnyPublisher()
             })
             .replaceError(with: [])
+            .handleEvents(receiveOutput: { value in
+                guard value.isNotEmpty else { return }
+                self.ping = Date().timeIntervalSince(startDate)
+            })
             .eraseToAnyPublisher()
     }
 
     func fetch() -> AnyPublisher<[BloodGlucose], Never> {
-        fetchGlucose()
+        fetchGlucose(since: glucoseStorage.syncDate())
     }
 
     func fetchCarbs() -> AnyPublisher<[CarbsEntry], Never> {

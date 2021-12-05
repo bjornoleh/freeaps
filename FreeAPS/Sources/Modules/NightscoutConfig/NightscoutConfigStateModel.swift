@@ -1,15 +1,18 @@
 import Combine
+import SwiftDate
 import SwiftUI
 
 extension NightscoutConfig {
     final class StateModel: BaseStateModel<Provider> {
-        @Injected() var keychain: Keychain!
-        @Injected() var settingsManager: SettingsManager!
+        @Injected() private var keychain: Keychain!
+        @Injected() private var nightscoutManager: NightscoutManager!
+        @Injected() private var glucoseStorage: GlucoseStorage!
 
         @Published var url = ""
         @Published var secret = ""
         @Published var message = ""
         @Published var connecting = false
+        @Published var backfilling = false
         @Published var isUploadEnabled = false
 
         @Published var useLocalSource = false
@@ -18,27 +21,10 @@ extension NightscoutConfig {
         override func subscribe() {
             url = keychain.getValue(String.self, forKey: Config.urlKey) ?? ""
             secret = keychain.getValue(String.self, forKey: Config.secretKey) ?? ""
-            isUploadEnabled = settingsManager.settings.isUploadEnabled
-            useLocalSource = settingsManager.settings.useLocalGlucoseSource
-            localPort = Decimal(settingsManager.settings.localGlucosePort)
 
-            $isUploadEnabled
-                .removeDuplicates()
-                .sink { [weak self] enabled in
-                    self?.settingsManager.settings.isUploadEnabled = enabled
-                }.store(in: &lifetime)
-
-            $useLocalSource
-                .removeDuplicates()
-                .sink { [weak self] use in
-                    self?.settingsManager.settings.useLocalGlucoseSource = use
-                }.store(in: &lifetime)
-
-            $localPort
-                .removeDuplicates()
-                .sink { [weak self] port in
-                    self?.settingsManager.settings.localGlucosePort = Int(port)
-                }.store(in: &lifetime)
+            subscribeSetting(\.isUploadEnabled, on: $isUploadEnabled) { isUploadEnabled = $0 }
+            subscribeSetting(\.useLocalGlucoseSource, on: $useLocalSource) { useLocalSource = $0 }
+            subscribeSetting(\.localGlucosePort, on: $localPort.map(Int.init)) { localPort = Decimal($0) }
         }
 
         func connect() {
@@ -61,6 +47,21 @@ extension NightscoutConfig {
                     self.message = "Connected!"
                     self.keychain.setValue(self.url, forKey: Config.urlKey)
                     self.keychain.setValue(self.secret, forKey: Config.secretKey)
+                }
+                .store(in: &lifetime)
+        }
+
+        func backfillGlucose() {
+            backfilling = true
+            nightscoutManager.fetchGlucose(since: Date().addingTimeInterval(-1.days.timeInterval))
+                .sink { [weak self] glucose in
+                    guard let self = self else { return }
+                    DispatchQueue.main.async {
+                        self.backfilling = false
+                    }
+
+                    guard glucose.isNotEmpty else { return }
+                    self.glucoseStorage.storeGlucose(glucose)
                 }
                 .store(in: &lifetime)
         }
