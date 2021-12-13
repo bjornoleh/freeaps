@@ -59,7 +59,7 @@ struct CurrentGlucoseView: View {
                         } ??
                         "--"
 
-                ).font(.system(size: 12, weight: .bold))
+                ).font(.system(size: 14, weight: .bold))
             }
         }
     }
