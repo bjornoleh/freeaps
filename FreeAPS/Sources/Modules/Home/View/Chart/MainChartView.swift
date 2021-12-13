@@ -380,7 +380,6 @@ extension MainChartView {
         calculateBolusDots(fullSize: fullSize)
         calculateCarbsDots(fullSize: fullSize)
         calculateTempTargetsRects(fullSize: fullSize)
-        calculateTempTargetsRects(fullSize: fullSize)
         calculateBasalPoints(fullSize: fullSize)
         calculateSuspensions(fullSize: fullSize)
     }
@@ -800,10 +799,7 @@ extension MainChartView {
     }
 
     private func timeToXCoordinate(_ time: TimeInterval, fullSize: CGSize) -> CGFloat {
-        let xOffset = -(
-            glucose.first?.dateString.timeIntervalSince1970 ?? Date()
-                .addingTimeInterval(-1.days.timeInterval).timeIntervalSince1970
-        )
+        let xOffset = -Date().addingTimeInterval(-1.days.timeInterval).timeIntervalSince1970
         let stepXFraction = fullGlucoseWidth(viewWidth: fullSize.width) / CGFloat(hours.hours.timeInterval)
         let x = CGFloat(time + xOffset) * stepXFraction
         return x
@@ -880,12 +876,12 @@ extension MainChartView {
     }
 
     private func firstHourDate() -> Date {
-        let firstDate = glucose.first?.dateString ?? Date()
+        let firstDate = Date().addingTimeInterval(-1.days.timeInterval)
         return firstDate.dateTruncated(from: .minute)!
     }
 
     private func firstHourPosition(viewWidth: CGFloat) -> CGFloat {
-        let firstDate = glucose.first?.dateString ?? Date()
+        let firstDate = Date().addingTimeInterval(-1.days.timeInterval)
         let firstHour = firstHourDate()
 
         let lastDeltaTime = firstHour.timeIntervalSince(firstDate)
