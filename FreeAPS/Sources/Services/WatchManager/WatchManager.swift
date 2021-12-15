@@ -165,7 +165,8 @@ final class BaseWatchManager: NSObject, WatchManager, Injectable {
     private var eventualFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 2
+        formatter.maximumFractionDigits = 1
+        formatter.minimumFractionDigits = 1
         return formatter
     }
 
