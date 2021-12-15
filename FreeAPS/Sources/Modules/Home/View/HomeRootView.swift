@@ -15,7 +15,7 @@ extension Home {
             formatter.maximumFractionDigits = 2
             return formatter
         }
-        
+
         private var eventualFormatter: NumberFormatter {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
@@ -23,7 +23,7 @@ extension Home {
             formatter.minimumFractionDigits = 1
             return formatter
         }
-        
+
         private var targetFormatter: NumberFormatter {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
