@@ -90,19 +90,19 @@ struct MainView: View {
             Spacer()
             HStack(alignment: .firstTextBaseline) {
                 HStack {
-                    Text(iobFormatter.string(from: (state.iob ?? 0) as NSNumber)! + " U")
+                    Text(iobFormatter.string(from: (state.cob ?? 0) as NSNumber)! + " g")
                         .font(.caption2)
                         .scaledToFill()
-                        .foregroundColor(.insulin)
+                        .foregroundColor(.loopYellow)
                         .minimumScaleFactor(0.5)
 
                 }.minimumScaleFactor(0.5)
                 Spacer()
                 HStack {
-                    Text(iobFormatter.string(from: (state.cob ?? 0) as NSNumber)! + " g")
+                    Text(iobFormatter.string(from: (state.iob ?? 0) as NSNumber)! + " U")
                         .font(.caption2)
                         .scaledToFill()
-                        .foregroundColor(.loopYellow)
+                        .foregroundColor(.insulin)
                         .minimumScaleFactor(0.5)
                 }
 
