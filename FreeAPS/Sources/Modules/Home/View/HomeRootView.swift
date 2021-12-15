@@ -15,7 +15,15 @@ extension Home {
             formatter.maximumFractionDigits = 2
             return formatter
         }
-
+        
+        private var eventualFormatter: NumberFormatter {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.maximumFractionDigits = 1
+            formatter.minimumFractionDigits = 1
+            return formatter
+        }
+        
         private var targetFormatter: NumberFormatter {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
@@ -214,7 +222,7 @@ extension Home {
 
                 if let eventualBG = state.eventualBG {
                     Text(
-                        "⇢ " + numberFormatter.string(
+                        "⇢ " + eventualFormatter.string(
                             from: (state.units == .mmolL ? eventualBG.asMmolL : Decimal(eventualBG)) as NSNumber
                         )!
                     )
