@@ -173,6 +173,7 @@ final class BaseWatchManager: NSObject, WatchManager, Injectable {
     private var deltaFormatter: NumberFormatter {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 1
         formatter.maximumFractionDigits = 1
         formatter.positivePrefix = "+"
         return formatter
