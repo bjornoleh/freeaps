@@ -171,7 +171,7 @@ struct MainChartView: View {
 
             return Text(glucoseFormatter.string(from: value as NSNumber)!)
                 .position(CGPoint(x: fullSize.width - 12, y: range.minY + CGFloat(line) * yStep))
-                .font(.caption2)
+                .font(.caption)
                 .asAny()
         }
     }
@@ -285,7 +285,7 @@ struct MainChartView: View {
 
             ForEach(bolusDots, id: \.rect.minX) { info -> AnyView in
                 let position = CGPoint(x: info.rect.midX, y: info.rect.maxY + 8)
-                return Text(bolusFormatter.string(from: info.value as NSNumber)!).font(.caption2)
+                return Text(bolusFormatter.string(from: info.value as NSNumber)!).font(.caption)
                     .position(position)
                     .asAny()
             }
@@ -307,7 +307,7 @@ struct MainChartView: View {
 
             ForEach(carbsDots, id: \.rect.minX) { info -> AnyView in
                 let position = CGPoint(x: info.rect.midX, y: info.rect.minY - 8)
-                return Text(carbsFormatter.string(from: info.value as NSNumber)!).font(.caption2)
+                return Text(carbsFormatter.string(from: info.value as NSNumber)!).font(.caption)
                     .position(position)
                     .asAny()
             }

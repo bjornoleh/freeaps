@@ -53,7 +53,7 @@ struct CurrentGlucoseView: View {
             HStack(alignment: .lastTextBaseline, spacing: 2) {
                 Text(
                     recentGlucose.map { dateFormatter.string(from: $0.dateString) } ?? "--"
-                ).font(.caption2).foregroundColor(.secondary)
+                ).font(.caption).foregroundColor(.secondary)
                 Text(
                     delta
                         .map { deltaFormatter.string(from: Double(units == .mmolL ? $0.asMmolL : Decimal($0)) as NSNumber)!

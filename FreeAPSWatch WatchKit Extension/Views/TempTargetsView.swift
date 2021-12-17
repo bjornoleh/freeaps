@@ -21,7 +21,7 @@ struct TempTargetsView: View {
                                     Text(until, style: .timer).foregroundColor(.loopGreen)
                                 }
                             }
-                            Text(target.description).font(.caption2).foregroundColor(.secondary)
+                            Text(target.description).font(.caption).foregroundColor(.secondary)
                         }
                     }
                 }

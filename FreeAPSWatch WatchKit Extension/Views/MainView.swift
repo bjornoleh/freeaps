@@ -21,7 +21,7 @@ struct MainView: View {
                             .frame(width: 14, height: 14)
                             .padding(2)
                     }
-                    Text("Updating...").font(.caption2).foregroundColor(.secondary)
+                    Text("Updating...").font(.caption).foregroundColor(.secondary)
                 }
             }
             VStack {
@@ -65,7 +65,7 @@ struct MainView: View {
                             .scaledToFill()
                             .minimumScaleFactor(0.5)
                     }
-                    Text(state.delta).font(.caption2)
+                    Text(state.delta).font(.caption)
                         .scaledToFill()
                         .minimumScaleFactor(0.5)
                         .foregroundColor(.secondary)
@@ -78,12 +78,12 @@ struct MainView: View {
                     }
 
                     if state.lastLoopDate != nil {
-                        Text(timeString).font(.caption2)
+                        Text(timeString).font(.caption)
                             .scaledToFill()
                             .minimumScaleFactor(0.5)
                             .foregroundColor(.secondary)
                     } else {
-                        Text("--").font(.caption2)
+                        Text("--").font(.caption)
                     }
                 }
             }
@@ -91,7 +91,7 @@ struct MainView: View {
             HStack(alignment: .firstTextBaseline) {
                 HStack {
                     Text(iobFormatter.string(from: (state.cob ?? 0) as NSNumber)! + " g")
-                        .font(.caption2)
+                        .font(.caption)
                         .scaledToFill()
                         .foregroundColor(.loopYellow)
                         .minimumScaleFactor(0.5)
@@ -100,7 +100,7 @@ struct MainView: View {
                 Spacer()
                 HStack {
                     Text(iobFormatter.string(from: (state.iob ?? 0) as NSNumber)! + " U")
-                        .font(.caption2)
+                        .font(.caption)
                         .scaledToFill()
                         .foregroundColor(.insulin)
                         .minimumScaleFactor(0.5)
@@ -110,7 +110,7 @@ struct MainView: View {
                     Spacer()
                     HStack {
                         Text(eventualBG)
-                            .font(.caption2)
+                            .font(.caption)
                             .scaledToFill()
                             .foregroundColor(.secondary)
                             .minimumScaleFactor(0.5)
