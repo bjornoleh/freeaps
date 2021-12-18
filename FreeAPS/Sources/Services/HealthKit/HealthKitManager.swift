@@ -23,12 +23,6 @@ protocol HealthKitManager: GlucoseSource {
 }
 
 final class BaseHealthKitManager: HealthKitManager, Injectable {
-    @Injected() private var glucoseStorage: GlucoseStorage!
-    @Injected() private var healthKitStore: HKHealthStore!
-    @Injected() private var settingsManager: SettingsManager!
-
-    private let processQueue = DispatchQueue(label: "BaseHealthKitManager.processQueue")
-
     private enum Config {
         // unwraped HKObjects
         static var permissions: Set<HKSampleType> { Set([healthBGObject].compactMap { $0 }) }
@@ -40,8 +34,15 @@ final class BaseHealthKitManager: HealthKitManager, Injectable {
         static let freeAPSMetaKey = "fromFreeAPSX"
     }
 
+    @Injected() private var glucoseStorage: GlucoseStorage!
+    @Injected() private var healthKitStore: HKHealthStore!
+    @Injected() private var settingsManager: SettingsManager!
+
+    private let processQueue = DispatchQueue(label: "BaseHealthKitManager.processQueue")
+    private var lifetime = Lifetime()
+
     // BG that will be return Publisher
-    @SyncAccess @Persisted(key: "HealthKitManagerNewGlucose") private var newGlucose: [BloodGlucose] = []
+    @SyncAccess @Persisted(key: "BaseHealthKitManager.newGlucose") private var newGlucose: [BloodGlucose] = []
 
     // last anchor for HKAnchoredQuery
     private var lastBloodGlucoseQueryAnchor: HKQueryAnchor! {
@@ -127,32 +128,32 @@ final class BaseHealthKitManager: HealthKitManager, Injectable {
               bloodGlucose.isNotEmpty
         else { return }
 
-        processQueue.async {
-            for bgItem in bloodGlucose {
-                let bgQuantity = HKQuantity(
-                    unit: .milligramsPerDeciliter,
-                    doubleValue: Double(bgItem.glucose!)
-                )
-
-                let bgObjectSample = HKQuantitySample(
-                    type: sampleType,
-                    quantity: bgQuantity,
-                    start: bgItem.dateString,
-                    end: bgItem.dateString,
-                    metadata: [
-                        HKMetadataKeyExternalUUID: bgItem.id,
-                        HKMetadataKeySyncIdentifier: bgItem.id,
-                        HKMetadataKeySyncVersion: 1,
-                        Config.freeAPSMetaKey: true
-                    ]
-                )
-                self.load(sampleFromHealth: sampleType, withID: bgItem.id) { [weak self] samples in
-                    if samples.isEmpty {
-                        self?.healthKitStore.save(bgObjectSample) { _, _ in }
-                    }
+        func save(samples: [HKSample]) {
+            let sampleIDs = samples.compactMap(\.syncIdentifier)
+            let samplesToSave = bloodGlucose
+                .filter { !sampleIDs.contains($0.id) }
+                .map {
+                    HKQuantitySample(
+                        type: sampleType,
+                        quantity: HKQuantity(unit: .milligramsPerDeciliter, doubleValue: Double($0.glucose!)),
+                        start: $0.dateString,
+                        end: $0.dateString,
+                        metadata: [
+                            HKMetadataKeyExternalUUID: $0.id,
+                            HKMetadataKeySyncIdentifier: $0.id,
+                            HKMetadataKeySyncVersion: 1,
+                            Config.freeAPSMetaKey: true
+                        ]
+                    )
                 }
-            }
+
+            healthKitStore.save(samplesToSave) { _, _ in }
         }
+
+        loadSamplesFromHealth(sampleType: sampleType, withIDs: bloodGlucose.map(\.id))
+            .receive(on: processQueue)
+            .sink(receiveValue: save)
+            .store(in: &lifetime)
     }
 
     func createObserver() {
@@ -203,33 +204,26 @@ final class BaseHealthKitManager: HealthKitManager, Injectable {
     }
 
     /// Try to load samples from Health store with id and do some work
-    private func load(
-        sampleFromHealth sampleType: HKQuantityType,
-        withID id: String,
-        andDo completion: (([HKSample]) -> Void)?
-    ) {
-        dispatchPrecondition(condition: .onQueue(processQueue))
-        let predicate = HKQuery.predicateForObjects(
-            withMetadataKey: HKMetadataKeySyncIdentifier,
-            operatorType: .equalTo,
-            value: id
-        )
+    private func loadSamplesFromHealth(
+        sampleType: HKQuantityType,
+        withIDs ids: [String]
+    ) -> Future<[HKSample], Never> {
+        Future { promise in
+            let predicate = HKQuery.predicateForObjects(
+                withMetadataKey: HKMetadataKeySyncIdentifier,
+                allowedValues: ids
+            )
 
-        let query = HKSampleQuery(
-            sampleType: sampleType,
-            predicate: predicate,
-            limit: 1,
-            sortDescriptors: nil
-        ) { _, results, _ in
-
-            guard let samples = results as? [HKQuantitySample] else {
-                completion?([])
-                return
+            let query = HKSampleQuery(
+                sampleType: sampleType,
+                predicate: predicate,
+                limit: 1000,
+                sortDescriptors: nil
+            ) { _, results, _ in
+                promise(.success((results as? [HKQuantitySample]) ?? []))
             }
-
-            completion?(samples)
+            self.healthKitStore.execute(query)
         }
-        healthKitStore.execute(query)
     }
 
     private func getBloodGlucoseHKQuery(predicate: NSPredicate) -> HKQuery? {
@@ -304,14 +298,28 @@ final class BaseHealthKitManager: HealthKitManager, Injectable {
     }
 
     private func deleteSamplesFromLocalStorage(_ deletedSamples: [HKDeletedObject]) {
-        dispatchPrecondition(condition: .onQueue(processQueue))
-        debug(.service, "Delete HealthKit objects: \(String(describing: deletedSamples))")
+        guard settingsManager.settings.useAppleHealth,
+              let sampleType = Config.healthBGObject,
+              checkAvailabilitySave(objectTypeToHealthStore: sampleType),
+              deletedSamples.isNotEmpty
+        else { return }
 
         let removingBGID = deletedSamples.map {
             $0.metadata?[HKMetadataKeySyncIdentifier] as? String ?? $0.uuid.uuidString
         }
-        glucoseStorage.removeGlucose(ids: removingBGID)
-        newGlucose = newGlucose.filter { !removingBGID.contains($0.id) }
+
+        func delete(samples: [HKSample]) {
+            let sampleIDs = samples.map(\.syncIdentifier)
+            let idsToRemove = removingBGID.filter { !sampleIDs.contains($0) }
+            debug(.service, "Delete HealthKit objects: \(idsToRemove)")
+            glucoseStorage.removeGlucose(ids: idsToRemove)
+            newGlucose = newGlucose.filter { !idsToRemove.contains($0.id) }
+        }
+
+        loadSamplesFromHealth(sampleType: sampleType, withIDs: removingBGID)
+            .receive(on: processQueue)
+            .sink(receiveValue: delete)
+            .store(in: &lifetime)
     }
 
     func fetch() -> AnyPublisher<[BloodGlucose], Never> {
