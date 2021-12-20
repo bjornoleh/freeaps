@@ -23,8 +23,8 @@ struct CurrentGlucoseView: View {
         formatter.numberStyle = .decimal
         formatter.minimumFractionDigits = 1
         formatter.maximumFractionDigits = 1
-        formatter.positivePrefix = " +"
-        formatter.negativePrefix = " -"
+        formatter.positivePrefix = "+"
+        formatter.negativePrefix = "-"
         return formatter
     }
 
