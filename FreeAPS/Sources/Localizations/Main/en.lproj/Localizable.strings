@@ -131,7 +131,10 @@
 "Top target" = "Top target";
 
 /*  Temp target set for ... minutes */
-"for %@ min" = "for %@ min";
+"for" = "for";
+
+/*  Temp target set for ... minutes */
+"min" = "min";
 
 /*  */
 "Autotune" = "Autotune";
@@ -874,6 +877,24 @@ Enact a temp Basal or a temp target */
 
 /* */
 "Bolus failed or inaccurate. Check pump history before repeating." = "Bolus failed or inaccurate. Check pump history before repeating.";
+
+/* */
+"Carbs" = "Carbs";
+
+/* */
+"Temp Basal" = "Temp Basal";
+
+/* */
+"Temp Target" = "Temp Target";
+
+/* */
+"Resume" = "Resume";
+
+/* */
+"Suspend" = "Suspend";
+
+/* */
+"Animated Background" = "Animated Background";
 
 
 /* Headers for settings ----------------------- */

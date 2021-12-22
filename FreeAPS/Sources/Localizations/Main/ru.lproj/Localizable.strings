@@ -131,7 +131,10 @@
 "Top target" = "Верхняя граница";
 
 /*  Temp target set for ... minutes */
-"for %@ min" = "на %d минут";
+"for" = "на";
+
+/*  Temp target set for ... minutes */
+"min" = "мин";
 
 /*  */
 "Autotune" = "Автотюн";
@@ -414,7 +417,7 @@ Enact a temp Basal or a temp target */
 "Temp Targets" = "Временные цели";
 
 /* Delete carbs from Treatments list*/
-"Delete carbs?" = "Удалить углероды?";
+"Delete carbs?" = "Удалить углеводы?";
 
 /* Treatments list */
 "Treatments" = "События";
@@ -875,6 +878,23 @@ Enact a temp Basal or a temp target */
 /* */
 "Bolus failed or inaccurate. Check pump history before repeating." = "Болюс не выполнен или неточный. Перед повторением проверьте историю помпы.";
 
+/* */
+"Carbs" = "Углеводы";
+
+/* */
+"Temp Basal" = "Врем. базал";
+
+/* */
+"Temp Target" = "Врем. цель";
+
+/* */
+"Resume" = "Возобновление";
+
+/* */
+"Suspend" = "Остановка";
+
+/* */
+"Animated Background" = "Анимированный фон";
 
 /* Headers for settings ----------------------- */
 "OpenAPS main settings" = "Основные настройки OpenAPS";

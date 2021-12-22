@@ -133,6 +133,9 @@
 /*  Temp target set for ... minutes */
 "for" = "für";
 
+/*  Temp target set for ... minutes */
+"min" = "min";
+
 /*  */
 "Autotune" = "Autotune";
 
@@ -868,6 +871,27 @@ Enact a temp Basal or a temp target */
 
 /* About this source */
 "About this source" = "Über diesen Quellcode";
+
+/* */
+"Bolus failed" = "Bolus fehlgeschlagen";
+
+/* */
+"Bolus failed or inaccurate. Check pump history before repeating." = "Bolus ist fehlgeschlagen oder ungenau. Prüfe den Pumpenverlauf vor einer erneuten Abgabe.";
+
+/* */
+"Carbs" = "Carbs";
+
+/* */
+"Temp Basal" = "Temp Basal";
+
+/* */
+"Temp Target" = "Temp Target";
+
+/* */
+"Resume" = "Resume";
+
+/* */
+"Suspend" = "Suspend";
 
 
 /* Headers for settings ----------------------- */
