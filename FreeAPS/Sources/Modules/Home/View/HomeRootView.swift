@@ -51,6 +51,13 @@ extension Home {
                 Spacer()
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
+                        //                        Text("COB").font(.caption).foregroundColor(.secondary)
+                        Text(
+                            (numberFormatter.string(from: (state.suggestion?.cob ?? 0) as NSNumber) ?? "0") +
+                                NSLocalizedString(" g", comment: "gram of carbs")
+                        )
+                        .font(.system(size: 14, weight: .bold)).foregroundColor(.loopYellow)
+                    }
                         //                        Text("IOB").font(.caption).foregroundColor(.secondary)
                         Text(
                             (numberFormatter.string(from: (state.suggestion?.iob ?? 0) as NSNumber) ?? "0") +
@@ -59,13 +66,6 @@ extension Home {
                         .font(.system(size: 14, weight: .bold)).foregroundColor(.insulin)
                     }
                     HStack {
-                        //                        Text("COB").font(.caption).foregroundColor(.secondary)
-                        Text(
-                            (numberFormatter.string(from: (state.suggestion?.cob ?? 0) as NSNumber) ?? "0") +
-                                NSLocalizedString(" g", comment: "gram of carbs")
-                        )
-                        .font(.system(size: 14, weight: .bold)).foregroundColor(.loopYellow)
-                    }
                 }
                 Spacer()
 
