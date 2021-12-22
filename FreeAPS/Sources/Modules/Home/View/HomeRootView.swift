@@ -58,15 +58,14 @@ extension Home {
                         )
                         .font(.system(size: 14, weight: .bold)).foregroundColor(.loopYellow)
                     }
-                        //                        Text("IOB").font(.caption).foregroundColor(.secondary)
-                        Text(
-                            (numberFormatter.string(from: (state.suggestion?.iob ?? 0) as NSNumber) ?? "0") +
-                                NSLocalizedString(" U", comment: "Insulin unit")
-                        )
-                        .font(.system(size: 14, weight: .bold)).foregroundColor(.insulin)
-                    }
-                    HStack {
+                    //                        Text("IOB").font(.caption).foregroundColor(.secondary)
+                    Text(
+                        (numberFormatter.string(from: (state.suggestion?.iob ?? 0) as NSNumber) ?? "0") +
+                            NSLocalizedString(" U", comment: "Insulin unit")
+                    )
+                    .font(.system(size: 14, weight: .bold)).foregroundColor(.insulin)
                 }
+                HStack {}
                 Spacer()
 
                 CurrentGlucoseView(
