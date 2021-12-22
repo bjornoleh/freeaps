@@ -18,6 +18,14 @@ extension Home {
             return formatter
         }
 
+        private var cobFormatter: NumberFormatter {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.maximumFractionDigits = 0
+            formatter.minimumFractionDigits = 0
+            return formatter
+        }
+
         private var eventualFormatter: NumberFormatter {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
@@ -53,7 +61,7 @@ extension Home {
                     HStack {
                         //                        Text("COB").font(.caption).foregroundColor(.secondary)
                         Text(
-                            (numberFormatter.string(from: (state.suggestion?.cob ?? 0) as NSNumber) ?? "0") +
+                            (cobFormatter.string(from: (state.suggestion?.cob ?? 0) as NSNumber) ?? "0") +
                                 NSLocalizedString(" g", comment: "gram of carbs")
                         )
                         .font(.system(size: 14, weight: .bold)).foregroundColor(.loopYellow)
