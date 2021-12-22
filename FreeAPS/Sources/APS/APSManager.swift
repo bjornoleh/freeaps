@@ -6,7 +6,7 @@ import SwiftDate
 import Swinject
 
 protocol APSManager {
-    func heartbeat(date: Date, force: Bool)
+    func heartbeat(date: Date)
     func autotune() -> AnyPublisher<Autotune?, Never>
     func enactBolus(amount: Double, isSMB: Bool)
     var pumpManager: PumpManagerUI? { get set }
@@ -106,6 +106,12 @@ final class BaseAPSManager: APSManager, Injectable {
         openAPS = OpenAPS(storage: storage)
         subscribe()
         lastLoopDateSubject.send(lastLoopDate)
+
+        isLooping
+            .sink { value in
+                self.deviceDataManager.loopInProgress = value
+            }
+            .store(in: &lifetime)
     }
 
     private func subscribe() {
@@ -137,8 +143,8 @@ final class BaseAPSManager: APSManager, Injectable {
             .store(in: &lifetime)
     }
 
-    func heartbeat(date: Date, force: Bool) {
-        deviceDataManager.heartbeat(date: date, force: force)
+    func heartbeat(date: Date) {
+        deviceDataManager.heartbeat(date: date)
     }
 
     private func loop() {
@@ -286,8 +292,10 @@ final class BaseAPSManager: APSManager, Injectable {
     }
 
     func roundBolus(amount: Decimal) -> Decimal {
-        guard let pump = pumpManager, verifyStatus() else { return amount }
-        return Decimal(pump.roundToSupportedBolusVolume(units: Double(amount)))
+        guard let pump = pumpManager else { return amount }
+        let rounded = Decimal(pump.roundToSupportedBolusVolume(units: Double(amount)))
+        let maxBolus = Decimal(pump.roundToSupportedBolusVolume(units: Double(settingsManager.pumpSettings.maxBolus)))
+        return min(rounded, maxBolus)
     }
 
     private var bolusReporter: DoseProgressReporter?
@@ -303,6 +311,13 @@ final class BaseAPSManager: APSManager, Injectable {
             if case let .failure(error) = completion {
                 warning(.apsManager, "Bolus failed with error: \(error.localizedDescription)")
                 self.processError(APSError.pumpError(error))
+                if !isSMB {
+                    self.processQueue.async {
+                        self.broadcaster.notify(BolusFailureObserver.self, on: self.processQueue) {
+                            $0.bolusDidFail()
+                        }
+                    }
+                }
             } else {
                 debug(.apsManager, "Bolus succeeded")
                 if !isSMB {
@@ -343,6 +358,9 @@ final class BaseAPSManager: APSManager, Injectable {
                 debug(.apsManager, "Temp Basal succeeded")
                 let temp = TempBasal(duration: Int(duration / 60), rate: Decimal(rate), temp: .absolute, timestamp: Date())
                 self.storage.save(temp, as: OpenAPS.Monitor.tempBasal)
+                if rate == 0, duration == 0 {
+                    self.pumpHistoryStorage.saveCancelTempEvents()
+                }
             case let .failure(error):
                 debug(.apsManager, "Temp Basal failed with error: \(error.localizedDescription)")
                 self.processError(APSError.pumpError(error))
@@ -493,8 +511,8 @@ final class BaseAPSManager: APSManager, Injectable {
             return
         }
 
-        let basalPublisher: AnyPublisher<Void, Error> = {
-            guard let rate = suggested.rate, let duration = suggested.duration, verifyStatus() else {
+        let basalPublisher: AnyPublisher<Void, Error> = Deferred { () -> AnyPublisher<Void, Error> in
+            guard let rate = suggested.rate, let duration = suggested.duration, self.verifyStatus() else {
                 return Just(()).setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
             }
@@ -504,10 +522,10 @@ final class BaseAPSManager: APSManager, Injectable {
                 return ()
             }
             .eraseToAnyPublisher()
-        }()
+        }.eraseToAnyPublisher()
 
-        let bolusPublisher: AnyPublisher<Void, Error> = {
-            guard let units = suggested.units, verifyStatus() else {
+        let bolusPublisher: AnyPublisher<Void, Error> = Deferred { () -> AnyPublisher<Void, Error> in
+            guard let units = suggested.units, self.verifyStatus() else {
                 return Just(()).setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
             }
@@ -516,7 +534,7 @@ final class BaseAPSManager: APSManager, Injectable {
                 return ()
             }
             .eraseToAnyPublisher()
-        }()
+        }.eraseToAnyPublisher()
 
         basalPublisher
             .flatMap { bolusPublisher }
@@ -542,7 +560,7 @@ final class BaseAPSManager: APSManager, Injectable {
             enacted.timestamp = Date()
             enacted.recieved = received
             storage.save(enacted, as: OpenAPS.Enact.enacted)
-            debug(.apsManager, "Suggestion enacted")
+            debug(.apsManager, "Suggestion enacted. Received: \(received)")
             DispatchQueue.main.async {
                 self.broadcaster.notify(EnactedSuggestionObserver.self, on: .main) {
                     $0.enactedSuggestionDidUpdate(enacted)
@@ -577,8 +595,10 @@ private extension PumpManager {
             self.enactTempBasal(unitsPerHour: unitsPerHour, for: duration) { result in
                 switch result {
                 case let .success(dose):
+                    debug(.apsManager, "Temp basal succeded: \(unitsPerHour) for: \(duration)")
                     promise(.success(dose))
                 case let .failure(error):
+                    debug(.apsManager, "Temp basal failed: \(unitsPerHour) for: \(duration)")
                     promise(.failure(error))
                 }
             }
@@ -590,8 +610,10 @@ private extension PumpManager {
             self.enactBolus(units: units, automatic: automatic) { result in
                 switch result {
                 case let .success(dose):
+                    debug(.apsManager, "Bolus succeded: \(units)")
                     promise(.success(dose))
                 case let .failure(error):
+                    debug(.apsManager, "Bolus failed: \(units)")
                     promise(.failure(error))
                 }
             }
@@ -603,8 +625,10 @@ private extension PumpManager {
             self.cancelBolus { result in
                 switch result {
                 case let .success(dose):
+                    debug(.apsManager, "Cancel Bolus succeded")
                     promise(.success(dose))
                 case let .failure(error):
+                    debug(.apsManager, "Cancel Bolus failed")
                     promise(.failure(error))
                 }
             }

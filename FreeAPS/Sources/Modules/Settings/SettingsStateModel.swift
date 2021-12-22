@@ -4,20 +4,22 @@ extension Settings {
     final class StateModel: BaseStateModel<Provider> {
         @Injected() private var broadcaster: Broadcaster!
         @Injected() private var fileManager: FileManager!
-        @Published var closedLoop = false
 
+        @Published var closedLoop = false
         @Published var debugOptions = false
+        @Published var animatedBackground = false
 
         private(set) var buildNumber = ""
 
         override func subscribe() {
-            debugOptions = settingsManager.settings.debugOptions
-
+            subscribeSetting(\.debugOptions, on: $debugOptions) { debugOptions = $0 }
             subscribeSetting(\.closedLoop, on: $closedLoop) { closedLoop = $0 }
 
             broadcaster.register(SettingsObserver.self, observer: self)
 
             buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+
+            subscribeSetting(\.animatedBackground, on: $animatedBackground) { animatedBackground = $0 }
         }
 
         func logItems() -> [URL] {

@@ -12,13 +12,14 @@ import UserNotifications
 
 protocol DeviceDataManager: GlucoseSource {
     var pumpManager: PumpManagerUI? { get set }
+    var loopInProgress: Bool { get set }
     var pumpDisplayState: CurrentValueSubject<PumpDisplayState?, Never> { get }
     var recommendsLoop: PassthroughSubject<Void, Never> { get }
     var bolusTrigger: PassthroughSubject<Bool, Never> { get }
     var errorSubject: PassthroughSubject<Error, Never> { get }
     var pumpName: CurrentValueSubject<String, Never> { get }
     var pumpExpiresAtDate: CurrentValueSubject<Date?, Never> { get }
-    func heartbeat(date: Date, force: Bool)
+    func heartbeat(date: Date)
     func createBolusProgressReporter() -> DoseProgressReporter?
 }
 
@@ -40,6 +41,7 @@ final class BaseDeviceDataManager: DeviceDataManager, Injectable {
     @Injected() private var storage: FileStorage!
     @Injected() private var broadcaster: Broadcaster!
     @Injected() private var glucoseStorage: GlucoseStorage!
+    @Injected() private var settingsManager: SettingsManager!
 
     @Persisted(key: "BaseDeviceDataManager.lastEventDate") var lastEventDate: Date? = nil
     @SyncAccess(lock: accessLock) @Persisted(key: "BaseDeviceDataManager.lastHeartBeatTime") var lastHeartBeatTime: Date =
@@ -49,6 +51,9 @@ final class BaseDeviceDataManager: DeviceDataManager, Injectable {
     let bolusTrigger = PassthroughSubject<Bool, Never>()
     let errorSubject = PassthroughSubject<Error, Never>()
     let pumpNewStatus = PassthroughSubject<Void, Never>()
+    @SyncAccess private var pumpUpdateCancellable: AnyCancellable?
+    private var pumpUpdatePromise: Future<Bool, Never>.Promise?
+    @SyncAccess var loopInProgress: Bool = false
 
     var pumpManager: PumpManagerUI? {
         didSet {
@@ -96,30 +101,20 @@ final class BaseDeviceDataManager: DeviceDataManager, Injectable {
         pumpManager?.createBolusProgressReporter(reportingOn: processQueue)
     }
 
-    func heartbeat(date: Date, force: Bool) {
+    func heartbeat(date: Date) {
+        guard pumpUpdateCancellable == nil else {
+            warning(.deviceManager, "Pump updating already in progress. Skip updating.")
+            return
+        }
+
+        guard !loopInProgress else {
+            warning(.deviceManager, "Loop in progress. Skip updating.")
+            return
+        }
+
+        func update(_: Future<Bool, Never>.Promise?) {}
+
         processQueue.safeSync {
-            if force {
-                updatePumpData()
-                return
-            }
-
-            var updateInterval: TimeInterval = 4.5 * 60
-
-            switch date.timeIntervalSince(lastHeartBeatTime) {
-            case let interval where interval > 10.minutes.timeInterval:
-                break
-            case let interval where interval > 5.minutes.timeInterval:
-                updateInterval = 1.minutes.timeInterval
-            default:
-                break
-            }
-
-            let interval = date.timeIntervalSince(lastHeartBeatTime)
-            guard interval >= updateInterval else {
-                debug(.deviceManager, "Last hearbeat \(interval / 60) min ago, skip updating the pump data")
-                return
-            }
-
             lastHeartBeatTime = date
             updatePumpData()
         }
@@ -128,14 +123,37 @@ final class BaseDeviceDataManager: DeviceDataManager, Injectable {
     private func updatePumpData() {
         guard let pumpManager = pumpManager else {
             debug(.deviceManager, "Pump is not set, skip updating")
+            updateUpdateFinished(false)
             return
         }
 
         debug(.deviceManager, "Start updating the pump data")
-
-        pumpManager.ensureCurrentPumpData {
-            debug(.deviceManager, "Pump Data updated")
+        pumpUpdateCancellable = Future<Bool, Never> { [unowned self] promise in
+            pumpUpdatePromise = promise
+            debug(.deviceManager, "Waiting for pump update and loop recommendation")
+            processQueue.safeSync {
+                pumpManager.ensureCurrentPumpData {
+                    debug(.deviceManager, "Pump data updated.")
+                }
+            }
         }
+        .timeout(60, scheduler: processQueue)
+        .replaceError(with: false)
+        .replaceEmpty(with: false)
+        .sink(receiveValue: updateUpdateFinished)
+    }
+
+    private func updateUpdateFinished(_ recommendsLoop: Bool) {
+        pumpUpdateCancellable = nil
+        pumpUpdatePromise = nil
+        if !recommendsLoop {
+            warning(.deviceManager, "Loop recommendation time out or got error. Trying to loop right now.")
+        }
+        guard !loopInProgress else {
+            warning(.deviceManager, "Loop already in progress. Skip recommendation.")
+            return
+        }
+        self.recommendsLoop.send()
     }
 
     private func pumpManagerFromRawValue(_ rawValue: [String: Any]) -> PumpManagerUI? {
@@ -237,7 +255,7 @@ extension BaseDeviceDataManager: PumpManagerDelegate {
     }
 
     func pumpManagerBLEHeartbeatDidFire(_: PumpManager) {
-        debug(.deviceManager, "Pump Heartbeat")
+        debug(.deviceManager, "Pump Heartbeat: do nothing. Pump connection is OK")
     }
 
     func pumpManagerMustProvideBLEHeartbeat(_: PumpManager) -> Bool {
@@ -304,6 +322,12 @@ extension BaseDeviceDataManager: PumpManagerDelegate {
     ) {
         dispatchPrecondition(condition: .onQueue(processQueue))
         debug(.deviceManager, "New pump events:\n\(events.map(\.title).joined(separator: "\n"))")
+
+        // filter buggy TBRs > maxBasal from MDT
+        let events = events.filter {
+            guard $0.type == .tempBasal else { return true }
+            return $0.dose?.unitsPerHour ?? 0 <= Double(settingsManager.pumpSettings.maxBasal)
+        }
         pumpHistoryStorage.storePumpEvents(events)
         lastEventDate = events.last?.date
         completion(nil)
@@ -334,8 +358,12 @@ extension BaseDeviceDataManager: PumpManagerDelegate {
 
     func pumpManagerRecommendsLoop(_: PumpManager) {
         dispatchPrecondition(condition: .onQueue(processQueue))
-        debug(.deviceManager, "Recomends loop")
-        recommendsLoop.send()
+        debug(.deviceManager, "Pump recommends loop")
+        guard let promise = pumpUpdatePromise else {
+            warning(.deviceManager, "We do not waiting for loop recommendation at this time.")
+            return
+        }
+        promise(.success(true))
     }
 
     func startDateToFilterNewPumpEvents(for _: PumpManager) -> Date {

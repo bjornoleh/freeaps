@@ -105,15 +105,11 @@ final class BaseGlucoseStorage: GlucoseStorage, Injectable {
     }
 
     func isGlucoseNotFlat() -> Bool {
-        let last3 = recent().suffix(3)
-        guard last3.count == 3 else { return true }
-
-        return Array(
-            last3
-                .compactMap { $0.filtered ?? 0 }
-                .filter { $0 != 0 }
-                .uniqued()
-        ).count != 1
+        let count = 3 // check last 3 readings
+        let lastReadings = Array(recent().suffix(count))
+        let filtered = lastReadings.compactMap(\.filtered).filter { $0 != 0 }
+        guard lastReadings.count == count, filtered.count == count else { return true }
+        return Array(filtered.uniqued()).count != 1
     }
 
     func nightscoutGlucoseNotUploaded() -> [BloodGlucose] {
@@ -127,11 +123,11 @@ final class BaseGlucoseStorage: GlucoseStorage, Injectable {
         guard let glucose = recent().last, glucose.dateString.addingTimeInterval(20.minutes.timeInterval) > Date(),
               let glucoseValue = glucose.glucose else { return nil }
 
-        if Decimal(glucoseValue) < settingsManager.settings.lowGlucose {
+        if Decimal(glucoseValue) <= settingsManager.settings.lowGlucose {
             return .low
         }
 
-        if Decimal(glucoseValue) > settingsManager.settings.highGlucose {
+        if Decimal(glucoseValue) >= settingsManager.settings.highGlucose {
             return .high
         }
 

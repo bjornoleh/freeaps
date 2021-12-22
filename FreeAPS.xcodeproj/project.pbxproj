@@ -165,6 +165,11 @@
 		38D0B3D925EC07C400CB6E88 /* CarbsEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D0B3D825EC07C400CB6E88 /* CarbsEntry.swift */; };
 		38DAB280260CBB7F00F74C1A /* PumpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DAB27F260CBB7F00F74C1A /* PumpView.swift */; };
 		38DAB28A260D349500F74C1A /* FetchGlucoseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DAB289260D349500F74C1A /* FetchGlucoseManager.swift */; };
+		38DF1786276A73D400B3528F /* TagCloudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DF1785276A73D400B3528F /* TagCloudView.swift */; };
+		38DF1789276FC8C400B3528F /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 38DF1788276FC8C400B3528F /* SwiftMessages */; };
+		38DF178D27733E6800B3528F /* snow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 38DF178B27733E6800B3528F /* snow.sks */; };
+		38DF178E27733E6800B3528F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38DF178C27733E6800B3528F /* Assets.xcassets */; };
+		38DF179027733EAD00B3528F /* SnowScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DF178F27733EAD00B3528F /* SnowScene.swift */; };
 		38E4451E274DB04600EC9A94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E4451D274DB04600EC9A94 /* AppDelegate.swift */; };
 		38E44522274E3DDC00EC9A94 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E44521274E3DDC00EC9A94 /* NetworkReachabilityManager.swift */; };
 		38E44528274E401C00EC9A94 /* Protected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E44527274E401C00EC9A94 /* Protected.swift */; };
@@ -566,6 +571,10 @@
 		38D0B3D825EC07C400CB6E88 /* CarbsEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarbsEntry.swift; sourceTree = "<group>"; };
 		38DAB27F260CBB7F00F74C1A /* PumpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpView.swift; sourceTree = "<group>"; };
 		38DAB289260D349500F74C1A /* FetchGlucoseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchGlucoseManager.swift; sourceTree = "<group>"; };
+		38DF1785276A73D400B3528F /* TagCloudView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCloudView.swift; sourceTree = "<group>"; };
+		38DF178B27733E6800B3528F /* snow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = snow.sks; sourceTree = "<group>"; };
+		38DF178C27733E6800B3528F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		38DF178F27733EAD00B3528F /* SnowScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowScene.swift; sourceTree = "<group>"; };
 		38E4451D274DB04600EC9A94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38E44521274E3DDC00EC9A94 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		38E44527274E401C00EC9A94 /* Protected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protected.swift; sourceTree = "<group>"; };
@@ -735,6 +744,7 @@
 				38B17B6625DD90E0005CAE3D /* SwiftDate in Frameworks */,
 				3818AA60274C26A300843DB3 /* Crypto.framework in Frameworks */,
 				3833B46D26012030003021B3 /* Algorithms in Frameworks */,
+				38DF1789276FC8C400B3528F /* SwiftMessages in Frameworks */,
 				E0CC2C5C275B9F0F00A7BC71 /* HealthKit.framework in Frameworks */,
 				3818AA62274C26A400843DB3 /* MinimedKit.framework in Frameworks */,
 				3818AA58274C26A300843DB3 /* LoopKit.framework in Frameworks */,
@@ -882,12 +892,13 @@
 		3811DE1325C9D39E00A708ED /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				E00EEBFC27368630002FF094 /* Assemblies */,
-				198377CF266BFEDE004DE65E /* Localizations */,
 				3811DEDE25C9E2DD00A708ED /* Application */,
 				3811DF0A25CAAAA500A708ED /* APS */,
+				E00EEBFC27368630002FF094 /* Assemblies */,
 				38E98A3225F5300800C0CED0 /* Config */,
 				388E5A5A25B6F05F0019842D /* Helpers */,
+				38DF178A27733E0F00B3528F /* AnimatedBackground */,
+				198377CF266BFEDE004DE65E /* Localizations */,
 				38E98A1A25F52C9300C0CED0 /* Logger */,
 				388E5A5925B6F0250019842D /* Models */,
 				3811DE0325C9D31700A708ED /* Modules */,
@@ -1180,6 +1191,7 @@
 				383420D825FFEB3F002D46C1 /* Popup.swift */,
 				389ECDFD2601061500D86C4F /* View+Snapshot.swift */,
 				38EA05FF262091870064E39B /* BolusProgressViewStyle.swift */,
+				38DF1785276A73D400B3528F /* TagCloudView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1336,6 +1348,16 @@
 				38B4F3C925E502E100E76A18 /* WeakObjectSet.swift */,
 			);
 			path = SwiftNotificationCenter;
+			sourceTree = "<group>";
+		};
+		38DF178A27733E0F00B3528F /* AnimatedBackground */ = {
+			isa = PBXGroup;
+			children = (
+				38DF178B27733E6800B3528F /* snow.sks */,
+				38DF178C27733E6800B3528F /* Assets.xcassets */,
+				38DF178F27733EAD00B3528F /* SnowScene.swift */,
+			);
+			path = AnimatedBackground;
 			sourceTree = "<group>";
 		};
 		38E44529274E40F100EC9A94 /* Disk */ = {
@@ -1844,6 +1866,7 @@
 				38B17B6525DD90E0005CAE3D /* SwiftDate */,
 				3833B46C26012030003021B3 /* Algorithms */,
 				3818AA46274C255A00843DB3 /* LibreTransmitter */,
+				38DF1788276FC8C400B3528F /* SwiftMessages */,
 			);
 			productName = FreeAPS;
 			productReference = 388E595825AD948C0019842D /* FreeAPS.app */;
@@ -1961,6 +1984,7 @@
 				3811DE0E25C9D37700A708ED /* XCRemoteSwiftPackageReference "Swinject" */,
 				38B17B6425DD90E0005CAE3D /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				3833B46B26012030003021B3 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				38DF1787276FC8C300B3528F /* XCRemoteSwiftPackageReference "SwiftMessages" */,
 			);
 			productRefGroup = 388E595925AD948C0019842D /* Products */;
 			projectDirPath = "";
@@ -1981,7 +2005,9 @@
 			files = (
 				388E596025AD948E0019842D /* Assets.xcassets in Resources */,
 				198377D2266BFFF6004DE65E /* Localizable.strings in Resources */,
+				38DF178D27733E6800B3528F /* snow.sks in Resources */,
 				388E597225AD9CF10019842D /* json in Resources */,
+				38DF178E27733E6800B3528F /* Assets.xcassets in Resources */,
 				388E596F25AD96040019842D /* javascript in Resources */,
 				1927C8E62744606D00347C69 /* InfoPlist.strings in Resources */,
 			);
@@ -2065,6 +2091,7 @@
 				3894873A2614928B004DF424 /* DispatchTimer.swift in Sources */,
 				3895E4C625B9E00D00214B37 /* Preferences.swift in Sources */,
 				386A124F271707F000DDC61C /* DexcomSource.swift in Sources */,
+				38DF1786276A73D400B3528F /* TagCloudView.swift in Sources */,
 				38B4F3CD25E5031100E76A18 /* Broadcaster.swift in Sources */,
 				383420D925FFEB3F002D46C1 /* Popup.swift in Sources */,
 				3811DE3025C9D49500A708ED /* HomeStateModel.swift in Sources */,
@@ -2158,6 +2185,7 @@
 				45252C95D220E796FDB3B022 /* ConfigEditorDataFlow.swift in Sources */,
 				3871F38725ED661C0013ECB5 /* Suggestion.swift in Sources */,
 				38C4D33A25E9A1ED00D30B77 /* NSObject+AssociatedValues.swift in Sources */,
+				38DF179027733EAD00B3528F /* SnowScene.swift in Sources */,
 				38AAF8712600C1B0004AF583 /* MainChartView.swift in Sources */,
 				38E4453A274E411700EC9A94 /* Disk+[UIImage].swift in Sources */,
 				72F1BD388F42FCA6C52E4500 /* ConfigEditorProvider.swift in Sources */,
@@ -2834,6 +2862,14 @@
 				minimumVersion = 6.3.1;
 			};
 		};
+		38DF1787276FC8C300B3528F /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2855,6 +2891,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 38B17B6425DD90E0005CAE3D /* XCRemoteSwiftPackageReference "SwiftDate" */;
 			productName = SwiftDate;
+		};
+		38DF1788276FC8C400B3528F /* SwiftMessages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 38DF1787276FC8C300B3528F /* XCRemoteSwiftPackageReference "SwiftMessages" */;
+			productName = SwiftMessages;
 		};
 		38E8755727567AE400975559 /* SwiftDate */ = {
 			isa = XCSwiftPackageProductDependency;
