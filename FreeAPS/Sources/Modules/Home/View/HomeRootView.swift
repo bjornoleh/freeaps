@@ -206,10 +206,22 @@ extension Home {
 
         var legendPanal: some View {
             HStack(alignment: .center) {
+//                Group {
+//                    Circle().fill(Color.loopGreen).frame(width: 8, height: 8)
+//                    Text("BG")
+//                        .font(.system(size: 12, weight: .bold)).foregroundColor(.loopGreen)
+//                }
                 Group {
-                    Circle().fill(Color.loopGreen).frame(width: 8, height: 8)
-                    Text("BG")
-                        .font(.system(size: 12, weight: .bold)).foregroundColor(.loopGreen)
+                    Circle().fill(Color.loopYellow).frame(width: 8, height: 8)
+                        .padding(.leading, 8)
+                    Text("COB")
+                        .font(.system(size: 12, weight: .bold)).foregroundColor(.loopYellow)
+                }
+                Group {
+                    Circle().fill(Color.uam).frame(width: 8, height: 8)
+                        .padding(.leading, 8)
+                    Text("UAM")
+                        .font(.system(size: 12, weight: .bold)).foregroundColor(.uam)
                 }
                 Group {
                     Circle().fill(Color.insulin).frame(width: 8, height: 8)
@@ -222,18 +234,6 @@ extension Home {
                         .padding(.leading, 8)
                     Text("ZT")
                         .font(.system(size: 12, weight: .bold)).foregroundColor(.zt)
-                }
-                Group {
-                    Circle().fill(Color.loopYellow).frame(width: 8, height: 8)
-                        .padding(.leading, 8)
-                    Text("COB")
-                        .font(.system(size: 12, weight: .bold)).foregroundColor(.loopYellow)
-                }
-                Group {
-                    Circle().fill(Color.uam).frame(width: 8, height: 8)
-                        .padding(.leading, 8)
-                    Text("UAM")
-                        .font(.system(size: 12, weight: .bold)).foregroundColor(.uam)
                 }
 
                 if let eventualBG = state.eventualBG {
