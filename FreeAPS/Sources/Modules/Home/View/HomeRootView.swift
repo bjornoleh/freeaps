@@ -216,18 +216,21 @@ extension Home {
                         .padding(.leading, 8)
                     Text("COB")
                         .font(.system(size: 12, weight: .bold)).foregroundColor(.loopYellow)
+                        .padding(.trailing, 20)
                 }
                 Group {
                     Circle().fill(Color.uam).frame(width: 8, height: 8)
                         .padding(.leading, 8)
                     Text("UAM")
                         .font(.system(size: 12, weight: .bold)).foregroundColor(.uam)
+                        .padding(.trailing, 20)
                 }
                 Group {
                     Circle().fill(Color.insulin).frame(width: 8, height: 8)
                         .padding(.leading, 8)
                     Text("IOB")
                         .font(.system(size: 12, weight: .bold)).foregroundColor(.insulin)
+                        .padding(.trailing, 20)
                 }
                 Group {
                     Circle().fill(Color.zt).frame(width: 8, height: 8)
