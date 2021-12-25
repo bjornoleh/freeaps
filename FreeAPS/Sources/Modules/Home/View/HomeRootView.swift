@@ -300,15 +300,6 @@ extension Home {
                         }
                     }
                     Spacer()
-                    Button { state.showModal(for: .addTempTarget) }
-                    label: {
-                        Image("target")
-                            .renderingMode(.template)
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .padding(8)
-                    }.foregroundColor(.loopGreen)
-                    Spacer()
                     Button { state.showModal(for: .bolus(waitForSuggestion: false)) }
                     label: {
                         Image("bolus")
@@ -329,6 +320,15 @@ extension Home {
                         }.foregroundColor(.insulin)
                         Spacer()
                     }
+                    Button { state.showModal(for: .addTempTarget) }
+                    label: {
+                        Image("target")
+                            .renderingMode(.template)
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                            .padding(8)
+                    }.foregroundColor(.loopGreen)
+                    Spacer()
                     Button { state.showModal(for: .settings) }
                     label: {
                         Image("settings1")
