@@ -291,7 +291,7 @@ extension Home {
                                 .foregroundColor(.loopYellow)
                                 .padding(8)
                             if let carbsReq = state.carbsRequired {
-                                Text(numberFormatter.string(from: carbsReq as NSNumber)!)
+                                Text(cobFormatter.string(from: carbsReq as NSNumber)!)
                                     .font(.caption)
                                     .foregroundColor(.white)
                                     .padding(4)
