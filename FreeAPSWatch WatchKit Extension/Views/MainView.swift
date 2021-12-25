@@ -134,6 +134,17 @@ struct MainView: View {
                     .foregroundColor(.loopYellow)
             }
 
+            NavigationLink(isActive: $state.isBolusViewActive) {
+                BolusView()
+                    .environmentObject(state)
+            } label: {
+                Image("bolus", bundle: nil)
+                    .renderingMode(.template)
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.insulin)
+            }
+
             NavigationLink(isActive: $state.isTempTargetViewActive) {
                 TempTargetsView()
                     .environmentObject(state)
@@ -150,17 +161,6 @@ struct MainView: View {
                             .font(.system(size: 8))
                     }
                 }
-            }
-
-            NavigationLink(isActive: $state.isBolusViewActive) {
-                BolusView()
-                    .environmentObject(state)
-            } label: {
-                Image("bolus", bundle: nil)
-                    .renderingMode(.template)
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .foregroundColor(.insulin)
             }
         }
     }
