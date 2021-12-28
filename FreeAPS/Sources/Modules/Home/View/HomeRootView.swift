@@ -75,20 +75,20 @@ extension Home {
         var cobIobView: some View {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Text("IOB").font(.caption2).foregroundColor(.secondary)
-                    Text(
-                        (numberFormatter.string(from: (state.suggestion?.iob ?? 0) as NSNumber) ?? "0") +
-                            NSLocalizedString(" U", comment: "Insulin unit")
-                    )
-                    .font(.system(size: 12, weight: .bold))
-                }
-                HStack {
-                    Text("COB").font(.caption2).foregroundColor(.secondary)
+                    Text("COB").font(.caption2).foregroundColor(.loopYellow)
                     Text(
                         (numberFormatter.string(from: (state.suggestion?.cob ?? 0) as NSNumber) ?? "0") +
                             NSLocalizedString(" g", comment: "gram of carbs")
                     )
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.system(size: 14, weight: .bold))
+                }
+                HStack {
+                    Text("IOB").font(.caption2).foregroundColor(.insulin)
+                    Text(
+                        (numberFormatter.string(from: (state.suggestion?.iob ?? 0) as NSNumber) ?? "0") +
+                            NSLocalizedString(" U", comment: "Insulin unit")
+                    )
+                    .font(.system(size: 14, weight: .bold))
                 }
             }
         }
