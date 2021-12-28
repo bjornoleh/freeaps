@@ -77,7 +77,7 @@ extension Home {
                 HStack {
                     Text("COB").font(.caption2).foregroundColor(.loopYellow)
                     Text(
-                        (numberFormatter.string(from: (state.suggestion?.cob ?? 0) as NSNumber) ?? "0") +
+                        (cobFormatter.string(from: (state.suggestion?.cob ?? 0) as NSNumber) ?? "0") +
                             NSLocalizedString(" g", comment: "gram of carbs")
                     )
                     .font(.system(size: 14, weight: .bold))
