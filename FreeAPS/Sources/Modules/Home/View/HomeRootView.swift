@@ -240,31 +240,31 @@ extension Home {
 //                Group {
 //                    Circle().fill(Color.loopGreen).frame(width: 8, height: 8)
 //                    Text("BG")
-//                        .font(.system(size: 12, weight: .bold)).foregroundColor(.loopGreen)
+//                        .font(.system(size: 14, weight: .regular)).foregroundColor(.loopGreen)
 //                }
                 Group {
                     Circle().fill(Color.loopYellow).frame(width: 8, height: 8)
                         .padding(.leading, 8)
                     Text("COB")
-                        .font(.system(size: 12, weight: .bold)).foregroundColor(.loopYellow)
+                        .font(.system(size: 14, weight: .regular)).foregroundColor(.loopYellow)
                 }
                 Group {
                     Circle().fill(Color.insulin).frame(width: 8, height: 8)
                         .padding(.leading, 8)
                     Text("IOB")
-                        .font(.system(size: 12, weight: .bold)).foregroundColor(.insulin)
+                        .font(.system(size: 14, weight: .regular)).foregroundColor(.insulin)
                 }
                 Group {
                     Circle().fill(Color.uam).frame(width: 8, height: 8)
                         .padding(.leading, 8)
                     Text("UAM")
-                        .font(.system(size: 12, weight: .bold)).foregroundColor(.uam)
+                        .font(.system(size: 14, weight: .regular)).foregroundColor(.uam)
                 }
                 Group {
                     Circle().fill(Color.zt).frame(width: 8, height: 8)
                         .padding(.leading, 8)
                     Text("ZT")
-                        .font(.system(size: 12, weight: .bold)).foregroundColor(.zt)
+                        .font(.system(size: 14, weight: .regular)).foregroundColor(.zt)
                 }
 
                 if let eventualBG = state.eventualBG {
@@ -273,7 +273,7 @@ extension Home {
                             from: (state.units == .mmolL ? eventualBG.asMmolL : Decimal(eventualBG)) as NSNumber
                         )!
                     )
-                    .font(.system(size: 14, weight: .bold)).foregroundColor(.secondary)
+                    .font(.system(size: 16, weight: .regular)).foregroundColor(.secondary)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: 30)
