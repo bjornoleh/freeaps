@@ -35,7 +35,7 @@ extension Bolus {
                             ).foregroundColor(.secondary)
                         }.contentShape(Rectangle())
                             .onTapGesture {
-                                state.amount = state.inslinRecommended
+                                state.amount = state.inslinRequired
                             }
                         HStack {
                             Text("Insulin recommended")
