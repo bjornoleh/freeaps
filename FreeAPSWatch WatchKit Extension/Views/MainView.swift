@@ -156,8 +156,8 @@ struct MainView: View {
                         .frame(width: 24, height: 24)
                         .foregroundColor(.loopGreen)
                     if let until = state.tempTargets.compactMap(\.until).first, until > Date() {
-                        Text(until, style: .timer)
-                            .scaledToFill()
+                        Text(until, style: .relative)
+                            .scaledToFill().fixedSize()
                             .font(.system(size: 8))
                     }
                 }
