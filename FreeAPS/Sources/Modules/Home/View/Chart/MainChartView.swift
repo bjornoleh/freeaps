@@ -24,7 +24,7 @@ struct MainChartView: View {
         static let topYPadding: CGFloat = 20
         static let bottomYPadding: CGFloat = 50
         static let minAdditionalWidth: CGFloat = 150
-        static let maxGlucose = 450
+        static let maxGlucose = 250
         static let minGlucose = 70
         static let yLinesCount = 5
         static let bolusSize: CGFloat = 8
@@ -892,7 +892,13 @@ extension MainChartView {
             minValue = Config.minGlucose
             maxValue = Config.maxGlucose
         }
-
+        // fix the grah y-axis as long as the min and max BG values are within set borders
+        if minValue > Config.minGlucose {
+            minValue = Config.minGlucose
+        }
+        if maxValue < Config.maxGlucose {
+            maxValue = Config.maxGlucose
+        }
         return (min: minValue, max: maxValue)
     }
 
