@@ -115,25 +115,25 @@ struct CurrentGlucoseView: View {
             HStack(alignment: .lastTextBaseline, spacing: 2) {
                 Text(
                     "\(minutesAgo)m "
-                ).font(.system(size: 12, weight: .bold)).foregroundColor(colorOfMinutesAgo(minutesAgo))
+                ).font(.system(size: 14, weight: .bold)).foregroundColor(colorOfMinutesAgo(minutesAgo))
                     .fixedSize()
                 Text(
                     delta
                         .map { deltaFormatter.string(from: Double(units == .mmolL ? $0.asMmolL : Decimal($0)) as NSNumber)!
                         } ??
                         "--"
-                ).font(.system(size: 12, weight: .bold))
+                ).font(.system(size: 14, weight: .bold))
                     .fixedSize()
                 Text(
                     NSLocalizedString("ISF", comment: "current ISF") + ":"
                 )
-                .font(.system(size: 12))
+                .font(.system(size: 14))
                 .padding(.leading, 6)
                 .fixedSize()
                 Text(
                     numberFormatter.string(from: (currentISF ?? 0) as NSNumber) ?? "0"
                 )
-                .font(.system(size: 12, weight: .bold))
+                .font(.system(size: 14, weight: .bold))
                 .fixedSize()
             }
         }
