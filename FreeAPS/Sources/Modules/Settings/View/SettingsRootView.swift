@@ -45,7 +45,7 @@ extension Settings {
                                 .navigationLink(to: .configEditor(file: OpenAPS.Settings.preferences), from: self)
                             Text("Pump Settings")
                                 .navigationLink(to: .configEditor(file: OpenAPS.Settings.settings), from: self)
-                            Text("Autosense")
+                            Text("Autosens")
                                 .navigationLink(to: .configEditor(file: OpenAPS.Settings.autosense), from: self)
                             Text("Pump History")
                                 .navigationLink(to: .configEditor(file: OpenAPS.Monitor.pumpHistory), from: self)

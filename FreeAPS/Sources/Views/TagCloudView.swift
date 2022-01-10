@@ -61,7 +61,7 @@ struct TagCloudView: View {
                     return .loopOrange
                 case "Parabolic Fit":
                     return .loopRed
-                case "Autosense":
+                case "Autosens":
                     return .loopGreen
                 case "Standard":
                     return .insulin
