@@ -18,6 +18,22 @@ extension Home {
             return formatter
         }
 
+        private var cobFormatter: NumberFormatter {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.maximumFractionDigits = 0
+            formatter.minimumFractionDigits = 0
+            return formatter
+        }
+
+        private var eventualFormatter: NumberFormatter {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal
+            formatter.maximumFractionDigits = 1
+            formatter.minimumFractionDigits = 1
+            return formatter
+        }
+
         private var targetFormatter: NumberFormatter {
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
@@ -79,7 +95,7 @@ extension Home {
                         .frame(width: 12, height: 12)
                         .foregroundColor(.loopYellow)
                     Text(
-                        (numberFormatter.string(from: (state.suggestion?.cob ?? 0) as NSNumber) ?? "0") +
+                        (cobFormatter.string(from: (state.suggestion?.cob ?? 0) as NSNumber) ?? "0") +
                             NSLocalizedString(" g", comment: "gram of carbs")
                     )
                     .font(.system(size: 12, weight: .bold))
