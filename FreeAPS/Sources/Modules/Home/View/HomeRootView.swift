@@ -298,7 +298,6 @@ extension Home {
                     autotunedBasalProfile: $state.autotunedBasalProfile,
                     basalProfile: $state.basalProfile,
                     tempTargets: $state.tempTargets,
-                    displayedTempTargets: $state.displayedTempTargets,
                     carbs: $state.carbs,
                     timerDate: $state.timerDate,
                     units: $state.units
