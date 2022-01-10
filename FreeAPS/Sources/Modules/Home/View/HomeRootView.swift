@@ -85,7 +85,7 @@ extension Home {
                         (numberFormatter.string(from: (state.suggestion?.iob ?? 0) as NSNumber) ?? "0") +
                             NSLocalizedString(" U", comment: "Insulin unit")
                     )
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.system(size: 14, weight: .bold))
                 }
                 HStack {
 //                    Text("COB").font(.caption).foregroundColor(.secondary)
@@ -98,7 +98,7 @@ extension Home {
                         (cobFormatter.string(from: (state.suggestion?.cob ?? 0) as NSNumber) ?? "0") +
                             NSLocalizedString(" g", comment: "gram of carbs")
                     )
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.system(size: 14, weight: .bold))
                 }
             }
         }
@@ -166,14 +166,14 @@ extension Home {
             HStack(alignment: .center) {
                 if state.pumpSuspended {
                     Text("Pump suspended")
-                        .font(.system(size: 12, weight: .bold)).foregroundColor(.loopGray)
+                        .font(.system(size: 14, weight: .bold)).foregroundColor(.loopGray)
                         .padding(.leading, 8)
                 } else if let tempRate = state.tempRate {
                     Text(
                         (numberFormatter.string(from: tempRate as NSNumber) ?? "0") +
                             NSLocalizedString(" U/hr", comment: "Unit per hour with space")
                     )
-                    .font(.system(size: 12, weight: .bold)).foregroundColor(.insulin)
+                    .font(.system(size: 14, weight: .bold)).foregroundColor(.insulin)
                     .padding(.leading, 8)
                 }
 
@@ -223,7 +223,7 @@ extension Home {
                 Spacer()
                 if let progress = state.bolusProgress {
                     Text("Bolusing")
-                        .font(.system(size: 12, weight: .bold)).foregroundColor(.insulin)
+                        .font(.system(size: 14, weight: .bold)).foregroundColor(.insulin)
                     ProgressView(value: Double(progress))
                         .progressViewStyle(BolusProgressViewStyle())
                         .padding(.trailing, 8)
