@@ -75,12 +75,12 @@ extension Home {
         var cobIobView: some View {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-//                    Text("IOB").font(.caption).foregroundColor(.secondary)
-                    Image("bolus")
-                        .renderingMode(.template)
-                        .resizable()
-                        .frame(width: 12, height: 12)
-                        .foregroundColor(.insulin)
+                    Text("IOB").font(.caption).foregroundColor(.insulin)
+//                    Image("bolus")
+//                        .renderingMode(.template)
+//                        .resizable()
+//                        .frame(width: 12, height: 12)
+//                        .foregroundColor(.insulin)
                     Text(
                         (numberFormatter.string(from: (state.suggestion?.iob ?? 0) as NSNumber) ?? "0") +
                             NSLocalizedString(" U", comment: "Insulin unit")
@@ -88,12 +88,12 @@ extension Home {
                     .font(.system(size: 14, weight: .bold))
                 }
                 HStack {
-//                    Text("COB").font(.caption).foregroundColor(.secondary)
-                    Image("carbs")
-                        .renderingMode(.template)
-                        .resizable()
-                        .frame(width: 12, height: 12)
-                        .foregroundColor(.loopYellow)
+                    Text("COB").font(.caption).foregroundColor(.loopYellow)
+//                    Image("carbs")
+//                        .renderingMode(.template)
+//                        .resizable()
+//                        .frame(width: 12, height: 12)
+//                        .foregroundColor(.loopYellow)
                     Text(
                         (cobFormatter.string(from: (state.suggestion?.cob ?? 0) as NSNumber) ?? "0") +
                             NSLocalizedString(" g", comment: "gram of carbs")
