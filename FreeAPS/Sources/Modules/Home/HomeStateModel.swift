@@ -23,6 +23,8 @@ extension Home {
         @Published var autotunedBasalProfile: [BasalProfileEntry] = []
         @Published var basalProfile: [BasalProfileEntry] = []
         @Published var tempTargets: [TempTarget] = []
+        @Published var displayedTempTargets: [TempTarget] = []
+
         @Published var carbs: [CarbsEntry] = []
         @Published var timerDate = Date()
         @Published var closedLoop = false
@@ -147,6 +149,12 @@ extension Home {
                         self.setupBattery()
                         self.setupReservoir()
                     }
+                }
+                .store(in: &lifetime)
+
+            $tempTargets
+                .sink { [weak self] _ in
+                    self?.calculateDisplayedTempTargets()
                 }
                 .store(in: &lifetime)
 
@@ -306,6 +314,102 @@ extension Home {
 
         private func setupCurrentTempTarget() {
             tempTarget = provider.tempTarget()
+        }
+
+        private func calculateDisplayedTempTargets() {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+
+                // get cancel items from all temptargets
+                let cancelDates: [Date] = self.tempTargets
+                    .filter {
+                        $0.duration == 0
+                    }.sorted {
+                        $0.createdAt > $1.createdAt
+                    }.map(\.createdAt)
+
+                var resultTempTargets: [TempTarget] = []
+
+                // slice temp targets by cancel items and others temp targets
+                self.tempTargets
+                    .filter {
+                        $0.duration > 0
+                    }.sorted {
+                        $0.createdAt > $1.createdAt
+                    }.map { tempTarget -> TempTarget in
+                        let sourceFinishDate = self.getFinishDateOf(tempTarget)
+                        let calculateFinishDate = cancelDates.first(where: { cancelItem in
+                            tempTarget.createdAt < cancelItem && sourceFinishDate > cancelItem
+                        }) ?? sourceFinishDate
+                        let duration = self.getDurationOf(tempTarget, withFinishDate: calculateFinishDate)
+                        return self.getCopyOf(tempTarget, newDuration: duration)
+                    }.forEach { item in
+                        var mutableItem = item
+                        // check all created ranges
+                        resultTempTargets.forEach { addedTempTarget in
+                            let itemFinishDate = self.getFinishDateOf(mutableItem, withDuration: mutableItem.duration)
+                            if addedTempTarget.createdAt > mutableItem.createdAt {
+                                if self.getFinishDateOf(mutableItem) >= addedTempTarget.createdAt
+                                {
+                                    let newTempTarget = self.getCopyOf(
+                                        item,
+                                        newCreatedDate: mutableItem.createdAt,
+                                        newDuration: self.getDurationOf(
+                                            mutableItem,
+                                            withFinishDate: addedTempTarget.createdAt
+                                        )
+                                    )
+                                    resultTempTargets.insert(newTempTarget, at: 0)
+                                } else {
+                                    resultTempTargets.insert(mutableItem, at: 0)
+                                    return
+                                }
+                            }
+
+                            let addedFinishDate = self.getFinishDateOf(addedTempTarget)
+                            mutableItem = self.getCopyOf(
+                                mutableItem,
+                                newCreatedDate: addedFinishDate,
+                                newDuration: self.getDurationBetween(
+                                    addedFinishDate,
+                                    and: itemFinishDate
+                                )
+                            )
+                        }
+                        resultTempTargets.insert(mutableItem, at: 0)
+                        resultTempTargets.sort { $0.createdAt < $1.createdAt }
+                    }
+
+                self.displayedTempTargets = resultTempTargets
+            }
+        }
+
+        private func getFinishDateOf(_ tempTarget: TempTarget, withDuration duration: Decimal? = nil) -> Date {
+            tempTarget.createdAt.addingTimeInterval(Int(duration ?? tempTarget.duration).minutes.timeInterval)
+        }
+
+        private func getDurationOf(_ tempTarget: TempTarget, withFinishDate finishDate: Date) -> Decimal {
+            Decimal(finishDate.timeIntervalSinceReferenceDate / 60 - tempTarget.createdAt.timeIntervalSinceReferenceDate / 60)
+        }
+
+        private func getDurationBetween(_ date1: Date, and date2: Date) -> Decimal {
+            Decimal(date2.timeIntervalSinceReferenceDate / 60 - date1.timeIntervalSinceReferenceDate / 60)
+        }
+
+        private func getCopyOf(
+            _ tempTarget: TempTarget,
+            newCreatedDate createdAt: Date? = nil,
+            newDuration duration: Decimal? = nil
+        ) -> TempTarget {
+            TempTarget(
+                name: tempTarget.name,
+                createdAt: createdAt ?? tempTarget.createdAt,
+                targetTop: tempTarget.targetTop,
+                targetBottom: tempTarget.targetBottom,
+                duration: duration ?? tempTarget.duration,
+                enteredBy: tempTarget.enteredBy,
+                reason: tempTarget.reason
+            )
         }
 
         func openCGM() {
