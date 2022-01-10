@@ -120,7 +120,7 @@ struct MainView: View {
                     CarbsView()
                         .environmentObject(state)
                 } label: {
-                    Image("carbs1", bundle: nil)
+                    Image("carbs", bundle: nil)
                         .renderingMode(.template)
                         .resizable()
                         .frame(width: 24, height: 24)
@@ -141,7 +141,7 @@ struct MainView: View {
                         .environmentObject(state)
                 } label: {
                     VStack {
-                        Image("target1", bundle: nil)
+                        Image("target", bundle: nil)
                             .renderingMode(.template)
                             .resizable()
                             .frame(width: 24, height: 24)

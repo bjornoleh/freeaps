@@ -60,7 +60,7 @@ extension Home {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
 //                    Text("IOB").font(.caption2).foregroundColor(.secondary)
-                    Image("bolus1")
+                    Image("bolus")
                         .renderingMode(.template)
                         .resizable()
                         .frame(width: 12, height: 12)
@@ -73,7 +73,7 @@ extension Home {
                 }
                 HStack {
 //                    Text("COB").font(.caption2).foregroundColor(.secondary)
-                    Image("premeal")
+                    Image("carbs")
                         .renderingMode(.template)
                         .resizable()
                         .frame(width: 12, height: 12)
@@ -299,7 +299,7 @@ extension Home {
                     Button { state.showModal(for: .addCarbs) }
                     label: {
                         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
-                            Image("carbs1")
+                            Image("carbs")
                                 .renderingMode(.template)
                                 .resizable()
                                 .frame(width: 30, height: 30)
@@ -326,7 +326,7 @@ extension Home {
                     Spacer()
                     Button { state.showModal(for: .addTempTarget) }
                     label: {
-                        Image("target1")
+                        Image("target")
                             .renderingMode(.template)
                             .resizable()
                             .frame(width: 30, height: 30)
@@ -347,7 +347,7 @@ extension Home {
                     }
                     Button { state.showModal(for: .settings) }
                     label: {
-                        Image("settings")
+                        Image("settings1")
                             .renderingMode(.template)
                             .resizable()
                             .frame(width: 30, height: 30)

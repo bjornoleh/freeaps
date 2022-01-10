@@ -56,7 +56,7 @@ struct CarbsView: View {
                 }
                 label: {
                     HStack {
-                        Image("carbs1", bundle: nil)
+                        Image("carbs", bundle: nil)
                             .renderingMode(.template)
                             .resizable()
                             .frame(width: 24, height: 24)
