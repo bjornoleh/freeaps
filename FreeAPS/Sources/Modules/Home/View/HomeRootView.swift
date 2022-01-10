@@ -267,14 +267,14 @@ extension Home {
                         .font(.system(size: 14, weight: .regular)).foregroundColor(.zt)
                 }
 
-                if let eventualBG = state.eventualBG {
-                    Text(
-                        "⇢ " + eventualFormatter.string(
-                            from: (state.units == .mmolL ? eventualBG.asMmolL : Decimal(eventualBG)) as NSNumber
-                        )!
-                    )
-                    .font(.system(size: 16, weight: .regular)).foregroundColor(.secondary)
-                }
+//                if let eventualBG = state.eventualBG {
+//                    Text(
+//                        "⇢ " + eventualFormatter.string(
+//                            from: (state.units == .mmolL ? eventualBG.asMmolL : Decimal(eventualBG)) as NSNumber
+//                        )!
+//                    )
+//                    .font(.system(size: 16, weight: .regular)).foregroundColor(.secondary)
+//                }
             }
             .frame(maxWidth: .infinity, maxHeight: 30)
         }
