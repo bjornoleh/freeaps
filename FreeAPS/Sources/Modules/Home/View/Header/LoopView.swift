@@ -33,12 +33,12 @@ struct LoopView: View {
                 }
             }
             if isLooping {
-                Text("looping").font(.caption2)
+                Text("looping").font(.caption)
             } else if actualSuggestion?.timestamp != nil {
-                Text(timeString).font(.caption2)
+                Text(timeString).font(.caption)
                     .foregroundColor(.secondary)
             } else {
-                Text("--").font(.caption2).foregroundColor(.secondary)
+                Text("--").font(.caption).foregroundColor(.secondary)
             }
         }
     }

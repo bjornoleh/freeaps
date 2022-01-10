@@ -75,12 +75,12 @@ struct MainView: View {
                     }
 
                     if state.lastLoopDate != nil {
-                        Text(timeString).font(.caption2).foregroundColor(.gray)
+                        Text(timeString).font(.caption).foregroundColor(.gray)
                             .scaledToFill()
                             .minimumScaleFactor(0.5)
                             .foregroundColor(.secondary)
                     } else {
-                        Text("--").font(.caption2).foregroundColor(.gray)
+                        Text("--").font(.caption).foregroundColor(.gray)
                             .scaledToFill()
                             .minimumScaleFactor(0.5)
                     }
