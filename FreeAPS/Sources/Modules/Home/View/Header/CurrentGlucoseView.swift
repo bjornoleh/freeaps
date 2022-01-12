@@ -128,12 +128,14 @@ struct CurrentGlucoseView: View {
                     NSLocalizedString("ISF", comment: "current ISF") + ":"
                 )
                 .font(.system(size: 14))
+                .foregroundColor(.secondary)
                 .padding(.leading, 6)
                 .fixedSize()
                 Text(
                     numberFormatter.string(from: (currentISF ?? 0) as NSNumber) ?? "0"
                 )
                 .font(.system(size: 14, weight: .bold))
+                .foregroundColor(.secondary)
                 .fixedSize()
             }
         }
