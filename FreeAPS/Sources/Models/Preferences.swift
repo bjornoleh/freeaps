@@ -1,7 +1,7 @@
 import Foundation
 
 struct Preferences: JSON {
-    var maxIOB: Decimal = 0
+    var maxIOB: Decimal = 4
     var maxDailySafetyMultiplier: Decimal = 3
     var currentBasalSafetyMultiplier: Decimal = 4
     var autosensMax: Decimal = 1.2
@@ -12,10 +12,10 @@ struct Preferences: JSON {
     var autoISFmin: Decimal = 1
     var smbDeliveryRatio: Decimal = 0.5
     var smbMaxRangeExtension: Decimal = 1
-    var rewindResetsAutosens: Bool = true
-    var highTemptargetRaisesSensitivity: Bool = false
-    var lowTemptargetLowersSensitivity: Bool = false
-    var sensitivityRaisesTarget: Bool = true
+    var rewindResetsAutosens: Bool = false
+    var highTemptargetRaisesSensitivity: Bool = true
+    var lowTemptargetLowersSensitivity: Bool = true
+    var sensitivityRaisesTarget: Bool = false
     var resistanceLowersTarget: Bool = false
     var advTargetAdjustments: Bool = false
     var exerciseMode: Bool = false
@@ -29,18 +29,18 @@ struct Preferences: JSON {
     var autotuneISFAdjustmentFraction: Decimal = 1.0
     var remainingCarbsFraction: Decimal = 1.0
     var remainingCarbsCap: Decimal = 90
-    var enableUAM: Bool = false
+    var enableUAM: Bool = true
     var a52RiskEnable: Bool = false
-    var enableSMBWithCOB: Bool = false
-    var enableSMBWithTemptarget: Bool = false
-    var enableSMBAlways: Bool = false
-    var enableSMBAfterCarbs: Bool = false
+    var enableSMBWithCOB: Bool = true
+    var enableSMBWithTemptarget: Bool = true
+    var enableSMBAlways: Bool = true
+    var enableSMBAfterCarbs: Bool = true
     var allowSMBWithHighTemptarget: Bool = false
-    var maxSMBBasalMinutes: Decimal = 30
-    var maxUAMSMBBasalMinutes: Decimal = 30
+    var maxSMBBasalMinutes: Decimal = 90
+    var maxUAMSMBBasalMinutes: Decimal = 60
     var smbInterval: Decimal = 3
-    var bolusIncrement: Decimal = 0.1
-    var curve: InsulinCurve = .rapidActing
+    var bolusIncrement: Decimal = 0.05
+    var curve: InsulinCurve = .ultraRapid
     var useCustomPeakTime: Bool = false
     var insulinPeakTime: Decimal = 75
     var carbsReqThreshold: Decimal = 1.0
