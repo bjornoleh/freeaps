@@ -115,7 +115,7 @@ struct CurrentGlucoseView: View {
             HStack(alignment: .lastTextBaseline, spacing: 2) {
                 Text(
                     "\(minutesAgo)m "
-                ).font(.system(size: 14, weight: .bold)).foregroundColor(colorOfMinutesAgo(minutesAgo))
+                ).font(.system(size: 14, weight: .semibold)).foregroundColor(colorOfMinutesAgo(minutesAgo))
                     .fixedSize()
                 Text(
                     delta

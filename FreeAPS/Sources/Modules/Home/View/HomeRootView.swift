@@ -75,7 +75,7 @@ extension Home {
         var cobIobView: some View {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Text("COB").font(.caption).foregroundColor(.loopYellow)
+                    Text("C").font(.system(size: 14, weight: .bold)).foregroundColor(.loopYellow)
 //                    Image("carbs")
 //                        .renderingMode(.template)
 //                        .resizable()
@@ -88,7 +88,7 @@ extension Home {
                     .font(.system(size: 14, weight: .bold))
                 }
                 HStack {
-                    Text("IOB").font(.caption).foregroundColor(.insulin)
+                    Text("I").font(.system(size: 14, weight: .bold)).foregroundColor(.insulin)
 //                    Image("bolus")
 //                        .renderingMode(.template)
 //                        .resizable()
