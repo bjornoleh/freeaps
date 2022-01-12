@@ -417,11 +417,11 @@ extension Home {
 
         private var popup: some View {
             VStack(alignment: .leading, spacing: 4) {
-                Text(state.statusTitle).font(.headline).foregroundColor(.white)
+                Text(state.statusTitle).font(.body).foregroundColor(.white)
                     .padding(.bottom, 4)
                 if let suggestion = state.suggestion {
                     TagCloudView(tags: suggestion.reasonParts).animation(.none, value: false)
-                    Text(suggestion.reasonConclusion.capitalizingFirstLetter()).font(.caption).foregroundColor(.white)
+                    Text(suggestion.reasonConclusion.capitalizingFirstLetter()).font(.body).foregroundColor(.white)
                 } else {
                     Text("No sugestion found").font(.body).foregroundColor(.white)
                 }
@@ -429,10 +429,10 @@ extension Home {
                 if let errorMessage = state.errorMessage, let date = state.errorDate {
                     Text("Error at \(dateFormatter.string(from: date))")
                         .foregroundColor(.white)
-                        .font(.headline)
+                        .font(.body)
                         .padding(.bottom, 4)
                         .padding(.top, 8)
-                    Text(errorMessage).font(.caption).foregroundColor(.loopRed)
+                    Text(errorMessage).font(.body).foregroundColor(.loopRed)
                 }
             }
         }
