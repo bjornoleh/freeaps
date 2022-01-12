@@ -159,13 +159,14 @@ extension Home {
                 .store(in: &lifetime)
 
             $setupPump
+                .removeDuplicates()
                 .sink { [weak self] show in
                     guard let self = self else { return }
                     if show, let pumpManager = self.provider.apsManager.pumpManager {
                         let view = PumpConfig.PumpSettingsView(pumpManager: pumpManager, completionDelegate: self).asAny()
-                        self.router.mainSecondaryModalView.send(view)
+                        self.router.mainSecondaryModalView.value = view
                     } else {
-                        self.router.mainSecondaryModalView.send(nil)
+                        self.router.mainSecondaryModalView.value = nil
                     }
                 }
                 .store(in: &lifetime)
@@ -344,43 +345,45 @@ extension Home {
                         let duration = self.getDurationOf(tempTarget, withFinishDate: calculateFinishDate)
                         return self.getCopyOf(tempTarget, newDuration: duration)
                     }.forEach { item in
-                        var mutableItem = item
-                        // check all created ranges
+                        var mutableItem: TempTarget? = item
+
                         resultTempTargets.forEach { addedTempTarget in
-                            let itemFinishDate = self.getFinishDateOf(mutableItem, withDuration: mutableItem.duration)
-                            if addedTempTarget.createdAt > mutableItem.createdAt {
-                                if self.getFinishDateOf(mutableItem) >= addedTempTarget.createdAt
-                                {
-                                    let newTempTarget = self.getCopyOf(
-                                        item,
-                                        newCreatedDate: mutableItem.createdAt,
-                                        newDuration: self.getDurationOf(
-                                            mutableItem,
-                                            withFinishDate: addedTempTarget.createdAt
-                                        )
+                            guard mutableItem != nil else { return }
+
+                            // insert tail of new temptarget
+                            if self.getFinishDateOf(mutableItem!) > self.getFinishDateOf(addedTempTarget) {
+                                let tail = self.getCopyOf(
+                                    mutableItem!,
+                                    newCreatedDate: self.getFinishDateOf(addedTempTarget),
+                                    newDuration: self.getDurationBetween(
+                                        self.getFinishDateOf(addedTempTarget),
+                                        and: self.getFinishDateOf(mutableItem!)
                                     )
-                                    resultTempTargets.insert(newTempTarget, at: 0)
-                                } else {
-                                    resultTempTargets.insert(mutableItem, at: 0)
-                                    return
+                                )
+                                if tail.duration >= 1 {
+                                    resultTempTargets.insert(tail, at: 0)
                                 }
                             }
 
-                            let addedFinishDate = self.getFinishDateOf(addedTempTarget)
+                            guard self.getFinishDateOf(mutableItem!) >= addedTempTarget.createdAt else { return }
+
                             mutableItem = self.getCopyOf(
-                                mutableItem,
-                                newCreatedDate: addedFinishDate,
+                                item,
+                                newCreatedDate: mutableItem!.createdAt,
                                 newDuration: self.getDurationBetween(
-                                    addedFinishDate,
-                                    and: itemFinishDate
+                                    mutableItem!.createdAt,
+                                    and: addedTempTarget.createdAt
                                 )
                             )
                         }
-                        resultTempTargets.insert(mutableItem, at: 0)
-                        resultTempTargets.sort { $0.createdAt < $1.createdAt }
+
+                        if mutableItem != nil, mutableItem!.duration >= 1 {
+                            resultTempTargets.insert(mutableItem!, at: 0)
+                        }
+                        resultTempTargets.sort { $0.createdAt > $1.createdAt }
                     }
 
-                self.displayedTempTargets = resultTempTargets
+                self.displayedTempTargets = resultTempTargets.reversed()
             }
         }
 
