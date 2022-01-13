@@ -56,7 +56,7 @@ extension Home {
 
         @ViewBuilder func header(_ geo: GeometryProxy) -> some View {
             HStack(alignment: .bottom) {
-                Spacer()
+                Spacer().frame(maxWidth: 5)
                 cobIobView
                 Spacer()
                 glucoseView
@@ -64,7 +64,7 @@ extension Home {
                 pumpView
                 Spacer()
                 loopView
-                Spacer()
+                Spacer().frame(maxWidth: 5)
             }
             .frame(maxWidth: .infinity)
             .frame(maxHeight: 70)
@@ -75,7 +75,7 @@ extension Home {
         var cobIobView: some View {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    Text("C").font(.system(size: 14, weight: .bold)).foregroundColor(.loopYellow)
+                    Text("COB").font(.system(size: 14, weight: .bold)).foregroundColor(.loopYellow)
 //                    Image("carbs")
 //                        .renderingMode(.template)
 //                        .resizable()
@@ -88,7 +88,7 @@ extension Home {
                     .font(.system(size: 14, weight: .bold))
                 }
                 HStack {
-                    Text("I").font(.system(size: 14, weight: .bold)).foregroundColor(.insulin)
+                    Text("IOB").font(.system(size: 14, weight: .bold)).foregroundColor(.insulin)
 //                    Image("bolus")
 //                        .renderingMode(.template)
 //                        .resizable()
