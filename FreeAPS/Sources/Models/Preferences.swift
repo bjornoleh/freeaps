@@ -6,6 +6,7 @@ struct Preferences: JSON {
     var currentBasalSafetyMultiplier: Decimal = 4
     var autosensMax: Decimal = 1.2
     var autosensMin: Decimal = 0.7
+    var temptargetRatioMax: Decimal = 1.3
     var autoisf: Bool = false
     var autoISFhourlyChange: Decimal = 0.25
     var autoISFmax: Decimal = 1.3
@@ -70,6 +71,7 @@ extension Preferences {
         case currentBasalSafetyMultiplier = "current_basal_safety_multiplier"
         case autosensMax = "autosens_max"
         case autosensMin = "autosens_min"
+        case temptargetRatioMax = "temptarget_ratio_max"
         case autoisf = "use_autoisf"
         case autoISFhourlyChange = "autoisf_hourlychange"
         case autoISFmax = "autoisf_max"

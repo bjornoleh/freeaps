@@ -103,6 +103,15 @@ extension PreferencesEditor {
                         comment: "Autosens Min"
                     ),
                     settable: self
+                ),
+                Field(
+                    displayName: "Temp target ratio max",
+                    type: .decimal(keypath: \.temptargetRatioMax),
+                    infoText: NSLocalizedString(
+                        "Limits sensitivityRatio to profile.temptarget_ratio_max. when using low_temptarget_lowers_sensitivity. Max allowed setting = x.x",
+                        comment: "Temp target ratio max"
+                    ),
+                    settable: self
                 )
             ]
 
