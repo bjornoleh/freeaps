@@ -46,6 +46,57 @@ final class BaseGlucoseStorage: GlucoseStorage, Injectable {
                     }
                 }
             }
+
+            self.storage.transaction { storage in
+                let file = OpenAPS.Monitor.cgmState
+                var treatments = storage.retrieve(file, as: [NigtscoutTreatment].self) ?? []
+                NSLog("CGM Treatments \(treatments)")
+                for x in glucose {
+                    guard let sessionStartDate = x.sessionStartDate else {
+                        continue
+                    }
+                    NSLog("CGM start \(sessionStartDate) lastTreatment \(String(describing: treatments.last))")
+                    if let lastTreatment = treatments.last,
+                       let createdAt = lastTreatment.createdAt,
+                       // When a new Dexcom sensor is started, it produces multiple consequetive
+                       // startDates. Disambiguate them by only allowing a session start per minute.
+                       abs(createdAt.timeIntervalSince(sessionStartDate)) < TimeInterval(60)
+                    {
+                        continue
+                    }
+                    var notes = ""
+                    if let t = x.transmitterID {
+                        notes = t
+                    }
+                    if let a = x.activationDate {
+                        notes = "\(notes) activated on \(a)"
+                    }
+                    let treatment = NigtscoutTreatment(
+                        duration: nil,
+                        rawDuration: nil,
+                        rawRate: nil,
+                        absolute: nil,
+                        rate: nil,
+                        eventType: .nsSensorChange,
+                        createdAt: sessionStartDate,
+                        enteredBy: NigtscoutTreatment.local,
+                        bolus: nil,
+                        insulin: nil,
+                        notes: notes,
+                        carbs: nil,
+                        targetTop: nil,
+                        targetBottom: nil
+                    )
+                    NSLog("CGM sensor change \(treatment)")
+                    treatments.append(treatment)
+                }
+                // We have to keep quite a bit of history as sensors start only every 10 days.
+                storage.save(
+                    treatments.filter
+                        { $0.createdAt != nil && $0.createdAt!.addingTimeInterval(30.days.timeInterval) > Date() },
+                    as: file
+                )
+            }
         }
     }
 
