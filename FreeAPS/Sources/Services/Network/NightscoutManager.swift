@@ -237,6 +237,55 @@ final class BaseNightscoutManager: NightscoutManager, Injectable {
                 } receiveValue: {}
                 .store(in: &self.lifetime)
         }
+
+        let batteryAge = storage.retrieve(OpenAPS.Nightscout.uploadedBatteryAge, as: [NigtscoutTreatment].self) ?? []
+        let batteryDate = batteryAge.last?.createdAt ?? Date.distantPast
+
+        if let battery = battery, let percent = battery.percent, percent > 95,
+           abs(batteryDate.timeIntervalSinceNow) > TimeInterval(hours: 48)
+        {
+            let batteryTreatment = NigtscoutTreatment(
+                duration: nil,
+                rawDuration: nil,
+                rawRate: nil,
+                absolute: nil,
+                rate: nil,
+                eventType: .nsBatteryChange,
+                createdAt: Date(),
+                enteredBy: NigtscoutTreatment.local,
+                bolus: nil,
+                insulin: nil,
+                notes: "\(percent)%",
+                carbs: nil,
+                targetTop: nil,
+                targetBottom: nil
+            )
+            uploadTreatments([batteryTreatment], fileToSave: OpenAPS.Nightscout.uploadedBatteryAge)
+        }
+
+        let uploadedPodAge = storage.retrieve(OpenAPS.Nightscout.uploadedPodAge, as: [NigtscoutTreatment].self) ?? []
+        let podAge = storage.retrieve(OpenAPS.Monitor.podAge, as: Date.self) ?? Date.distantPast
+
+        if uploadedPodAge.last?.createdAt == nil || podAge != uploadedPodAge.last!.createdAt!
+        {
+            let siteTreatment = NigtscoutTreatment(
+                duration: nil,
+                rawDuration: nil,
+                rawRate: nil,
+                absolute: nil,
+                rate: nil,
+                eventType: .nsSiteChange,
+                createdAt: podAge,
+                enteredBy: NigtscoutTreatment.local,
+                bolus: nil,
+                insulin: nil,
+                notes: nil,
+                carbs: nil,
+                targetTop: nil,
+                targetBottom: nil
+            )
+            uploadTreatments([siteTreatment], fileToSave: OpenAPS.Nightscout.uploadedPodAge)
+        }
     }
 
     func uploadProfile() {
