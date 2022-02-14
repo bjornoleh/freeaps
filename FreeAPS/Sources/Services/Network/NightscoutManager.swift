@@ -11,6 +11,7 @@ protocol NightscoutManager: GlucoseSource {
     func deleteCarbs(at date: Date)
     func uploadStatus()
     func uploadGlucose()
+    func uploadProfile()
     var cgmURL: URL? { get }
 }
 
@@ -236,10 +237,183 @@ final class BaseNightscoutManager: NightscoutManager, Injectable {
                 } receiveValue: {}
                 .store(in: &self.lifetime)
         }
+
+        // uploadBatteryAge(battery: battery)
+        uploadPodAge()
+    }
+
+    /* func uploadBatteryAge(battery: Battery?) {
+         let uploadedBatteryAge = storage.retrieve(OpenAPS.Nightscout.uploadedBatteryAge, as: [NigtscoutTreatment].self) ?? []
+         let batteryDate = uploadedBatteryAge.last?.createdAt ?? Date.distantPast
+
+         if let battery = battery, let percent = battery.percent, percent > 95,
+            abs(batteryDate.timeIntervalSinceNow) > TimeInterval(hours: 48)
+         {
+             let batteryTreatment = NigtscoutTreatment(
+                 duration: nil,
+                 rawDuration: nil,
+                 rawRate: nil,
+                 absolute: nil,
+                 rate: nil,
+                 eventType: .nsBatteryChange,
+                 createdAt: Date(),
+                 enteredBy: NigtscoutTreatment.local,
+                 bolus: nil,
+                 insulin: nil,
+                 notes: "\(percent)%",
+                 carbs: nil,
+                 targetTop: nil,
+                 targetBottom: nil
+             )
+             uploadTreatments([batteryTreatment], fileToSave: OpenAPS.Nightscout.uploadedBatteryAge)
+         }
+     } */
+
+    func uploadPodAge() {
+        let uploadedPodAge = storage.retrieve(OpenAPS.Nightscout.uploadedPodAge, as: [NigtscoutTreatment].self) ?? []
+        if let podAge = storage.retrieve(OpenAPS.Monitor.podAge, as: Date.self),
+           uploadedPodAge.last?.createdAt == nil || podAge != uploadedPodAge.last!.createdAt!
+        {
+            let siteTreatment = NigtscoutTreatment(
+                duration: nil,
+                rawDuration: nil,
+                rawRate: nil,
+                absolute: nil,
+                rate: nil,
+                eventType: .nsSiteChange,
+                createdAt: podAge,
+                enteredBy: NigtscoutTreatment.local,
+                bolus: nil,
+                insulin: nil,
+                notes: nil,
+                carbs: nil,
+                targetTop: nil,
+                targetBottom: nil
+            )
+            uploadTreatments([siteTreatment], fileToSave: OpenAPS.Nightscout.uploadedPodAge)
+        }
+    }
+
+    func uploadProfile() {
+        // These should be modified anyways and not the defaults
+        guard let sensitivities = storage.retrieve(OpenAPS.Settings.insulinSensitivities, as: InsulinSensitivities.self),
+              let basalProfile = storage.retrieve(OpenAPS.Settings.basalProfile, as: [BasalProfileEntry].self),
+              let carbRatios = storage.retrieve(OpenAPS.Settings.carbRatios, as: CarbRatios.self),
+              let targets = storage.retrieve(OpenAPS.Settings.bgTargets, as: BGTargets.self)
+        else {
+            NSLog("NightscoutManager uploadProfile Not all settings found to build profile!")
+            return
+        }
+
+        let sens = sensitivities.sensitivities.map { item -> NightscoutTimevalue in
+            NightscoutTimevalue(
+                time: String(item.start.prefix(5)),
+                value: item.sensitivity,
+                timeAsSeconds: item.offset
+            )
+        }
+
+        let target_low = targets.targets.map { item -> NightscoutTimevalue in
+            NightscoutTimevalue(
+                time: String(item.start.prefix(5)),
+                value: item.low,
+                timeAsSeconds: item.offset
+            )
+        }
+        let target_high = targets.targets.map { item -> NightscoutTimevalue in
+            NightscoutTimevalue(
+                time: String(item.start.prefix(5)),
+                value: item.high,
+                timeAsSeconds: item.offset
+            )
+        }
+        let cr = carbRatios.schedule.map { item -> NightscoutTimevalue in
+            NightscoutTimevalue(
+                time: String(item.start.prefix(5)),
+                value: item.ratio,
+                timeAsSeconds: item.offset
+            )
+        }
+
+        let basal = basalProfile.map { item -> NightscoutTimevalue in
+            NightscoutTimevalue(
+                time: String(item.start.prefix(5)),
+                value: item.rate,
+                timeAsSeconds: item.minutes * 60
+            )
+        }
+        var nsUnits = ""
+        switch settingsManager.settings.units {
+        case .mgdL:
+            nsUnits = "mg/dl"
+        case .mmolL:
+            nsUnits = "mmol"
+        }
+
+        var carbs_hr: Decimal = 0
+        if let isf = sensitivities.sensitivities.map(\.sensitivity).first,
+           let cr = carbRatios.schedule.map(\.ratio).first,
+           isf > 0, cr > 0
+        {
+            // CarbImpact -> Carbs/hr = CI [mg/dl/5min] * 12 / ISF [mg/dl/U] * CR [g/U]
+            carbs_hr = settingsManager.preferences.min5mCarbimpact * 12 / isf * cr
+            if settingsManager.settings.units == .mmolL {
+                carbs_hr = carbs_hr * GlucoseUnits.exchangeRate
+            }
+            // No, Decimal has no rounding function.
+            carbs_hr = Decimal(round(Double(carbs_hr) * 10.0)) / 10
+        }
+        let ps = ScheduledNightscoutProfile(
+            dia: settingsManager.pumpSettings.insulinActionCurve,
+            carbs_hr: Int(carbs_hr),
+            delay: 0,
+            timezone: TimeZone.current.identifier,
+            target_low: target_low,
+            target_high: target_high,
+            sens: sens,
+            basal: basal,
+            carbratio: cr,
+            units: nsUnits
+        )
+        let defaultProfile = "default"
+        let now = Date()
+        let p = NightscoutProfileStore(
+            defaultProfile: defaultProfile,
+            startDate: now,
+            mills: Int(now.timeIntervalSince1970) * 1000,
+            units: nsUnits,
+            enteredBy: NigtscoutTreatment.local,
+            store: [defaultProfile: ps]
+        )
+
+        if let uploadedProfile = storage.retrieve(OpenAPS.Nightscout.uploadedProfile, as: NightscoutProfileStore.self),
+           (uploadedProfile.store[defaultProfile]?.rawJSON ?? "") == ps.rawJSON
+        {
+            NSLog("NightscoutManager uploadProfile, no profile change")
+            return
+        }
+        guard let nightscout = nightscoutAPI, isNetworkReachable, isUploadEnabled else {
+            return
+        }
+        processQueue.async {
+            nightscout.uploadProfile(p)
+                .sink { completion in
+                    switch completion {
+                    case .finished:
+                        self.storage.save(p, as: OpenAPS.Nightscout.uploadedProfile)
+                        debug(.nightscout, "Profile uploaded")
+                    case let .failure(error):
+                        debug(.nightscout, error.localizedDescription)
+                    }
+                } receiveValue: {}
+                .store(in: &self.lifetime)
+        }
     }
 
     func uploadGlucose() {
         uploadGlucose(glucoseStorage.nightscoutGlucoseNotUploaded(), fileToSave: OpenAPS.Nightscout.uploadedGlucose)
+
+        uploadTreatments(glucoseStorage.nightscoutCGMStateNotUploaded(), fileToSave: OpenAPS.Nightscout.uploadedCGMState)
     }
 
     private func uploadPumpHistory() {

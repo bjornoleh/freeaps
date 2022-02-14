@@ -41,6 +41,13 @@ extension Settings {
                     Toggle("Debug options", isOn: $state.debugOptions)
                     if state.debugOptions {
                         Group {
+                            Text("NS Upload Profile").onTapGesture {
+                                state.uploadProfile()
+                            }
+                            Text("NS Uploaded Profile")
+                                .navigationLink(to: .configEditor(file: OpenAPS.Nightscout.uploadedProfile), from: self)
+                        }
+                        Group {
                             Text("Preferences")
                                 .navigationLink(to: .configEditor(file: OpenAPS.Settings.preferences), from: self)
                             Text("Pump Settings")
@@ -72,6 +79,7 @@ extension Settings {
                                 .navigationLink(to: .configEditor(file: OpenAPS.Settings.profile), from: self)
                             Text("Glucose")
                                 .navigationLink(to: .configEditor(file: OpenAPS.Monitor.glucose), from: self)
+
                             Text("Carbs")
                                 .navigationLink(to: .configEditor(file: OpenAPS.Monitor.carbHistory), from: self)
                             Text("Suggested")
@@ -85,7 +93,12 @@ extension Settings {
                             Text("Autotune")
                                 .navigationLink(to: .configEditor(file: OpenAPS.Settings.autotune), from: self)
                         }
-
+                        Group {
+                            Text("CGM Events")
+                                .navigationLink(to: .configEditor(file: OpenAPS.Monitor.cgmState), from: self)
+                            Text("Uploaded CGM Events")
+                                .navigationLink(to: .configEditor(file: OpenAPS.Nightscout.uploadedCGMState), from: self)
+                        }
                         Group {
                             Text("Target presets")
                                 .navigationLink(to: .configEditor(file: OpenAPS.FreeAPS.tempTargetsPresets), from: self)
@@ -117,7 +130,7 @@ extension Settings {
             }
             .onAppear(perform: configureView)
             .navigationTitle("Settings")
-            .navigationBarItems(leading: Button("Close", action: state.hideModal))
+            .navigationBarItems(leading: Button("Close", action: state.hideSettingsModal))
             .navigationBarTitleDisplayMode(.automatic)
         }
     }

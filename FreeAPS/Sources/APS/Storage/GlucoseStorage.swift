@@ -1,5 +1,7 @@
+import AVFAudio
 import Foundation
 import SwiftDate
+import SwiftUI
 import Swinject
 
 protocol GlucoseStorage {
@@ -12,6 +14,7 @@ protocol GlucoseStorage {
     func isGlucoseFresh() -> Bool
     func isGlucoseNotFlat() -> Bool
     func nightscoutGlucoseNotUploaded() -> [BloodGlucose]
+    func nightscoutCGMStateNotUploaded() -> [NigtscoutTreatment]
     var alarm: GlucoseAlarm? { get }
 }
 
@@ -44,6 +47,59 @@ final class BaseGlucoseStorage: GlucoseStorage, Injectable {
                     self.broadcaster.notify(GlucoseObserver.self, on: .main) {
                         $0.glucoseDidUpdate(glucose.reversed())
                     }
+                }
+            }
+
+            self.storage.transaction { storage in
+                let file = OpenAPS.Monitor.cgmState
+                var treatments = storage.retrieve(file, as: [NigtscoutTreatment].self) ?? []
+                var updated = false
+                for x in glucose {
+                    guard let sessionStartDate = x.sessionStartDate else {
+                        continue
+                    }
+                    if let lastTreatment = treatments.last,
+                       let createdAt = lastTreatment.createdAt,
+                       // When a new Dexcom sensor is started, it produces multiple consequetive
+                       // startDates. Disambiguate them by only allowing a session start per minute.
+                       abs(createdAt.timeIntervalSince(sessionStartDate)) < TimeInterval(60)
+                    {
+                        continue
+                    }
+                    var notes = ""
+                    if let t = x.transmitterID {
+                        notes = t
+                    }
+                    if let a = x.activationDate {
+                        notes = "\(notes) activated on \(a)"
+                    }
+                    let treatment = NigtscoutTreatment(
+                        duration: nil,
+                        rawDuration: nil,
+                        rawRate: nil,
+                        absolute: nil,
+                        rate: nil,
+                        eventType: .nsSensorChange,
+                        createdAt: sessionStartDate,
+                        enteredBy: NigtscoutTreatment.local,
+                        bolus: nil,
+                        insulin: nil,
+                        notes: notes,
+                        carbs: nil,
+                        targetTop: nil,
+                        targetBottom: nil
+                    )
+                    NSLog("CGM sensor change \(treatment)")
+                    treatments.append(treatment)
+                    updated = true
+                }
+                if updated {
+                    // We have to keep quite a bit of history as sensors start only every 10 days.
+                    storage.save(
+                        treatments.filter
+                            { $0.createdAt != nil && $0.createdAt!.addingTimeInterval(30.days.timeInterval) > Date() },
+                        as: file
+                    )
                 }
             }
         }
@@ -118,6 +174,13 @@ final class BaseGlucoseStorage: GlucoseStorage, Injectable {
         let recentGlucose = recent()
 
         return Array(Set(recentGlucose).subtracting(Set(uploaded)))
+    }
+
+    func nightscoutCGMStateNotUploaded() -> [NigtscoutTreatment] {
+        let uploaded = storage.retrieve(OpenAPS.Nightscout.uploadedCGMState, as: [NigtscoutTreatment].self) ?? []
+        let recent = storage.retrieve(OpenAPS.Monitor.cgmState, as: [NigtscoutTreatment].self) ?? []
+
+        return Array(Set(recent).subtracting(Set(uploaded)))
     }
 
     var alarm: GlucoseAlarm? {
