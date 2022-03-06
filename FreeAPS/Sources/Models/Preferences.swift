@@ -41,6 +41,7 @@ struct Preferences: JSON {
     var noisyCGMTargetMultiplier: Decimal = 1.3
     var suspendZerosIOB: Bool = true
     var timestamp: Date?
+    var enableChris: Bool = true
 }
 
 extension Preferences {
