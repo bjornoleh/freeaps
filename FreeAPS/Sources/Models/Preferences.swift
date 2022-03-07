@@ -42,6 +42,7 @@ struct Preferences: JSON {
     var suspendZerosIOB: Bool = true
     var timestamp: Date?
     var enableChris: Bool = true
+    var adjustmentFactor: Decimal = 1
 }
 
 extension Preferences {
@@ -85,6 +86,8 @@ extension Preferences {
         case carbsReqThreshold
         case noisyCGMTargetMultiplier
         case suspendZerosIOB = "suspend_zeros_iob"
+        case adjustmentFactor
+        case enableChris
     }
 }
 
