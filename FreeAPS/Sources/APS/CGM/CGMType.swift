@@ -8,7 +8,8 @@ enum CGMType: String, JSON, CaseIterable, Identifiable {
     case glucoseDirect
     case enlite
     case libreTransmitter
-    case xdrip
+    case xdripLeft
+    case xdripRight
     case nightscout
     case simulator
 
@@ -16,8 +17,10 @@ enum CGMType: String, JSON, CaseIterable, Identifiable {
         switch self {
         case .nightscout:
             return "Nightscout"
-        case .xdrip:
-            return "xDrip"
+        case .xdripLeft:
+            return "xDrip venstre"
+        case .xdripRight:
+            return "xDrip høyre"
         case .glucoseDirect:
             return "Glucose Direct"
         case .dexcomG6:
@@ -38,8 +41,10 @@ enum CGMType: String, JSON, CaseIterable, Identifiable {
         case .enlite,
              .nightscout:
             return nil
-        case .xdrip:
-            return URL(string: "xdripswift://")!
+        case .xdripLeft:
+            return URL(string: "xdripswiftLeft://")!
+        case .xdripRight:
+            return URL(string: "xdripswiftRight://")!
         case .glucoseDirect:
             return URL(string: "libredirect://")!
         case .dexcomG6:
@@ -55,7 +60,9 @@ enum CGMType: String, JSON, CaseIterable, Identifiable {
 
     var externalLink: URL? {
         switch self {
-        case .xdrip:
+        case .xdripLeft:
+            return URL(string: "https://github.com/JohanDegraeve/xdripswift")!
+        case .xdripRight:
             return URL(string: "https://github.com/JohanDegraeve/xdripswift")!
         case .glucoseDirect:
             return URL(string: "https://github.com/creepymonster/GlucoseDirectApp")!
@@ -67,7 +74,12 @@ enum CGMType: String, JSON, CaseIterable, Identifiable {
         switch self {
         case .nightscout:
             return NSLocalizedString("Online or internal server", comment: "Online or internal server")
-        case .xdrip:
+        case .xdripLeft:
+            return NSLocalizedString(
+                "Shared app group for direct connection with Libre 1 transmitters or European Libre 2 sensors",
+                comment: "Shared app group for direct connection with Libre 1 transmitters or European Libre 2 sensors"
+            )
+        case .xdripRight:
             return NSLocalizedString(
                 "Shared app group for direct connection with Libre 1 transmitters or European Libre 2 sensors",
                 comment: "Shared app group for direct connection with Libre 1 transmitters or European Libre 2 sensors"
