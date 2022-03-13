@@ -31,8 +31,10 @@ final class BaseFetchGlucoseManager: FetchGlucoseManager, Injectable {
 
     private func updateGlucoseSource() {
         switch settingsManager.settings.cgm {
-        case .xdrip:
-            glucoseSource = AppGroupSource(from: "xDrip")
+        case .xdripLeft:
+            glucoseSource = AppGroupSource(from: "xDripLeft")
+        case .xdripRight:
+            glucoseSource = AppGroupSource(from: "xDripRight")
         case .dexcomG5,
              .dexcomG6:
             glucoseSource = dexcomSource
