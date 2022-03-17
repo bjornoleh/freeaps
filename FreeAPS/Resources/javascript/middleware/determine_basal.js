@@ -271,7 +271,7 @@ function middleware(iob, currenttemp, glucose, profile, autosens, meal, reservoi
         // Set the new ratio
         autosens.ratio = newRatio;
         // Print to log
-        return log + logCalculatedAF + logTDD + logBolus + logTempBasal + logBasal;
+        return log + logTDD + logBolus + logTempBasal + logBasal;
         
     } else { return "Dynamic ISF is off." }
 }
