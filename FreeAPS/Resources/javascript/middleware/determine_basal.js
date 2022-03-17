@@ -253,7 +253,7 @@ function middleware(iob, currenttemp, glucose, profile, autosens, meal, reservoi
     logBasal = ". Delivered scheduled basal insulin: " + scheduledBasalInsulin.toPrecision(5) + " U";
     logTDD = ". TDD past 24h is: " + TDD.toPrecision(5) + " U";
     // ----------------------------------------------------
-      
+    
     // Chris' formula with added adjustmentFactor for tuning:
     if (chrisFormula == true && TDD > 0) {
         var newRatio = profile.sens / (277700 / (adjustmentFactor  * TDD * BG));
@@ -261,17 +261,17 @@ function middleware(iob, currenttemp, glucose, profile, autosens, meal, reservoi
 
         // Respect autosens.max and autosens.min limits
         if (newRatio > maxLimitChris) {
+            log = "Dynamic ISF hit limit by autosens_max setting: " + maxLimitChris + " (" +  newRatio.toPrecision(3) + ")" + ". ISF: " + (profile.sens / maxLimitChris).toPrecision(3) + " (" + ((profile.sens / maxLimitChris) * 0.0555).toPrecision(3) + " mmol/l/U)";
             newRatio = maxLimitChris;
-            log = "Dynamic ISF hit limit by autosens_max setting: " + maxLimitChris + ". ISF: " + (profile.sens / maxLimitChris).toPrecision(3) + " (" + ((profile.sens / maxLimitChris) * 0.0555).toPrecision(3) + " mmol/l/U)";
         } else if (newRatio < minLimitChris) {
+            log = "Dynamic ISF hit limit by autosens_min setting: " + minLimitChris + " (" +  newRatio.toPrecision(3) + ")" + ". ISF: " + (profile.sens / minLimitChris).toPrecision(3) + " (" + ((profile.sens / minLimitChris) * 0.0555).toPrecision(3) + " mmol/l/U)";
             newRatio = minLimitChris;
-            log = "Dynamic ISF hit limit by autosens_min setting: " + minLimitChris + ". ISF: " + (profile.sens / minLimitChris).toPrecision(3) + " (" + ((profile.sens / minLimitChris) * 0.0555).toPrecision(3) + " mmol/l/U)";
-          }
+        }
 
         // Set the new ratio
         autosens.ratio = newRatio;
         // Print to log
-        return log + logTDD + logBolus + logTempBasal + logBasal;
+        return log + logCalculatedAF + logTDD + logBolus + logTempBasal + logBasal;
         
     } else { return "Dynamic ISF is off." }
 }
