@@ -61,6 +61,8 @@ struct Preferences: JSON {
     var bgAccelISFweight: Decimal = 0
     var bgBrakeISFweight: Decimal = 0
     var enableBGacceleration: Bool = false
+    var enableChris: Bool = true
+    var adjustmentFactor: Decimal = 1
 }
 
 extension Preferences {
@@ -124,6 +126,8 @@ extension Preferences {
         case bgAccelISFweight = "bgAccel_ISF_weight"
         case bgBrakeISFweight = "bgBrake_ISF_weight"
         case enableBGacceleration = "enable_BG_acceleration"
+        case adjustmentFactor
+        case enableChris
     }
 }
 
