@@ -63,6 +63,7 @@ struct Preferences: JSON {
     var enableBGacceleration: Bool = false
     var enableChris: Bool = true
     var adjustmentFactor: Decimal = 1
+    var enableDynamicCR: Bool = false
 }
 
 extension Preferences {
@@ -128,6 +129,7 @@ extension Preferences {
         case enableBGacceleration = "enable_BG_acceleration"
         case adjustmentFactor
         case enableChris
+        case enableDynamicCR
     }
 }
 
