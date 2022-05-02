@@ -64,6 +64,7 @@ struct Preferences: JSON {
     var enableChris: Bool = true
     var adjustmentFactor: Decimal = 1
     var enableDynamicCR: Bool = false
+    var useNewFormula: Bool = false
 }
 
 extension Preferences {
@@ -130,6 +131,7 @@ extension Preferences {
         case adjustmentFactor
         case enableChris
         case enableDynamicCR
+        case useNewFormula
     }
 }
 

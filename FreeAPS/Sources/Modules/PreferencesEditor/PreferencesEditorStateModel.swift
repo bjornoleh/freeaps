@@ -135,6 +135,15 @@ extension PreferencesEditor {
                         comment: "Use Dynamic CR together with Dynamic ISF"
                     ),
                     settable: self
+                ),
+                Field(
+                    displayName: "Use logaritmic formula",
+                    type: .boolean(keypath: \.useNewFormula),
+                    infoText: NSLocalizedString(
+                        "Use logaritmic formula",
+                        comment: "Use logaritmic formula"
+                    ),
+                    settable: self
                 )
             ]
 
@@ -607,7 +616,7 @@ extension PreferencesEditor {
                     displayName: NSLocalizedString("OpenAPS main settings", comment: "OpenAPS main settings"), fields: mainFields
                 ),
                 FieldSection(
-                    displayName: NSLocalizedString("Dynamic ISF settings", comment: "Dynamic ISF settings"),
+                    displayName: NSLocalizedString("Dynamic settings", comment: "Dynamic settings"),
                     fields: dynamicISF
                 ),
                 FieldSection(
