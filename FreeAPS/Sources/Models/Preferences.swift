@@ -65,6 +65,8 @@ struct Preferences: JSON {
     var adjustmentFactor: Decimal = 1
     var enableDynamicCR: Bool = false
     var useNewFormula: Bool = false
+    var use_Static_COB_decay: Bool = false
+    var cobDecayAdjust: Decimal = 1
 }
 
 extension Preferences {
@@ -132,6 +134,8 @@ extension Preferences {
         case enableChris
         case enableDynamicCR
         case useNewFormula
+        case use_Static_COB_decay
+        case cobDecayAdjust
     }
 }
 

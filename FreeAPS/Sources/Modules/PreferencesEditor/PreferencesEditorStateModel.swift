@@ -128,6 +128,24 @@ extension PreferencesEditor {
                     settable: self
                 ),
                 Field(
+                    displayName: "Enable Static COB decay",
+                    type: .boolean(keypath: \.use_Static_COB_decay),
+                    infoText: NSLocalizedString(
+                        "Use static COB decay together with dynamic ISF",
+                        comment: "Use static COB decay together with dynamic ISF"
+                    ),
+                    settable: self
+                ),
+                Field(
+                    displayName: "COB decay adjustment factor",
+                    type: .decimal(keypath: \.cobDecayAdjust),
+                    infoText: NSLocalizedString(
+                        "Adjustment factor to tune static COB decay",
+                        comment: "Adjustment factor to tune static COB decay"
+                    ),
+                    settable: self
+                ),
+                Field(
                     displayName: "Enable Dynamic CR",
                     type: .boolean(keypath: \.enableDynamicCR),
                     infoText: NSLocalizedString(
