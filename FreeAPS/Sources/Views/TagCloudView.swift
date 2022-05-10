@@ -52,7 +52,7 @@ struct TagCloudView: View {
 
     private func item(for textTag: String) -> some View {
         var colorOfTag: Color {
-            if textTag.contains("Floating") {
+            if textTag.contains("Not Floating") {
                 return .loopYellow } else {
                 switch textTag {
                 case "autoISF":
@@ -61,12 +61,8 @@ struct TagCloudView: View {
                     return .loopOrange
                 case "Parabolic Fit":
                     return .loopRed
-                case "Autosens":
-                    return .loopGreen
-                case "Standard":
-                    return .insulin
                 default:
-                    return .basal
+                    return .insulin
                 }
             }
         }
