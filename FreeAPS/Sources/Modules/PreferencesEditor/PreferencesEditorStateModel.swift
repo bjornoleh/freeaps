@@ -128,6 +128,24 @@ extension PreferencesEditor {
                     settable: self
                 ),
                 Field(
+                    displayName: "Use logarithmic formula",
+                    type: .boolean(keypath: \.useNewFormula),
+                    infoText: NSLocalizedString(
+                        "Use logarithmic formula",
+                        comment: "Use logarithmic formula"
+                    ),
+                    settable: self
+                ),
+                Field(
+                    displayName: "Enable Dynamic CR",
+                    type: .boolean(keypath: \.enableDynamicCR),
+                    infoText: NSLocalizedString(
+                        "Use Dynamic CR together with Dynamic ISF",
+                        comment: "Use Dynamic CR together with Dynamic ISF"
+                    ),
+                    settable: self
+                ),
+                Field(
                     displayName: "Enable Static COB decay",
                     type: .boolean(keypath: \.use_Static_COB_decay),
                     infoText: NSLocalizedString(
@@ -142,24 +160,6 @@ extension PreferencesEditor {
                     infoText: NSLocalizedString(
                         "Adjustment factor to tune static COB decay",
                         comment: "Adjustment factor to tune static COB decay"
-                    ),
-                    settable: self
-                ),
-                Field(
-                    displayName: "Enable Dynamic CR",
-                    type: .boolean(keypath: \.enableDynamicCR),
-                    infoText: NSLocalizedString(
-                        "Use Dynamic CR together with Dynamic ISF",
-                        comment: "Use Dynamic CR together with Dynamic ISF"
-                    ),
-                    settable: self
-                ),
-                Field(
-                    displayName: "Use logarithmic formula",
-                    type: .boolean(keypath: \.useNewFormula),
-                    infoText: NSLocalizedString(
-                        "Use logarithmic formula",
-                        comment: "Use logarithmic formula"
                     ),
                     settable: self
                 )
