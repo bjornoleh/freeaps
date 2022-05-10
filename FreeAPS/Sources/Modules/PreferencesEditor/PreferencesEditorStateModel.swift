@@ -158,8 +158,8 @@ extension PreferencesEditor {
                     displayName: "COB decay adjustment factor",
                     type: .decimal(keypath: \.cobDecayAdjust),
                     infoText: NSLocalizedString(
-                        "Adjustment factor to tune static COB decay",
-                        comment: "Adjustment factor to tune static COB decay"
+                        "Adjustment factor to tune static COB decay. Default 1,0. A larger number makes COB decay faster.",
+                        comment: "Adjustment factor to tune static COB decay. The default value is 1,0. A larger number makes COB decay faster."
                     ),
                     settable: self
                 )
