@@ -137,11 +137,38 @@ extension PreferencesEditor {
                     settable: self
                 ),
                 Field(
-                    displayName: "Enable Dynamic CR",
+                    displayName: "Enable TDD-adjusted CR",
                     type: .boolean(keypath: \.enableDynamicCR),
                     infoText: NSLocalizedString(
-                        "Use Dynamic CR together with Dynamic ISF",
-                        comment: "Use Dynamic CR together with Dynamic ISF"
+                        "Adjust CR by the dynamic ISF formula based on TDD, profile ISF and reference BG level",
+                        comment: "Adjust CR by the dynamic ISF formula based on TDD, profile ISF and reference BG level"
+                    ),
+                    settable: self
+                ),
+                Field(
+                    displayName: "Minimum TDD-adjusted CR ratio",
+                    type: .decimal(keypath: \.minCRratio),
+                    infoText: NSLocalizedString(
+                        "Minimum limit for TDD-based scaling of CR. Set to 1,0 to disable weakening of CR. (Analogous to the Autosens Min setting).",
+                        comment: "Minimum limit for TDD-based scaling of CR. Set to 1,0 to disable weakening of CR. (Analogous to the Autosens Min setting)."
+                    ),
+                    settable: self
+                ),
+                Field(
+                    displayName: "Maximum TDD-adjusted CR ratio",
+                    type: .decimal(keypath: \.maxCRratio),
+                    infoText: NSLocalizedString(
+                        "Maximum limit for TDD-based scaling of CR. Set to 1,0 to disable strengthening of CR. (Analogous to the Autosens Max setting).",
+                        comment: "Maximum limit for TDD-based scaling of CR. Set to 1,0 to disable strengthening of CR. (Analogous to the Autosens Max setting)."
+                    ),
+                    settable: self
+                ),
+                Field(
+                    displayName: "Reference BG level (mg/dL)",
+                    type: .decimal(keypath: \.crSensRefBG),
+                    infoText: NSLocalizedString(
+                        "Reference BG level for CR-adjustment based on TDD",
+                        comment: "Reference BG level for CR-adjustment based on TDD"
                     ),
                     settable: self
                 ),

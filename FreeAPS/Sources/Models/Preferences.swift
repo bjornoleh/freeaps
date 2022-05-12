@@ -67,6 +67,9 @@ struct Preferences: JSON {
     var useNewFormula: Bool = false
     var use_Static_COB_decay: Bool = false
     var cobDecayAdjust: Decimal = 1
+    var crSensRefBG: Decimal = 100
+    var minCRratio: Decimal = 1
+    var maxCRratio: Decimal = 1
 }
 
 extension Preferences {
@@ -136,6 +139,9 @@ extension Preferences {
         case useNewFormula
         case use_Static_COB_decay
         case cobDecayAdjust
+        case crSensRefBG
+        case minCRratio
+        case maxCRratio
     }
 }
 
