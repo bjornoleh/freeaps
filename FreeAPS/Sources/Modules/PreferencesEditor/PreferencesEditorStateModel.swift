@@ -173,6 +173,15 @@ extension PreferencesEditor {
                     settable: self
                 ),
                 Field(
+                    displayName: "CR scale facor",
+                    type: .decimal(keypath: \.crScaleFactor),
+                    infoText: NSLocalizedString(
+                        "Scales the impact of TDD variation on carb ratio. Increase the number to reduce the impact of TDD variation. 0 = unscaled, suggested settings: 0,5 - 2",
+                        comment: "Scales the impact of TDD variation on carb ratio. Increase the number to reduce the impact of TDD variation. 0 = unscaled, suggested settings: 0,5 - 2"
+                    ),
+                    settable: self
+                ),
+                Field(
                     displayName: "Enable Static COB decay",
                     type: .boolean(keypath: \.use_Static_COB_decay),
                     infoText: NSLocalizedString(
