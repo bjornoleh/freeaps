@@ -176,8 +176,8 @@ extension PreferencesEditor {
                     displayName: "CR scale facor",
                     type: .decimal(keypath: \.crScaleFactor),
                     infoText: NSLocalizedString(
-                        "Scales the impact of TDD variation on carb ratio. Increase the number to reduce the impact of TDD variation. 0 = unscaled, suggested settings: 0,5 - 2",
-                        comment: "Scales the impact of TDD variation on carb ratio. Increase the number to reduce the impact of TDD variation. 0 = unscaled, suggested settings: 0,5 - 2"
+                        "Scales the impact of TDD variation on carb ratio. Lower the number to reduce the impact of TDD variation. Scale factor 1 = unscaled. Suggested settings: 0,2 - 0,5",
+                        comment: "Scales the impact of TDD variation on carb ratio. Lower the number to reduce the impact of TDD variation. Scale factor 1 = unscaled. Suggested settings: 0,2 - 0,5"
                     ),
                     settable: self
                 ),
