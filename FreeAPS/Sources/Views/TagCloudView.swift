@@ -1,4 +1,7 @@
+import Combine
+import Foundation
 import SwiftUI
+import Swinject
 
 struct TagCloudView: View {
     var tags: [String]
@@ -6,7 +9,6 @@ struct TagCloudView: View {
     @State private var totalHeight
 //          = CGFloat.zero       // << variant for ScrollView/List
         = CGFloat.infinity // << variant for VStack
-
     var body: some View {
         VStack {
             GeometryReader { geometry in
@@ -52,27 +54,35 @@ struct TagCloudView: View {
 
     private func item(for textTag: String) -> some View {
         var colorOfTag: Color {
-            if textTag.contains("Not Floating") {
-                return .loopYellow } else {
-                switch textTag {
-                case "autoISF":
-                    return .zt
-                case "SMB Delivery Ratio:":
-                    return .loopOrange
-                case "Parabolic Fit":
-                    return .loopRed
-                default:
-                    return .insulin
-                }
+            switch textTag {
+            case textTag where textTag.contains("Not Floating"):
+                return .loopYellow
+            case textTag where textTag.contains("Floating Carbs"):
+                return .loopPink
+            case textTag where textTag.contains("autoISF"):
+                return .zt
+            case textTag where textTag.contains("SMB Delivery Ratio:"):
+                return .uam
+            case textTag where textTag.contains("Parabolic Fit"):
+                return .loopRed
+            case textTag where textTag.contains("TDD:"),
+                 textTag where textTag.contains("Original formula"),
+                 textTag where textTag.contains("Logarithmic formula"),
+                 textTag where textTag.contains("Autosens/Dynamic Limit:"),
+                 textTag where textTag.contains("Dynamic ISF/CR"):
+                return .zt
+            default:
+                return .insulin
             }
         }
+
         return ZStack { Text(textTag)
             .padding(.vertical, 2)
             .padding(.horizontal, 4)
-            .font(.body)
+            .font(.subheadline)
             .background(colorOfTag.opacity(0.8))
             .foregroundColor(Color.white)
-            .cornerRadius(5) }
+            .cornerRadius(2) }
     }
 
     private func viewHeightReader(_ binding: Binding<CGFloat>) -> some View {

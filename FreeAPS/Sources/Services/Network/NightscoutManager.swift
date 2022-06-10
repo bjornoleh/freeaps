@@ -197,6 +197,7 @@ final class BaseNightscoutManager: NightscoutManager, Injectable {
         )
 
         let battery = storage.retrieve(OpenAPS.Monitor.battery, as: Battery.self)
+
         var reservoir = Decimal(from: storage.retrieveRaw(OpenAPS.Monitor.reservoir) ?? "0")
         if reservoir == 0xDEAD_BEEF {
             reservoir = nil
@@ -212,7 +213,7 @@ final class BaseNightscoutManager: NightscoutManager, Injectable {
         let uploader = Uploader(batteryVoltage: nil, battery: Int(device.batteryLevel * 100))
 
         let status = NightscoutStatus(
-            device: "freeaps-x://" + device.name,
+            device: NigtscoutTreatment.local,
             openaps: openapsStatus,
             pump: pump,
             preferences: preferences,

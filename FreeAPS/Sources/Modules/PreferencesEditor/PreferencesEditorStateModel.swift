@@ -5,7 +5,7 @@ extension PreferencesEditor {
     final class StateModel: BaseStateModel<Provider>, PreferencesSettable { private(set) var preferences = Preferences()
         @Published var unitsIndex = 1
         @Published var allowAnnouncements = false
-        @Published var insulinReqFraction: Decimal = 0.7
+        @Published var insulinReqFraction: Decimal = 2.0
         @Published var skipBolusScreenAfterCarbs = false
 
         @Published var sections: [FieldSection] = []
@@ -110,29 +110,38 @@ extension PreferencesEditor {
 
             let dynamicISF = [
                 Field(
-                    displayName: "Adjustment Factor",
-                    type: .decimal(keypath: \.adjustmentFactor),
-                    infoText: NSLocalizedString(
-                        "Adjust Dynamic ISF constant",
-                        comment: "Adjust Dynamic ISF constant"
-                    ),
-                    settable: self
-                ),
-                Field(
                     displayName: "Enable Dynamic ISF",
                     type: .boolean(keypath: \.enableChris),
                     infoText: NSLocalizedString(
-                        "Enable Dynamic ISF",
+                        "Change ISF with every loop cycle. New ISF will be based on current BG, TDD if insulin (past 24 hours or a weighted average) and an Adjustment Factor (default is 1). Dynamic ISF and CR ratios will be limited by your autosens.min/max limits. Dynamic ratio replaces the autosens.ratio: New ISF = Static ISF / Dynamic ratio",
                         comment: "Enable Dynamic ISF"
                     ),
                     settable: self
                 ),
                 Field(
-                    displayName: "Use logarithmic formula",
+                    displayName: "Adjustment Factor",
+                    type: .decimal(keypath: \.adjustmentFactor),
+                    infoText: NSLocalizedString(
+                        "Adjust Dynamic ratios by a constant. Default is 1. Higher than 1 => lower ISF",
+                        comment: "Adjust Dynamic ISF constant"
+                    ),
+                    settable: self
+                ),
+                Field(
+                    displayName: "Use Logarithmic Formula",
                     type: .boolean(keypath: \.useNewFormula),
                     infoText: NSLocalizedString(
-                        "Use logarithmic formula",
-                        comment: "Use logarithmic formula"
+                        "New Logarithmic Formula. More aggressive at lower and normal BG and less aggressive at really high BG. Use a lower AF (compared to Original Formula) when using the Logaritmic Formula. ",
+                        comment: "Use Logarithmic Formula"
+                    ),
+                    settable: self
+                ),
+                Field(
+                    displayName: "Weighted Average of TDD. Weight of past 24 hours:",
+                    type: .decimal(keypath: \.weightPercentage),
+                    infoText: NSLocalizedString(
+                        "Has to be > 0 and <= 1. Default is 0.65 (65 %) * past 24 hours. The rest will be from 7 days TDD average (0.35). To only use past 24 hours, set this to 1.",
+                        comment: "Weight of past 24 hours of TDD"
                     ),
                     settable: self
                 ),
@@ -212,6 +221,15 @@ extension PreferencesEditor {
                     settable: self
                 ),
                 Field(
+                    displayName: "Max Delta-BG Threshold SMB",
+                    type: .decimal(keypath: \.maxDeltaBGthreshold),
+                    infoText: NSLocalizedString(
+                        "Defaults to 0.2 (20%). Maximum positiv %change of BG level to use SMB, above that will disable SMB. Hardcoded cap of 40%. For UAM fully-closed-loop 30% is advisable. Observe in log and popup (maxDelta 27 > 20% of BG 100 - disabling SMB!).",
+                        comment: "Max Delta-BG Threshold"
+                    ),
+                    settable: self
+                ),
+                Field(
                     displayName: "Enable SMB With COB",
                     type: .boolean(keypath: \.enableSMBWithCOB),
                     infoText: NSLocalizedString(
@@ -271,6 +289,15 @@ extension PreferencesEditor {
                     infoText: NSLocalizedString(
                         "Defaults to start at 30. This is the maximum minutes of basal that can be delivered by UAM as a single SMB when IOB exceeds COB. This gives the ability to make UAM more or less aggressive if you choose. It is recommended that the value is set to start at 30, in line with the default, and if you choose to increase this value, do so in no more than 15 minute increments, keeping a close eye on the effects of the changes. Reducing the value will cause UAM to dose less insulin for each SMB. It is not recommended to set this value higher than 60 mins, as this may affect the ability for the algorithm to safely zero temp. It is also recommended that pushover is used when setting the value to be greater than default, so that alerts are generated for any predicted lows or highs.",
                         comment: "Max UAM SMB Basal Minutes"
+                    ),
+                    settable: self
+                ),
+                Field(
+                    displayName: "SMB DeliveryRatio",
+                    type: .decimal(keypath: \.smbDeliveryRatio),
+                    infoText: NSLocalizedString(
+                        "Default value: 0.5 This is another key OpenAPS safety cap, and specifies what share of the total insulin required can be delivered as SMB. Increase this experimental value slowly and with caution.",
+                        comment: "SMB DeliveryRatio"
                     ),
                     settable: self
                 ),
@@ -472,22 +499,25 @@ extension PreferencesEditor {
                 )
             ]
 
-            let xpmToogles = [
-                Field(
-                    displayName: "Enable Floating Carbs",
-                    type: .boolean(keypath: \.floatingcarbs),
-                    infoText: NSLocalizedString(
-                        "Defaults to false. If true, then dose slightly more aggressively by using all entered carbs for calculating COBpredBGs. This avoids backing off too quickly as COB decays. Even with this option, oref0 still switches gradually from using COBpredBGs to UAMpredBGs proportionally to how many carbs are left as COB. Summary: use all entered carbs in the future for predBGs & don't decay them as COB, only once they are actual.",
-                        comment: "Floating Carbs"
-                    ),
-                    settable: self
-                ),
+            let autoISF = [
                 Field(
                     displayName: "Enable AutoISF",
                     type: .boolean(keypath: \.autoisf),
                     infoText: NSLocalizedString(
                         "Defaults to false. Adapt ISF when glucose is stuck at high levels, only works without COB.\n\nRead up on:\nhttps://github.com/ga-zelle/autoISF/tree/2.8.2",
                         comment: "Enable AutoISF"
+                    ),
+                    settable: self
+                )
+            ]
+
+            let autoISFsettings = [
+                Field(
+                    displayName: "Enable Floating Carbs",
+                    type: .boolean(keypath: \.floatingcarbs),
+                    infoText: NSLocalizedString(
+                        "Defaults to false. If true, then dose slightly more aggressively by using all entered carbs for calculating COBpredBGs. This avoids backing off too quickly as COB decays. Even with this option, oref0 still switches gradually from using COBpredBGs to UAMpredBGs proportionally to how many carbs are left as COB. Summary: use all entered carbs in the future for predBGs & don't decay them as COB, only once they are actual.",
+                        comment: "Floating Carbs"
                     ),
                     settable: self
                 ),
@@ -508,9 +538,7 @@ extension PreferencesEditor {
                         comment: "Enable BG accel in autoISF"
                     ),
                     settable: self
-                )
-            ]
-            let xpmSettings = [
+                ),
                 Field(
                     displayName: "AutoISF HourlyMaxChange",
                     type: .decimal(keypath: \.autoISFhourlyChange),
@@ -528,24 +556,13 @@ extension PreferencesEditor {
                         comment: "AutoISF Max"
                     ),
                     settable: self
-                )
-            ]
-            let xpmSMB = [
+                ),
                 Field(
                     displayName: "SMB Max RangeExtension",
                     type: .decimal(keypath: \.smbMaxRangeExtension),
                     infoText: NSLocalizedString(
                         "Default value: 1. This is another key OpenAPS safety cap, and specifies by what factor you can exceed the regular 120 maxSMB/maxUAM minutes. Increase this experimental value slowly and with caution. Available only when autoISF is enabled.",
                         comment: "SMB Max RangeExtension"
-                    ),
-                    settable: self
-                ),
-                Field(
-                    displayName: "SMB DeliveryRatio",
-                    type: .decimal(keypath: \.smbDeliveryRatio),
-                    infoText: NSLocalizedString(
-                        "Default value: 0.5 This is another key OpenAPS safety cap, and specifies what share of the total insulin required can be delivered as SMB. This is to prevent people from getting into dangerous territory by setting SMB requests from the caregivers phone at the same time. Increase this experimental value slowly and with caution.",
-                        comment: "SMB DeliveryRatio"
                     ),
                     settable: self
                 ),
@@ -575,9 +592,7 @@ extension PreferencesEditor {
                         comment: "SMB DeliveryRatio Minimum"
                     ),
                     settable: self
-                )
-            ]
-            let xpmParabolicFit = [
+                ),
                 Field(
                     displayName: "ISF weight while BG accelerates",
                     type: .decimal(keypath: \.bgAccelISFweight),
@@ -604,9 +619,7 @@ extension PreferencesEditor {
                         comment: "AutoISF Min"
                     ),
                     settable: self
-                )
-            ]
-            let xpmAutoISF = [
+                ),
                 Field(
                     displayName: "ISF weight for higher BG's",
                     type: .decimal(keypath: \.higherISFrangeWeight),
@@ -633,9 +646,7 @@ extension PreferencesEditor {
                         comment: "ISF higher delta BG weight"
                     ),
                     settable: self
-                )
-            ]
-            let xpmPostPrandial = [
+                ),
                 Field(
                     displayName: "Enable always postprandial ISF adaption",
                     type: .boolean(keypath: \.postMealISFalways),
@@ -685,34 +696,15 @@ extension PreferencesEditor {
                     fields: otherSettings
                 ),
                 FieldSection(
-                    displayName: NSLocalizedString("XPM toggles", comment: "Switch on/off experimental stuff"),
-                    fields: xpmToogles
-                ),
-                FieldSection(
-                    displayName: NSLocalizedString("autoISF general settings", comment: "Experimental stuff settings"),
-                    fields: xpmSettings
-                ),
-                FieldSection(
-                    displayName: NSLocalizedString("SMB Delivery Ratio settings", comment: "Experimental settings for SMBs"),
-                    fields: xpmSMB
-                ),
-                FieldSection(
-                    displayName: NSLocalizedString("autoISF 2.1 settings", comment: "Experimental settings for autoISF 2.1"),
-                    fields: xpmAutoISF
+                    displayName: NSLocalizedString("Use Auto ISF", comment: "Switch on/off experimental stuff"),
+                    fields: autoISF
                 ),
                 FieldSection(
                     displayName: NSLocalizedString(
-                        "autoISF 2.2 Parabolic Fit settings",
-                        comment: "Experimental settings for autoISF 2.2"
+                        "Auto ISF Settings. Forget about these if Auto ISF is toggled off",
+                        comment: "AutoISF Settings"
                     ),
-                    fields: xpmParabolicFit
-                ),
-                FieldSection(
-                    displayName: NSLocalizedString(
-                        "autoISF 2.1 Post-prandial settings",
-                        comment: "Experimental settings for autoISF 2.1"
-                    ),
-                    fields: xpmPostPrandial
+                    fields: autoISFsettings
                 )
             ]
         }
