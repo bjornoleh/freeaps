@@ -56,7 +56,7 @@ extension Home {
 
         @ViewBuilder func header(_ geo: GeometryProxy) -> some View {
             HStack(alignment: .bottom) {
-                Spacer().frame(maxWidth: 5)
+                Spacer().frame(maxWidth: 2)
                 cobIobView
                 Spacer()
                 glucoseView
@@ -64,7 +64,7 @@ extension Home {
                 pumpView
                 Spacer()
                 loopView
-                Spacer().frame(maxWidth: 5)
+                Spacer().frame(maxWidth: 2)
             }
             .frame(maxWidth: .infinity)
             .frame(maxHeight: 70)
