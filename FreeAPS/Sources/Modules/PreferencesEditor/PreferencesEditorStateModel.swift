@@ -146,6 +146,15 @@ extension PreferencesEditor {
                     settable: self
                 ),
                 Field(
+                    displayName: "Enable TDD-adjusted basal",
+                    type: .boolean(keypath: \.tddAdjBasal),
+                    infoText: NSLocalizedString(
+                        "Enable adjustment of basal based on the ratio of 24 h : 7 day average TDD",
+                        comment: "Enable adjustment of basal based on the ratio of 24 h : 7 day average TDD"
+                    ),
+                    settable: self
+                ),
+                Field(
                     displayName: "Enable TDD-adjusted CR",
                     type: .boolean(keypath: \.enableDynamicCR),
                     infoText: NSLocalizedString(
