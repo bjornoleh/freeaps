@@ -198,24 +198,6 @@ extension PreferencesEditor {
                         comment: "Scales the impact of TDD variation on carb ratio. Lower the number to reduce the impact of TDD variation. Scale factor 1 = unscaled. Suggested settings: 0,2 - 0,5"
                     ),
                     settable: self
-                ),
-                Field(
-                    displayName: "Enable Static COB decay",
-                    type: .boolean(keypath: \.use_Static_COB_decay),
-                    infoText: NSLocalizedString(
-                        "Use static COB decay together with dynamic ISF",
-                        comment: "Use static COB decay together with dynamic ISF"
-                    ),
-                    settable: self
-                ),
-                Field(
-                    displayName: "COB decay adjustment factor",
-                    type: .decimal(keypath: \.cobDecayAdjust),
-                    infoText: NSLocalizedString(
-                        "Adjustment factor to tune static COB decay. Default 1,0. A larger number makes COB decay faster.",
-                        comment: "Adjustment factor to tune static COB decay. The default value is 1,0. A larger number makes COB decay faster."
-                    ),
-                    settable: self
                 )
             ]
 

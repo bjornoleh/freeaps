@@ -68,8 +68,6 @@ struct Preferences: JSON {
     var useNewFormula: Bool = false
     var useWeightedAverage: Bool = false
     var weightPercentage: Decimal = 0.65
-    var use_Static_COB_decay: Bool = false
-    var cobDecayAdjust: Decimal = 1
     var crSensRefBG: Decimal = 100
     var crScaleFactor: Decimal = 1
     var minCRratio: Decimal = 1
@@ -145,8 +143,6 @@ extension Preferences {
         case useNewFormula
         case useWeightedAverage
         case weightPercentage
-        case use_Static_COB_decay
-        case cobDecayAdjust
         case crSensRefBG
         case crScaleFactor
         case minCRratio
