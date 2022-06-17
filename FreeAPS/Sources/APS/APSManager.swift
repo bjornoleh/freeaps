@@ -616,7 +616,7 @@ final class BaseAPSManager: APSManager, Injectable {
                     }
                 }
 
-                var entriesPast2hours = storage.retrieve(file, as: [TDD].self)?
+                let entriesPast2hours = storage.retrieve(file, as: [TDD].self)?
                     .filter { $0.timestamp.addingTimeInterval(2.hours.timeInterval) > Date() }
                     .sorted { $0.timestamp > $1.timestamp } ?? []
 
@@ -639,8 +639,8 @@ final class BaseAPSManager: APSManager, Injectable {
                 }
 
                 let average7 = total / indeces
-                let weight = preferences.weightPercentage
                 let average2hours = totalAmount / nrOfIndeces
+                let weight = preferences.weightPercentage
                 let weighted_average = weight * average2hours + (1 - weight) * average7
 
                 let averages = TDD_averages(
