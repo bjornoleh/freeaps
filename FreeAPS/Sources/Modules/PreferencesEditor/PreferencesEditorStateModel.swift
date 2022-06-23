@@ -182,15 +182,6 @@ extension PreferencesEditor {
                     settable: self
                 ),
                 Field(
-                    displayName: "Reference BG level (mg/dL)",
-                    type: .decimal(keypath: \.crSensRefBG),
-                    infoText: NSLocalizedString(
-                        "Reference BG level for CR-adjustment based on TDD",
-                        comment: "Reference BG level for CR-adjustment based on TDD"
-                    ),
-                    settable: self
-                ),
-                Field(
                     displayName: "CR scale factor",
                     type: .decimal(keypath: \.crScaleFactor),
                     infoText: NSLocalizedString(

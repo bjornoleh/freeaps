@@ -68,7 +68,6 @@ struct Preferences: JSON {
     var useNewFormula: Bool = false
     var useWeightedAverage: Bool = false
     var weightPercentage: Decimal = 0.65
-    var crSensRefBG: Decimal = 100
     var crScaleFactor: Decimal = 1
     var minCRratio: Decimal = 1
     var maxCRratio: Decimal = 1
@@ -143,7 +142,6 @@ extension Preferences {
         case useNewFormula
         case useWeightedAverage
         case weightPercentage
-        case crSensRefBG
         case crScaleFactor
         case minCRratio
         case maxCRratio
