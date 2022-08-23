@@ -1,5 +1,5 @@
 APP_DISPLAY_NAME = FreeAPS X
-BUILD_VERSION = 0.2.7.2_Dynamic_TDD_adj_basal
+BUILD_VERSION = 0.2.7.3_TDD_14_day_average
 DEVELOPER_TEAM = ##TEAM_ID##
 BUNDLE_IDENTIFIER = ru.artpancreas.$(DEVELOPMENT_TEAM).FreeAPS
 APP_GROUP_ID = group.com.$(DEVELOPMENT_TEAM).loopkit.LoopGroup
