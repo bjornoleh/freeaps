@@ -603,7 +603,7 @@ final class BaseAPSManager: APSManager, Injectable {
             storage.transaction { storage in
                 storage.append(tdd, to: file, uniqBy: \.id)
                 uniqEvents = storage.retrieve(file, as: [TDD].self)?
-                    .filter { $0.timestamp.addingTimeInterval(7.days.timeInterval) > Date() }
+                    .filter { $0.timestamp.addingTimeInterval(14.days.timeInterval) > Date() }
                     .sorted { $0.timestamp > $1.timestamp } ?? []
 
                 var total: Decimal = 0
