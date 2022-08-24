@@ -61,8 +61,17 @@ struct Preferences: JSON {
     var bgAccelISFweight: Decimal = 0
     var bgBrakeISFweight: Decimal = 0
     var enableBGacceleration: Bool = false
-    var enableChris: Bool = true
-    var adjustmentFactor: Decimal = 1
+    var maxDeltaBGthreshold: Decimal = 0.2
+    var adjustmentFactor: Decimal = 1.0
+    var enableChris: Bool = false
+    var enableDynamicCR: Bool = false
+    var useNewFormula: Bool = false
+    var useWeightedAverage: Bool = false
+    var weightPercentage: Decimal = 0.65
+    var crScaleFactor: Decimal = 1
+    var minCRratio: Decimal = 1
+    var maxCRratio: Decimal = 1
+    var tddAdjBasal: Bool = false
 }
 
 extension Preferences {
@@ -126,8 +135,17 @@ extension Preferences {
         case bgAccelISFweight = "bgAccel_ISF_weight"
         case bgBrakeISFweight = "bgBrake_ISF_weight"
         case enableBGacceleration = "enable_BG_acceleration"
+        case maxDeltaBGthreshold = "maxDelta_bg_threshold"
         case adjustmentFactor
         case enableChris
+        case enableDynamicCR
+        case useNewFormula
+        case useWeightedAverage
+        case weightPercentage
+        case crScaleFactor
+        case minCRratio
+        case maxCRratio
+        case tddAdjBasal
     }
 }
 

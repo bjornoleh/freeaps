@@ -108,6 +108,10 @@ extension Settings {
                                 .navigationLink(to: .configEditor(file: OpenAPS.Monitor.tempBasal), from: self)
                             Text("Middleware")
                                 .navigationLink(to: .configEditor(file: OpenAPS.Middleware.determineBasal), from: self)
+                            Text("TDD")
+                                .navigationLink(to: .configEditor(file: OpenAPS.Monitor.tdd), from: self)
+                            Text("TDD Averages")
+                                .navigationLink(to: .configEditor(file: OpenAPS.Monitor.tdd_averages), from: self)
                             Text("Edit settings json")
                                 .navigationLink(to: .configEditor(file: OpenAPS.FreeAPS.settings), from: self)
                         }

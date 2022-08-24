@@ -56,7 +56,7 @@ extension Home {
 
         @ViewBuilder func header(_ geo: GeometryProxy) -> some View {
             HStack(alignment: .bottom) {
-                Spacer().frame(maxWidth: 5)
+                Spacer().frame(maxWidth: 2)
                 cobIobView
                 Spacer()
                 glucoseView
@@ -64,7 +64,7 @@ extension Home {
                 pumpView
                 Spacer()
                 loopView
-                Spacer().frame(maxWidth: 5)
+                Spacer().frame(maxWidth: 2)
             }
             .frame(maxWidth: .infinity)
             .frame(maxHeight: 70)
@@ -116,7 +116,7 @@ extension Home {
                 if state.alarm == nil {
                     state.openCGM()
                 } else {
-                    state.showModal(for: .snooze)
+                    state.openCGM()
                 }
             }
             .onLongPressGesture {
@@ -125,7 +125,7 @@ extension Home {
                 if state.alarm == nil {
                     state.showModal(for: .snooze)
                 } else {
-                    state.openCGM()
+                    state.showModal(for: .snooze)
                 }
             }
         }
@@ -162,7 +162,7 @@ extension Home {
             }
         }
 
-        var infoPanal: some View {
+        var infoPanel: some View {
             HStack(alignment: .center) {
                 if state.pumpSuspended {
                     Text("Pump suspended")
@@ -380,7 +380,7 @@ extension Home {
                 VStack(spacing: 0) {
                     header(geo)
                     Divider().background(Color.gray)
-                    infoPanal
+                    infoPanel
                     mainChart
                     legendPanal
                         .background(Color.secondary.opacity(0.05))
@@ -423,7 +423,7 @@ extension Home {
                     .padding(.bottom, 4)
                 if let suggestion = state.suggestion {
                     TagCloudView(tags: suggestion.reasonParts).animation(.none, value: false)
-                    Text(suggestion.reasonConclusion.capitalizingFirstLetter()).font(.body).foregroundColor(.white)
+                    Text(suggestion.reasonConclusion.capitalizingFirstLetter()).font(.caption).foregroundColor(.white)
                 } else {
                     Text("No sugestion found").font(.body).foregroundColor(.white)
                 }
