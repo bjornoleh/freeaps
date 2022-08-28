@@ -175,14 +175,14 @@ extension Home {
                                 NSLocalizedString(" U/hr", comment: "Unit per hour with space") +
                                 NSLocalizedString(" -  Manual Basal ⚠️", comment: "Manual Temp basal")
                         )
-                        .font(.system(size: 12, weight: .bold)).foregroundColor(.insulin)
+                        .font(.system(size: 14, weight: .bold)).foregroundColor(.insulin)
                         .padding(.leading, 8)
                     } else {
                         Text(
                             (numberFormatter.string(from: tempRate as NSNumber) ?? "0") +
                                 NSLocalizedString(" U/hr", comment: "Unit per hour with space")
                         )
-                        .font(.system(size: 12, weight: .bold)).foregroundColor(.insulin)
+                        .font(.system(size: 14, weight: .bold)).foregroundColor(.insulin)
                         .padding(.leading, 8)
                     }
                 }
