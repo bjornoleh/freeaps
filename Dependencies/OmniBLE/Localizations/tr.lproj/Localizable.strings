@@ -509,7 +509,7 @@
 "Your Pod is ready for use.\n\n%1$@ will remind you to change your pod before it expires. You can change this to a time convenient for you." = "Pod'unuz kullanıma hazır.\n\n%1$@ süresi dolmadan önce pod değiştirmeniz için hatırlatacak. Bunu sizin için uygun bir zamana değiştirebilirsiniz.";
 
 /* */
-"Scheduled Reminder" = "Programlanmış Anımsatıcı";
+"Scheduled Reminder" = "Programlanan Anımsatma";
 
 /* Label for expiration reminder row */
 "Time" = "Saat";
@@ -524,7 +524,7 @@
 "No Reminder" = "Hatırlatıcı Yok";
 
 /* Error message description for PeripheralManagerError.notReady */
-"Peripheral Not Ready" = "Periferal hazır değil";
+"Peripheral Not Ready" = "Çevre birimi hazır değil";
 
 /* Error message description for PeripheralManagerError.incorrectResponse */
 "Incorrect Response" = "Yanlış Yanıt";
