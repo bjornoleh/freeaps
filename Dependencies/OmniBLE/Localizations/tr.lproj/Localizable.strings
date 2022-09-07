@@ -494,7 +494,7 @@
 "The window on the top of the Pod should be colored pink when the cannula is properly inserted into the skin." = "Kanül cilde düzgün bir şekilde yerleştirildiğinde Pod'un üstündeki pencere pembe renkte olmalıdır.";
 
 /* Button label for user to answer cannula was properly inserted  */
-"Yes" = "Yes";
+"Yes" = "Evet";
 
 /* Button label for user to answer cannula was not properly inserted */
 "No" = "Hayır";
