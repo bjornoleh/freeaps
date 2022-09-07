@@ -255,7 +255,7 @@
 "Save Basal Profile" = "Bazal Profili Kaydet";
 
 /* */
-"Save basal profile failed: %{public}@" = "Bazal profili kaydetme başarısız oldu: %{public}@";
+"Save basal profile failed: %{public}@" = "Bazal profil kaydedilemedi: %{public}@";
 
 /* */
 "Skipping Play Test Beeps due to bolus still in progress." = "Devam eden bolus nedeniyle Deneme Testi Bip Sesleri atlanıyor.";
@@ -264,7 +264,7 @@
 "Play Test Beeps" = "Test Bip Sesi Çal";
 
 /* */
-"Skipping Read Pulse Log due to bolus still in progress." = "Hala devam eden bolus nedeniyle Nabız Okuma Günlüğünü atlanıyor.";
+"Skipping Read Pulse Log due to bolus still in progress." = "Devam eden bolus nedeniyle Nabız Okuma Günlüğü atlanıyor.";
 
 /* */
 "Read Pulse Log" = "Nabız Kaydını Oku";
@@ -339,10 +339,10 @@
 "The time on your pump is different from the current time. Do you want to update the time on your pump to the current time?" = "Pompanızdaki saat, mevcut saatten farklı. Pompanızdaki saati şu anki saate güncellemek ister misiniz?";
 
 /* Button text to confirm pump time sync */
-"Yes, Sync to Current Time" = "Evet, Geçerli Saate Eşitle";
+"Yes, Sync to Current Time" = "Evet güncelle";
 
 /* Button text to cancel pump time sync */
-"No, Keep Pump As Is" = "Hayır, Pompayı Olduğu Gibi Tutun";
+"No, Keep Pump As Is" = "Hayır güncelleme";
 
 /* Title for Omnipod DASH PumpManager deletion action sheet. */
 "Remove Pump" = "Pompayı Çıkart";
@@ -376,7 +376,7 @@
 "2 hours" = "2 saat";
 
 /* Alert title for suspend error */
-"Failed to Suspend Insulin Delivery" = "İnsülin Teslimatı Askıya Alınamadı";
+"Failed to Suspend Insulin Delivery" = "İnsülin İletimi Askıya Alınamadı";
 
 /* Alert title for resume error */
 "Failed to Resume Insulin Delivery" = "İnsülin İletimi Tekrar Başlatılamadı";
