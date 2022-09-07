@@ -388,7 +388,7 @@
 "Failed to Cancel Manual Basal" = "Manuel Bazal İptal Edilemedi";
 
 /* */
-"Please deactivate the pod. When deactivation is complete, you may remove it and pair a new pod." = "Lütfen pod'u devre dışı bırakın. Devre dışı bırakma işlemi tamamlandığında, onu kaldırabilir ve yeni bir bölme eşleştirebilirsiniz.";
+"Please deactivate the pod. When deactivation is complete, you may remove it and pair a new pod." = "Lütfen pod'u devre dışı bırakın. Devre dışı bırakma tamamlandığında, onu kaldırabilir ve yeni bir pod eşleştirebilirsiniz.";
 
 /* Instructions for deactivate pod when pod not on body */
 "Please deactivate the pod. When deactivation is complete, you may pair a new pod." = "Lütfen pod'u devre dışı bırakın. Devre dışı bırakma tamamlandığında, yeni bir pod eşleştirebilirsiniz.";
