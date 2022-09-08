@@ -976,7 +976,7 @@ Enact a temp Basal or a temp target */
 "Pair Pod" = "Parkoppla podd";
 
 /* Text for previous pod information row */
-"Previous Pod Information" = "Information om tidigare podd";
+"Previous Pod Information" = "Info om tidigare podd";
 
 /* Text for confidence reminders navigation link */
 "Confidence Reminders" = "Bekräftelseljud";
@@ -1041,6 +1041,7 @@ Enact a temp Basal or a temp target */
 
 /* Description text on manual temp basal action sheet */
 "Loop will not automatically adjust your insulin delivery until the temporary basal rate finishes or is canceled." = "FreeAPS X kommer inte automatiskt att justera dina insulindoser förrän den temporära basalen är färdig eller har avbrytits.";
+
 /* Button text for setting manual temporary basal rate*/
 "Set Temporary Basal" = "Ställ in temporaär basal";
 
