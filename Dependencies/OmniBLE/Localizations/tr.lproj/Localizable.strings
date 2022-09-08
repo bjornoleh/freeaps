@@ -649,7 +649,7 @@
 "No\nDelivery" = "Teslimat \nYok";
 
 "* description label for active time pod details row */
-Active Time" = "Active Time";
+Active Time" = "Aktif Süre";
 
 /* description label for total delivery pod details row */
-"Total Delivery" = "Total Delivery";
+"Total Delivery" = "Toplam Teslimat";
