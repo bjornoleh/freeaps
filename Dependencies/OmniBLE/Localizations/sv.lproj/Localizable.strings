@@ -77,6 +77,9 @@
 /* */
 "Notification Settings" = "Notisinställningar";
 
+/* */
+"Confidence Reminders" = "Bekräftelseljud";
+
 /* Text for suspend resume button when insulin delivery active */
 "Suspend Insulin Delivery" = "Pausa insulintillförsel";
 
@@ -641,3 +644,6 @@
 
 /* Text for previous pod information row */
 "Previous Pod Information" = "Information om tidigare podd";
+
+/* Text shown in insulin remaining space when no pod is paired (Please keep the '\n' while translating!) */
+"No\nDelivery" = "Inget\ninsulin";
