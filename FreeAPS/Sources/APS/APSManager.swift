@@ -3,6 +3,7 @@ import Foundation
 import LoopKit
 import LoopKitUI
 import OmniBLE
+import OmniKit
 import RileyLinkKit
 import SwiftDate
 import Swinject
@@ -37,7 +38,6 @@ enum APSError: LocalizedError {
     case glucoseError(message: String)
     case apsError(message: String)
     case deviceSyncError(message: String)
-    case deviceAlert(message: String)
     case manualBasalTemp(message: String)
 
     var errorDescription: String? {
@@ -52,8 +52,6 @@ enum APSError: LocalizedError {
             return "APS error: \(message)"
         case let .deviceSyncError(message):
             return "Sync error: \(message)"
-        case let .deviceAlert(message):
-            return "Pump message: \(message)"
         case let .manualBasalTemp(message):
             return "Manual Basal Temp : \(message)"
         }
@@ -476,7 +474,16 @@ final class BaseAPSManager: APSManager, Injectable {
             let roundedAmount = pump.roundToSupportedBolusVolume(units: Double(amount))
             pump.enactBolus(units: roundedAmount, activationType: .manualRecommendationAccepted) { error in
                 if let error = error {
-                    warning(.apsManager, "Announcement Bolus failed with error: \(error.localizedDescription)")
+                    // warning(.apsManager, "Announcement Bolus failed with error: \(error.localizedDescription)")
+                    switch error {
+                    case .uncertainDelivery:
+                        // Do not generate notification on uncertain delivery error
+                        break
+                    default:
+                        // Do not generate notifications for automatic boluses that fail.
+                        warning(.apsManager, "Announcement Bolus failed with error: \(error.localizedDescription)")
+                    }
+
                 } else {
                     debug(.apsManager, "Announcement Bolus succeeded")
                     self.announcementsStorage.storeAnnouncements([announcement], enacted: true)
@@ -705,11 +712,26 @@ final class BaseAPSManager: APSManager, Injectable {
         bolusReporter?.addObserver(self)
     }
 
+    private func updateStatus() {
+        debug(.apsManager, "force update status")
+        guard let pump = pumpManager else {
+            return
+        }
+
+        if let omnipod = pump as? OmnipodPumpManager {
+            omnipod.getPodStatus { _ in }
+        }
+        if let omnipodBLE = pump as? OmniBLEPumpManager {
+            omnipodBLE.getPodStatus { _ in }
+        }
+    }
+
     private func clearBolusReporter() {
         bolusReporter?.removeObserver(self)
         bolusReporter = nil
-        processQueue.asyncAfter(deadline: .now() + 1) {
+        processQueue.asyncAfter(deadline: .now() + 0.5) {
             self.bolusProgress.send(nil)
+            self.updateStatus()
         }
     }
 }
