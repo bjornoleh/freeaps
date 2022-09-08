@@ -968,6 +968,9 @@ Połączono z Nightscout!";
 
 "Deactivate Pod" = "Dezaktywuj PODa";
 
+/* */
+"Deactivating..." = "Deactivating...";
+
 "Pair Pod" = "Pair Pod";
 
 /* Text for previous pod information row */
