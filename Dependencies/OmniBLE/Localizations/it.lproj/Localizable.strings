@@ -77,6 +77,9 @@
 /* */
 "Notification Settings" = "Impostazioni di Notifica";
 
+/* */
+"Confidence Reminders" = "Confidence Reminders";
+
 /* Text for suspend resume button when insulin delivery active */
 "Suspend Insulin Delivery" = "Suspend Insulin Delivery";
 
@@ -641,3 +644,6 @@
 
 /* Text for previous pod information row */
 "Previous Pod Information" = "Previous Pod Information";
+
+/* Text shown in insulin remaining space when no pod is paired (Please keep the '\n' while translating!) */
+"No\nDelivery" = "No\nDelivery";
