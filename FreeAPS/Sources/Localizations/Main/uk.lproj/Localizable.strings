@@ -954,7 +954,7 @@ Enact a temp Basal or a temp target */
 "Info" = "Інформація";
 
 /* Warning title */
-"Warning" = "Varning";
+"Warning" = "Попередження";
 
 /* Error title */
 "Error" = "Помилка";
