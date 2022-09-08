@@ -967,12 +967,12 @@ Enact a temp Basal or a temp target */
 "Deactivate Pod" = "Pod'u devredışı bırak";
 
 /* */
-"Deactivating..." = "Deactivating...";
+"Deactivating..." = "Devre dışı bırakılıyor...";
 
 "Pair Pod" = "Pod Eşleştir";
 
 /* Text for previous pod information row */
-"Previous Pod Information" = "Previous Pod Information";
+"Previous Pod Information" = "Önceki Pod Bilgileri";
 
 /* Text for confidence reminders navigation link */
 "Confidence Reminders" = "Onay sesi";
@@ -989,19 +989,19 @@ Enact a temp Basal or a temp target */
 "Failed to update confidence reminder preference." = "Failed to update confidence reminder preference.";
 
 /* */
-"No Error" = "No Error";
+"No Error" = "Hata yok";
 
 /* description label for active time pod details row */
 "Active Time" = "Aktif Süre";
 
 /* Title string for BeepPreference.silent */
-"Disabled" = "Disabled";
+"Disabled" = "Devre dışı";
 
 /* Title string for BeepPreference.manualCommands */
 "Enabled" = "Etkin";
 
 /* Title string for BeepPreference.extended */
-"Extended" = "Extended";
+"Extended" = "Genişletilmiş";
 
 /* Description for BeepPreference.silent */
 "No confidence reminders are used." = "No confidence reminders are used.";
@@ -1038,25 +1038,25 @@ Enact a temp Basal or a temp target */
 /* Description text on manual temp basal action sheet */
 "Loop will not automatically adjust your insulin delivery until the temporary basal rate finishes or is canceled." = "Loop will not automatically adjust your insulin delivery until the temporary basal rate finishes or is canceled.";
 /* Button text for setting manual temporary basal rate*/
-"Set Temporary Basal" = "Set Temporary Basal";
+"Set Temporary Basal" = "Geçici Bazalı Ayarla";
 
 /* Navigation Title for ManualTempBasalEntryView */
-"Temporary Basal" = "Temporary Basal";
+"Temporary Basal" = "Geçici Bazal";
 
 /* Alert title for a failure to set temporary basal */
-"Temporary Basal Failed" = "Temporary Basal Failed";
+"Temporary Basal Failed" = "Geçici Bazal Başarısız";
 
 /* Alert format string for a failure to set temporary basal with recovery suggestion. (1: error description) (2: recovery text) */
-"Unable to set a temporary basal rate: %1$@\n\n%2$@" = "Unable to set a temporary basal rate: %1$@\n\n%2$@";
+"Unable to set a temporary basal rate: %1$@\n\n%2$@" = "Geçici bir bazal oran ayarlanamıyor: %1$@\n\n%2$@";
 
 /* Alert format string for a failure to set temporary basal. (1: error description) */
-"Unable to set a temporary basal rate: %1$@" = "Unable to set a temporary basal rate: %1$@";
+"Unable to set a temporary basal rate: %1$@" = "Geçici bir bazal oran ayarlanamıyor: %1$@";
 
 /* Alert title for missing temp basal configuration */
-"Missing Config" = "Missing Config";
+"Missing Config" = "Konfigurasyon Bulunamadı";
 
 /* Alert format string for missing temp basal configuration. */
-"This PumpManager has not been configured with a maximum basal rate because it was added before manual temp basal was a feature. Please go to therapy settings -> delivery limits and set a new maximum basal rate." = "This PumpManager has not been configured with a maximum basal rate because it was added before manual temp basal was a feature. Please go to therapy settings -> delivery limits and set a new maximum basal rate.";
+"This PumpManager has not been configured with a maximum basal rate because it was added before manual temp basal was a feature. Please go to therapy settings -> delivery limits and set a new maximum basal rate." = "Bu PumpManager, manuel temp bazal bir özellik olmadan önce eklendiğinden maksimum bazal oranı ile yapılandırılmadı. Lütfen terapi ayarları -> iletim limitlerine gidin ve yeni bir maksimum bazal oran ayarlayın.";
 
 /* --------------------------------------
 
