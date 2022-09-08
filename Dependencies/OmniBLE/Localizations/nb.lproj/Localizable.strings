@@ -646,10 +646,10 @@
 "Previous Pod Information" = "Previous Pod Information";
 
 /* Text shown in insulin remaining space when no pod is paired (Please keep the '\n' while translating!) */
-"No\nDelivery" = "No\nDelivery";
+"No\nDelivery" = "Ingen\nleveranse";
 
 "* description label for active time pod details row */
 Active Time" = "Active Time";
 
 /* description label for total delivery pod details row */
-"Total Delivery" = "Total Delivery";
+"Total Delivery" = "Total leveranse";
