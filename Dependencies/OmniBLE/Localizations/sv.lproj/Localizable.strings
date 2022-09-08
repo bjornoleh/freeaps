@@ -649,7 +649,7 @@
 "No\nDelivery" = "Inget\ninsulin";
 
 "* description label for active time pod details row */
-Active Time" = "Active Time";
+Active Time" = "Aktiv tid";
 
 /* description label for total delivery pod details row */
-"Total Delivery" = "Total Delivery";
+"Total Delivery" = "Total mängd insulin given";
