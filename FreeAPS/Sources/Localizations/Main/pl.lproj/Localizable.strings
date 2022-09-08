@@ -956,7 +956,7 @@ Połączono z Nightscout!";
 "Info" = "Info";
 
 /* Warning title */
-"Warning" = "Varning";
+"Warning" = "Ostrzeżenie";
 
 /* Error title */
 "Error" = "Error";
