@@ -1026,6 +1026,12 @@ Enact a temp Basal or a temp target */
 /* Label text for expiration reminder default row */
 "Expiration Reminder Default" = "Expiration Reminder Default";
 
+/* */
+"Expiration Reminder" = "Expiration Reminder";
+
+/* */
+"Low Reservoir" = "Low Reservoir";
+
 /* Value text for no expiration reminder */
 "No Reminder" = "No Reminder";
 
@@ -1088,6 +1094,18 @@ Enact a temp Basal or a temp target */
 
 /* */
 "Setup Complete" = "Setup Complete";
+
+/* */
+"Insulin Suspended" = "Insulin Suspended";
+
+/* Text for suspend resume button when insulin delivery is suspending */
+"Suspending insulin delivery..." = "Suspending insulin delivery...";
+
+/* Text for suspend resume button when insulin delivery is suspended */
+"Resume Insulin Delivery" = "Resume Insulin Delivery";
+
+/* Text for suspend resume button when insulin delivery is resuming */
+"Resuming insulin delivery..." = "Resuming insulin delivery...";
 
  /* --------------------------------------
 

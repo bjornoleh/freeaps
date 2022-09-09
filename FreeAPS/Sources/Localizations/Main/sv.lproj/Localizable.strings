@@ -425,6 +425,9 @@ Enact a temp Basal or a temp target */
 /* " min" in Treatments list */
 " min" = " min";
 
+/* */
+"Unable to change anything" = "Det går inte att ändra något";
+
 
 /* Calendar and Libre transmitter settings ---------------
  */
@@ -1019,11 +1022,23 @@ Enact a temp Basal or a temp target */
 /* Label text for expiration reminder default row */
 "Expiration Reminder Default" = "Standard påminnelsetid";
 
+/* */
+"Expiration Reminder" = "Påminnelse om utgångsdatum";
+
+/* */
+"Low Reservoir" = "Låg reservoarvolym";
+
 /* Value text for no expiration reminder */
 "No Reminder" = "Ingen påminnelse";
 
 /* */
 "Scheduled Reminder" = "Schemalagd påminnelse";
+
+/* */
+"Expiration Reminder" = "Utgångsdatum";
+
+/* */
+"Low Reservoir" = "Insulinnivå";
 
 /* */
 "Low Reservoir Reminder" = "Påminnelse om låg insulinnivå";
@@ -1080,6 +1095,17 @@ Enact a temp Basal or a temp target */
 /* */
 "Setup Complete" = "Inställning färdig";
 
+/* */
+"Insulin Suspended" = "Insulintillförsel pausad";
+
+/* Text for suspend resume button when insulin delivery is suspending */
+"Suspending insulin delivery..." = "Pausar pump...";
+
+/* Text for suspend resume button when insulin delivery is suspended */
+"Resume Insulin Delivery" = "Återuppta pump";
+
+/* Text for suspend resume button when insulin delivery is resuming */
+"Resuming insulin delivery..." = "Återupptar pump...";
 
 /* --------------------------------------
 

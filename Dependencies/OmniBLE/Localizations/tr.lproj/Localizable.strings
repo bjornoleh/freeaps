@@ -314,9 +314,6 @@
 /* The default notification body for AlarmCodes */
 "Insulin delivery stopped. Change Pod now." = "İnsülin iletimi durduruldu. Pod'u şimdi değiştirin.";
 
-/* Units for showing temp basal rate */
-"U/hr" = "Ü/Sa";
-
 /* Header for insulin remaining on pod settings screen */
 "Insulin Remaining" = "Kalan İnsülin";
 
@@ -559,7 +556,7 @@
 "Omnipod Reminders" = "Omnipod Hatırlatıcıları";
 
 /* Footer text for omnipod reminders section */
-"The app configures a reminder on the pod to notify you in advance of Pod expiration. Set the number of hours advance notice you would like to configure when pairing a new Pod." = "Uygulama, Pod'un sona ermesinden önce sizi bilgilendirmek için pod üzerinde bir hatırlatıcı yapılandırır. Yeni bir Pod'u eşleştirirken yapılandırmak istediğiniz saat önceden bildirim sayısını ayarlayın.";
+"The app configures a reminder on the pod to notify you in advance of Pod expiration. Set the number of hours advance notice you would like to configure when pairing a new Pod." = "Uygulama, Pod'un sona ermesinden önce sizi bilgilendirmek için pod üzerinde bir hatırlatıcı yapılandırır. Yeni bir Pod'u eşleştirirken sizi pod sona ermeden kaç saat önce uyaracağını ayarlayın.";
 
 /* Footer text for scheduled reminder area */
 "This is a reminder that you scheduled when you paired your current Pod." = "Bu mevcut Pod'unuzu eşleştirdiğinizde planladığınız bir hatırlatıcıdır.";
@@ -613,6 +610,9 @@
 /* Label text for temporary basal rate summary */
 "Rate" = "Oran";
 
+/* Insulin unit per hour */
+"U/hr" = "Ü/Sa";
+
 /* Summary string for temporary basal rate configuration page */
 "%1$@ for %2$@" = "%2$@ için %1$@";
 
@@ -637,7 +637,7 @@
 "Missing Config" = "Konfigurasyon Bulunamadı";
 
 /* Alert format string for missing temp basal configuration. */
-"This PumpManager has not been configured with a maximum basal rate because it was added before manual temp basal was a feature. Please go to therapy settings -> delivery limits and set a new maximum basal rate." = "Bu PumpManager, manuel temp bazal bir özellik olmadan önce eklendiğinden maksimum bazal oranı ile yapılandırılmadı. Lütfen terapi ayarları -> iletim limitlerine gidin ve yeni bir maksimum bazal oran ayarlayın.";
+"This PumpManager has not been configured with a maximum basal rate because it was added before manual temp basal was a feature. Please go to therapy settings -> delivery limits and set a new maximum basal rate." = "Pompa Yönetimi, daha önce manuel geçici bazal eklendiğinden, maksimum bazal oranı ile yapılandırılmadı. Lütfen terapi ayarları -> iletim limitlerine gidin ve yeni bir maksimum bazal oran ayarlayın.";
 
 /* Label text for expiration reminder default row */
 "Expiration Reminder Default" = "Süre Sonu Hatırlatıcı Varsayılan";
@@ -646,19 +646,46 @@
 "Previous Pod Information" = "Önceki Pod Bilgileri";
 
 /* Text shown in insulin remaining space when no pod is paired (Please keep the '\n' while translating!) */
-"No\nDelivery" = "Teslimat \nYok";
+"No\nDelivery" = "İletim \nYok";
 
 /* description label for active time pod details row */
 "Active Time" = "Aktif Süre";
 
 /* description label for total delivery pod details row */
-"Total Delivery" = "Toplam Teslimat";
+"Total Delivery" = "Toplam İletim";
+
+/* description label for device name pod details row */
+"Device Name" = "Cihaz adı";
+
+/* description label for lot number pod details row */
+"Lot Number" = "Parti Numarası";
+
+/* description label for sequence number pod details row */
+"Sequence Number" = "Sıra Numarası";
+
+/* description label for firmware version pod details row */
+"Firmware Version" = "Aygıt Yazılımı Sürümü";
+
+/* description label for ble firmware version pod details row */
+"BLE Firmware Version" = "BLE Donanım Yazılımı Sürümü";
+
+/* description label for activated at timne pod details row */
+"Pod Activated" = "Pod Etkinleştirildi";
+
+/* description label for active time pod details row */
+"Active Time" = "Aktif Süre";
+
+/* description label for last status date pod details row */
+"Last Status" = "Son Durum";
+
+/* description label for pod fault details */
+"Pod Fault Details" = "Pod Arıza Ayrıntıları";
 
 /* Title for PodSetupView */
-"Pod Setup" = "Pod Setup";
+"Pod Setup" = "Pod Kurulumu";
 
 /* bodyText for PodSetupView */
-"You will now begin the process of configuring your reminders, filling your Pod with insulin, pairing to your device and placing it on your body." = "You will now begin the process of configuring your reminders, filling your Pod with insulin, pairing to your device and placing it on your body.";
+"You will now begin the process of configuring your reminders, filling your Pod with insulin, pairing to your device and placing it on your body." = "Artık hatırlatıcılarınızı yapılandırma, Pod'unuzu insülin ile doldurma, cihazınızla eşleştirme ve vücudunuza yerleştirme işlemine başlayacaksınız.";
 
 /* Cancel button title */
 "Cancel" = "Vazgeç";
@@ -667,18 +694,25 @@
 "Continue" = "Devam et";
 
 /* Are you sure you want to skip Omnipod Onboarding? */
-"Skip Omnipod Onboarding?" = "Skip Omnipod Onboarding?";
+"Skip Omnipod Onboarding?" = "Omnipod Tanıtımı Atlansın mı?";
 
 /* Description text on ExpirationReminderSetupView */
-"The App notifies you in advance of Pod expiration.\n\nScroll to set the number of hours advance notice you would like to have." = "The App notifies you in advance of Pod expiration.\n\nScroll to set the number of hours advance notice you would like to have.";
+"The App notifies you in advance of Pod expiration.\n\nScroll to set the number of hours advance notice you would like to have." = "Uygulama, Pd süresinin sona ermesinden önce sizi bilgilendirir.\n\nSaatler önceden bildirim almak istediğiniz saati ayarlamak için kaydırın.";
 
 /* Text of continue button on ExpirationReminderSetupView" */
-"Next" = "Next";
+"Next" = "İleri";
 
 /* */
 "Expiration Reminder" = "Süre Sonu Hatırlatıcısı";
 
 /* Description text on LowReservoirReminderSetupView */
-"The App notifies you when the amount of insulin in the Pod reaches this level (50-10 U).\n\nScroll to set the number of units at which you would like to be reminded." = "The App notifies you when the amount of insulin in the Pod reaches this level (50-10 U).\n\nScroll to set the number of units at which you would like to be reminded.";
+"The App notifies you when the amount of insulin in the Pod reaches this level (50-10 U).\n\nScroll to set the number of units at which you would like to be reminded." = "Uygulama, Kapsüldeki insülin miktarı bu seviyeye (50-10 Ü) ulaştığında sizi bilgilendirir.\n\nHatırlatmak istediğiniz ünite sayısını ayarlamak için kaydırın.";
 
 /* Label text for low reservoir value row */
+"Low Reservoir" = "Düşük Rezervuar";
+
+/* */
+"Save" = "Kaydet";
+
+/* hr (short for hour) */
+"hr" = "sa";

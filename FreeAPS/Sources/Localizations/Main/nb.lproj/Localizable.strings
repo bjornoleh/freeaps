@@ -425,6 +425,9 @@ Enact a temp Basal or a temp target */
 /* " min" in Treatments list */
 " min" = " min";
 
+/* */
+"Unable to change anything" = "Kan ikke utføre endringer";
+
 
 /* Calendar and Libre transmitter settings ---------------
  */
@@ -1015,6 +1018,12 @@ Enact a temp Basal or a temp target */
 /* Label text for expiration reminder default row */
 "Expiration Reminder Default" = "Utløpspåminnelse";
 
+/* */
+"Expiration Reminder" = "Utløpspåminnelse";
+
+/* */
+"Low Reservoir" = "Lite insulin i pod";
+
 /* Value text for no expiration reminder */
 "No Reminder" = "Ingen påminnelse";
 
@@ -1065,7 +1074,29 @@ Enact a temp Basal or a temp target */
 "Total Delivery" = "Total leveranse";
 
 /* */
-"Add Omnipod Dash" = "Add Omnipod Dash";
+"Add Omnipod Dash" = "Legg til Omnipod Dash";
+
+/* */
+"Insert Cannula" = "Sett inn kanyle";
+
+/* */
+"Check Cannula" = "Kontroller kanyle";
+
+/* */
+"Setup Complete" = "Oppsett ferdig";
+
+/* */
+"Insulin Suspended" = "Insulinleveranse pauset";
+
+/* Text for suspend resume button when insulin delivery is suspending */
+"Suspending insulin delivery..." = "Stopper insulintilførsel...";
+
+/* Text for suspend resume button when insulin delivery is suspended */
+"Resume Insulin Delivery" = "Gjenoppta insulintilførsel";
+
+/* Text for suspend resume button when insulin delivery is resuming */
+"Resuming insulin delivery..." = "Gjenopptar insulintilførselen...";
+
 /* --------------------------------------
 
   Infotexts from openaps.docs and androidaps.docs
