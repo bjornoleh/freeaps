@@ -719,3 +719,25 @@
 
 /* Button title to cancel manual basal */
 "Cancel Manual Basal" = "Avbryt manuell basal";
+
+/* Insulin\nSuspended
+Text shown in insulin delivery space when insulin suspended (Please don't touch the '\n' ) */
+"Insulin\nSuspended" = "Insulintilførsel\npauset";
+
+/* Text for suspend resume button when insulin delivery is suspended */
+"Resume Insulin Delivery" = "Gjenoppta insulintilførsel";
+
+/* Recovery suggestion when no pod is available */
+"Make sure your pod is nearby and try again." = "Pass på at poden er i nærheten, og prøv igjen.";
+
+/* Error message shown when the pod is not connected */
+"Pod not connected" = "Pod er ikke tilkoblet";
+
+/* Label for suspended at time */
+"Suspended At" = "Pauset kl";
+
+/* Text for suspend resume button when insulin delivery is resuming */
+"Resuming insulin delivery..." = "Gjenopptar insulintilførselen...";
+
+/* Text for suspend resume button when insulin delivery is suspending */
+"Suspending insulin delivery..." = "Stopper insulintilførsel...";
