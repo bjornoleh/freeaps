@@ -81,7 +81,7 @@
 "com.loudnate.LoopKit.errorAlertActionTitle" = "OK";
 
 /* The title for the override emoji condition section */
-"Condition" = "Conditions";
+"Condition" = "Condition";
 
 /* Title of the setup button to continue */
 "Continue" = "Continuer";
