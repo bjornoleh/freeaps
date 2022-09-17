@@ -962,6 +962,15 @@ Enact a temp Basal or a temp target */
 /* Error title */
 "Error" = "Помилка";
 
+/* Manual temp basal mode */
+"Manual" = "Manual";
+
+/* Status highlight when manual temp basal is running. */
+"Manual Basal" = "Ручна тимчасова базальна швидкість (ТБШ)";
+
+/* Current Manual Temp basal */
+" -  Manual Basal ⚠️" = " -  Manual Basal ⚠️";
+
 /* ---------------------------------------
   DASH strings
 */
