@@ -47,7 +47,20 @@ extension CGM {
                     Text("Calibrations").navigationLink(to: .calibrations, from: self)
                 }
 
-                if state.cgm == .xdrip {
+                if state.cgm == .xdripLeft {
+                    Section(header: Text("Heartbeat")) {
+                        VStack(alignment: .leading) {
+                            if let cgmTransmitterDeviceAddress = state.cgmTransmitterDeviceAddress {
+                                Text("CGM address :")
+                                Text(cgmTransmitterDeviceAddress)
+                            } else {
+                                Text("CGM is not used as heartbeat.")
+                            }
+                        }
+                    }
+                }
+
+                if state.cgm == .xdripRight {
                     Section(header: Text("Heartbeat")) {
                         VStack(alignment: .leading) {
                             if let cgmTransmitterDeviceAddress = state.cgmTransmitterDeviceAddress {
