@@ -1,5 +1,5 @@
 APP_DISPLAY_NAME = FreeAPS X
-BUILD_VERSION = 0.2.8.50_dynisf+Heartbeat_timer_3_second_BTaddress_CGM_UI_oref0_updates
+BUILD_VERSION = 0.2.8.51_dynisf+Heartbeat_timer_3_second_BTaddress_CGM_UI_oref0_updates+sync_timeago
 DEVELOPER_TEAM = ##TEAM_ID##
 BUNDLE_IDENTIFIER = ru.artpancreas.$(DEVELOPMENT_TEAM).FreeAPS
 APP_GROUP_ID = group.com.$(DEVELOPMENT_TEAM).loopkit.LoopGroup
