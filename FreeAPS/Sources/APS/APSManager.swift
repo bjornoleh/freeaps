@@ -62,6 +62,7 @@ final class BaseAPSManager: APSManager, Injectable {
     private let processQueue = DispatchQueue(label: "BaseAPSManager.processQueue")
     @Injected() private var storage: FileStorage!
     @Injected() private var pumpHistoryStorage: PumpHistoryStorage!
+    @Injected() private var alertHistoryStorage: AlertHistoryStorage!
     @Injected() private var glucoseStorage: GlucoseStorage!
     @Injected() private var tempTargetsStorage: TempTargetsStorage!
     @Injected() private var carbsStorage: CarbsStorage!
@@ -689,13 +690,13 @@ final class BaseAPSManager: APSManager, Injectable {
                     nrOfIndeces = 1
                 }
 
-                let average7 = total / indeces
+                let average14 = total / indeces
                 let average2hours = totalAmount / nrOfIndeces
                 let weight = preferences.weightPercentage
-                let weighted_average = weight * average2hours + (1 - weight) * average7
+                let weighted_average = weight * average2hours + (1 - weight) * average14
 
                 let averages = TDD_averages(
-                    average_7days: average7,
+                    average_total_data: average14,
                     weightedAverage: weighted_average,
                     past2hoursAverage: average2hours,
                     date: Date()
