@@ -72,6 +72,7 @@ struct Preferences: JSON {
     var minCRratio: Decimal = 1
     var maxCRratio: Decimal = 1
     var tddAdjBasal: Bool = false
+    var threshold_setting: Decimal = 65
 }
 
 extension Preferences {
@@ -146,6 +147,7 @@ extension Preferences {
         case minCRratio
         case maxCRratio
         case tddAdjBasal
+        case threshold_setting
     }
 }
 
