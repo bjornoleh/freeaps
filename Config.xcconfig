@@ -1,5 +1,5 @@
 APP_DISPLAY_NAME = FreeAPS X
-BUILD_VERSION = 0.2.8.54_dynisf+avouspierre/cgm_heartbeat
+BUILD_VERSION = 0.2.8.55_dyn-pred_update_oref0_threshold-setting+tddReason
 DEVELOPER_TEAM = ##TEAM_ID##
 BUNDLE_IDENTIFIER = ru.artpancreas.$(DEVELOPMENT_TEAM).FreeAPS
 APP_GROUP_ID = group.com.$(DEVELOPMENT_TEAM).loopkit.LoopGroup
