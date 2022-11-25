@@ -1,9 +1,11 @@
 APP_DISPLAY_NAME = FreeAPS X
-BUILD_VERSION = 0.2.8.60_bob_basal_adjust_by_temptargetRatio
+APP_VERSION = 0.2.8.61_bo_statistics
+APP_BUILD_NUMBER = 1
+BRANCH = bo
 DEVELOPER_TEAM = ##TEAM_ID##
 BUNDLE_IDENTIFIER = ru.artpancreas.$(DEVELOPMENT_TEAM).FreeAPS
 APP_GROUP_ID = group.com.$(DEVELOPMENT_TEAM).loopkit.LoopGroup
-
+APP_ICON = AppIcon
 
 #include? "ConfigOverride.xcconfig"
 #include? "../../ConfigOverride.xcconfig"

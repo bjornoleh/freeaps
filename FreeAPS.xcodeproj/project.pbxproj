@@ -13,11 +13,14 @@
 		0D9A5E34A899219C5C4CDFAF /* DataTableStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9455FA2D92E77A6C4AFED8A3 /* DataTableStateModel.swift */; };
 		0F7A65FBD2CD8D6477ED4539 /* NotificationsConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E625985B47742D498CB1681A /* NotificationsConfigProvider.swift */; };
 		17A9D0899046B45E87834820 /* CREditorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8D5F457B5AFF763F8CF3DF /* CREditorProvider.swift */; };
+		19012CDC291D2CB900FB8210 /* LoopStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19012CDB291D2CB900FB8210 /* LoopStats.swift */; };
 		1927C8E62744606D00347C69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1927C8E82744606D00347C69 /* InfoPlist.strings */; };
 		1935364028496F7D001E0B16 /* TDD_averages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1935363F28496F7D001E0B16 /* TDD_averages.swift */; };
+		193B6FAA291AB9AC0087410F /* TenDaysStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193B6FA9291AB9AC0087410F /* TenDaysStats.swift */; };
 		19795118275953E50044850D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 198377D4266BFFF6004DE65E /* Localizable.strings */; };
 		198377D2266BFFF6004DE65E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 198377D4266BFFF6004DE65E /* Localizable.strings */; };
 		199561C1275E61A50077B976 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 199561C0275E61A50077B976 /* HealthKit.framework */; };
+		19B0EF2128F6D66200069496 /* DailyStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B0EF2028F6D66200069496 /* DailyStats.swift */; };
 		19F79FA9283AE7E000646323 /* TDD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F79FA8283AE7E000646323 /* TDD.swift */; };
 		1BBB001DAD60F3B8CEA4B1C7 /* ISFEditorStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505E09DC17A0C3D0AF4B66FE /* ISFEditorStateModel.swift */; };
 		1D845DF2E3324130E1D95E67 /* DataTableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60744C3E9BB3652895C908CC /* DataTableProvider.swift */; };
@@ -242,7 +245,6 @@
 		448B6FCB252BD4796E2960C0 /* PumpSettingsEditorDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274EE6439B1C3ED70730D41 /* PumpSettingsEditorDataFlow.swift */; };
 		45252C95D220E796FDB3B022 /* ConfigEditorDataFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8A87AA037BD079BA3528BA /* ConfigEditorDataFlow.swift */; };
 		45717281F743594AA9D87191 /* ConfigEditorRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920DDB21E5D0EB813197500D /* ConfigEditorRootView.swift */; };
-		49D42B4E274BCBA600FCEEB4 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 38F3783A2613555C009DB701 /* Config.xcconfig */; };
 		5075C1608E6249A51495C422 /* TargetsEditorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDEA2DC60EDE0A3CA54DC73 /* TargetsEditorProvider.swift */; };
 		53F2382465BF74DB1A967C8B /* PumpConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8630D58BDAD6D9C650B9B39 /* PumpConfigProvider.swift */; };
 		5BFA1C2208114643B77F8CEB /* AddTempTargetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE53A13D26F101B332EFFC8 /* AddTempTargetProvider.swift */; };
@@ -333,6 +335,8 @@
 		F90692D3274B9A130037068D /* AppleHealthKitRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90692D2274B9A130037068D /* AppleHealthKitRootView.swift */; };
 		F90692D6274B9A450037068D /* HealthKitStateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90692D5274B9A450037068D /* HealthKitStateModel.swift */; };
 		FA630397F76B582C8D8681A7 /* BasalProfileEditorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42369F66CF91F30624C0B3A6 /* BasalProfileEditorProvider.swift */; };
+		FE66D16B291F74F8005D6F77 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE66D16A291F74F8005D6F77 /* Bundle+Extensions.swift */; };
+		FEFFA7A22929FE49007B8193 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEFFA7A12929FE49007B8193 /* UIDevice+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -416,6 +420,7 @@
 		0CA3E609094E064C99A4752C /* PreferencesEditorStateModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PreferencesEditorStateModel.swift; sourceTree = "<group>"; };
 		10A0C32B0DAB52726EF9B6D9 /* BolusRootView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BolusRootView.swift; sourceTree = "<group>"; };
 		12204445D7632AF09264A979 /* PreferencesEditorDataFlow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PreferencesEditorDataFlow.swift; sourceTree = "<group>"; };
+		19012CDB291D2CB900FB8210 /* LoopStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopStats.swift; sourceTree = "<group>"; };
 		1918333A26ADA46800F45722 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1927C8E92744611700347C69 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1927C8EA2744611800347C69 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -438,6 +443,7 @@
 		1927C8FB2744612600347C69 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1927C8FE274489BA00347C69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1935363F28496F7D001E0B16 /* TDD_averages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDD_averages.swift; sourceTree = "<group>"; };
+		193B6FA9291AB9AC0087410F /* TenDaysStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenDaysStats.swift; sourceTree = "<group>"; };
 		198377D3266BFFF6004DE65E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		198377D5266C0A05004DE65E /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		198377D6266C0A0A004DE65E /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -458,6 +464,7 @@
 		199561C0275E61A50077B976 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.0.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		199732B4271B72DD00129A3F /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-PT"; path = "pt-PT.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		199732B5271B9EE900129A3F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		19B0EF2028F6D66200069496 /* DailyStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStats.swift; sourceTree = "<group>"; };
 		19C166682756EFBD00ED12E3 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		19C166692756EFBD00ED12E3 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		19F79FA8283AE7E000646323 /* TDD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDD.swift; sourceTree = "<group>"; };
@@ -757,6 +764,8 @@
 		F90692D2274B9A130037068D /* AppleHealthKitRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleHealthKitRootView.swift; sourceTree = "<group>"; };
 		F90692D5274B9A450037068D /* HealthKitStateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitStateModel.swift; sourceTree = "<group>"; };
 		FBB3BAE7494CB771ABAC7B8B /* ISFEditorRootView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ISFEditorRootView.swift; sourceTree = "<group>"; };
+		FE66D16A291F74F8005D6F77 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
+		FEFFA7A12929FE49007B8193 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1332,6 +1341,9 @@
 				19F79FA8283AE7E000646323 /* TDD.swift */,
 				1935363F28496F7D001E0B16 /* TDD_averages.swift */,
 				CE82E02628E869DF00473A9C /* AlertEntry.swift */,
+				19B0EF2028F6D66200069496 /* DailyStats.swift */,
+				193B6FA9291AB9AC0087410F /* TenDaysStats.swift */,
+				19012CDB291D2CB900FB8210 /* LoopStats.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1360,6 +1372,8 @@
 				3811DEE325CA063400A708ED /* PropertyWrappers */,
 				E06B9119275B5EEA003C04B6 /* Array+Extension.swift */,
 				CEB434E428B8FF5D00B70274 /* UIColor.swift */,
+				FE66D16A291F74F8005D6F77 /* Bundle+Extensions.swift */,
+				FEFFA7A12929FE49007B8193 /* UIDevice+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2085,7 +2099,6 @@
 				388E597225AD9CF10019842D /* json in Resources */,
 				38DF178E27733E6800B3528F /* Assets.xcassets in Resources */,
 				388E596F25AD96040019842D /* javascript in Resources */,
-				49D42B4E274BCBA600FCEEB4 /* Config.xcconfig in Resources */,
 				1927C8E62744606D00347C69 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2174,6 +2187,7 @@
 				3811DE3025C9D49500A708ED /* HomeStateModel.swift in Sources */,
 				38BF021725E7CBBC00579895 /* PumpManagerExtensions.swift in Sources */,
 				38F3B2EF25ED8E2A005C48AA /* TempTargetsStorage.swift in Sources */,
+				19B0EF2128F6D66200069496 /* DailyStats.swift in Sources */,
 				3811DF1025CAAAE200A708ED /* APSManager.swift in Sources */,
 				3870FF4725EC187A0088248F /* BloodGlucose.swift in Sources */,
 				38A0364225ED069400FCBB52 /* TempBasal.swift in Sources */,
@@ -2255,6 +2269,7 @@
 				38BF021F25E7F0DE00579895 /* DeviceDataManager.swift in Sources */,
 				38A504A425DD9C4000C5B9E8 /* UserDefaultsExtensions.swift in Sources */,
 				38FE826A25CC82DB001FF17A /* NetworkService.swift in Sources */,
+				FE66D16B291F74F8005D6F77 /* Bundle+Extensions.swift in Sources */,
 				3883581C25EE79BB00E024B2 /* DecimalTextField.swift in Sources */,
 				38DAB28A260D349500F74C1A /* FetchGlucoseManager.swift in Sources */,
 				38F37828261260DC009DB701 /* Color+Extensions.swift in Sources */,
@@ -2294,6 +2309,7 @@
 				389ECDFE2601061500D86C4F /* View+Snapshot.swift in Sources */,
 				38FEF3FE2738083E00574A46 /* CGMProvider.swift in Sources */,
 				38E98A3725F5509500C0CED0 /* String+Extensions.swift in Sources */,
+				193B6FAA291AB9AC0087410F /* TenDaysStats.swift in Sources */,
 				F90692D1274B99B60037068D /* HealthKitProvider.swift in Sources */,
 				385CEAC125F2EA52002D6D5B /* Announcement.swift in Sources */,
 				8B759CFCF47B392BB365C251 /* BasalProfileEditorDataFlow.swift in Sources */,
@@ -2308,6 +2324,7 @@
 				CA370FC152BC98B3D1832968 /* BasalProfileEditorRootView.swift in Sources */,
 				E00EEC0327368630002FF094 /* ServiceAssembly.swift in Sources */,
 				38192E07261BA9960094D973 /* FetchTreatmentsManager.swift in Sources */,
+				19012CDC291D2CB900FB8210 /* LoopStats.swift in Sources */,
 				6632A0DC746872439A858B44 /* ISFEditorDataFlow.swift in Sources */,
 				DBA5254DBB2586C98F61220C /* ISFEditorProvider.swift in Sources */,
 				1BBB001DAD60F3B8CEA4B1C7 /* ISFEditorStateModel.swift in Sources */,
@@ -2356,6 +2373,7 @@
 				38569353270B5E350002C50D /* CGMRootView.swift in Sources */,
 				69A31254F2451C20361D172F /* BolusStateModel.swift in Sources */,
 				0CEA2EA070AB041AF3E3745B /* BolusRootView.swift in Sources */,
+				FEFFA7A22929FE49007B8193 /* UIDevice+Extensions.swift in Sources */,
 				F90692D3274B9A130037068D /* AppleHealthKitRootView.swift in Sources */,
 				3862CC1F273FDC9200BF832C /* CalibrationsChart.swift in Sources */,
 				711C0CB42CAABE788916BC9D /* ManualTempBasalDataFlow.swift in Sources */,
@@ -2543,7 +2561,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = "$(BUILD_VERSION)";
+				CURRENT_PROJECT_VERSION = $APP_VERSION;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2607,7 +2625,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = "$(BUILD_VERSION)";
+				CURRENT_PROJECT_VERSION = $APP_VERSION;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2634,12 +2652,12 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = "$(APP_DISPLAY_NAME)";
 				APP_GROUP_ID = "$(APP_GROUP_ID)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(APP_ICON)";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUNDLE_IDENTIFIER = "$(BUNDLE_IDENTIFIER)";
 				CODE_SIGN_ENTITLEMENTS = FreeAPS/Resources/FreeAPS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "$(BUILD_VERSION)";
+				CURRENT_PROJECT_VERSION = $APP_VERSION;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = "$(DEVELOPER_TEAM)";
 				ENABLE_PREVIEWS = YES;
@@ -2653,7 +2671,7 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/swift",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = "$(APP_VERSION)";
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					CoreNFC,
@@ -2670,12 +2688,12 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = "$(APP_DISPLAY_NAME)";
 				APP_GROUP_ID = "$(APP_GROUP_ID)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(APP_ICON)";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUNDLE_IDENTIFIER = "$(BUNDLE_IDENTIFIER)";
 				CODE_SIGN_ENTITLEMENTS = FreeAPS/Resources/FreeAPS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "$(BUILD_VERSION)";
+				CURRENT_PROJECT_VERSION = $APP_VERSION;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = "$(DEVELOPER_TEAM)";
 				ENABLE_PREVIEWS = YES;
@@ -2689,7 +2707,7 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/swift",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = "$(APP_VERSION)";
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					CoreNFC,
@@ -2706,20 +2724,20 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APP_DISPLAY_NAME = "$(APP_DISPLAY_NAME)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(APP_ICON)";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUNDLE_IDENTIFIER = "$(BUNDLE_IDENTIFIER)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = FreeAPSWatch/FreeAPSWatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "$(BUILD_VERSION)";
-				DEVELOPMENT_TEAM = "${DEVELOPER_TEAM}";
+				CURRENT_PROJECT_VERSION = $APP_VERSION;
+				DEVELOPMENT_TEAM = "$(DEVELOPER_TEAM)";
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = FreeAPSWatch_WatchKit_Extension;
 				INFOPLIST_KEY_CFBundleDisplayName = "FreeAPS X";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(BUNDLE_IDENTIFIER)";
-				MARKETING_VERSION = 0.2;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = ru.artpancreas.244D5GDCJ8.FreeAPS;
+				MARKETING_VERSION = "$(APP_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_IDENTIFIER).watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2736,20 +2754,20 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				APP_DISPLAY_NAME = "$(APP_DISPLAY_NAME)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$(APP_ICON)";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				BUNDLE_IDENTIFIER = "$(BUNDLE_IDENTIFIER)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = FreeAPSWatch/FreeAPSWatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "$(BUILD_VERSION)";
-				DEVELOPMENT_TEAM = "${DEVELOPER_TEAM}";
+				CURRENT_PROJECT_VERSION = $APP_VERSION;
+				DEVELOPMENT_TEAM = "$(DEVELOPER_TEAM)";
 				GENERATE_INFOPLIST_FILE = YES;
 				IBSC_MODULE = FreeAPSWatch_WatchKit_Extension;
 				INFOPLIST_KEY_CFBundleDisplayName = "FreeAPS X";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(BUNDLE_IDENTIFIER)";
-				MARKETING_VERSION = 0.2;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = ru.artpancreas.244D5GDCJ8.FreeAPS;
+				MARKETING_VERSION = "$(APP_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_IDENTIFIER).watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2770,7 +2788,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "FreeAPSWatch WatchKit Extension/FreeAPSWatch WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "$(BUILD_VERSION)";
+				CURRENT_PROJECT_VERSION = $APP_VERSION;
 				DEVELOPMENT_ASSET_PATHS = "\"FreeAPSWatch WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = "${DEVELOPER_TEAM}";
 				ENABLE_PREVIEWS = YES;
@@ -2778,6 +2796,9 @@
 				INFOPLIST_FILE = "FreeAPSWatch WatchKit Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "FreeAPS X WatchKit Extension";
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = FreeAPSWatch_WatchKit_Extension.ComplicationController;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Bla bla Record Health";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Bla bla Share Health";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Bla bla Update Health";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2785,7 +2806,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = "$(APP_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_IDENTIFIER).watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -2806,7 +2827,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "FreeAPSWatch WatchKit Extension/FreeAPSWatch WatchKit Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "$(BUILD_VERSION)";
+				CURRENT_PROJECT_VERSION = $APP_VERSION;
 				DEVELOPMENT_ASSET_PATHS = "\"FreeAPSWatch WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = "${DEVELOPER_TEAM}";
 				ENABLE_PREVIEWS = YES;
@@ -2814,6 +2835,9 @@
 				INFOPLIST_FILE = "FreeAPSWatch WatchKit Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "FreeAPS X WatchKit Extension";
 				INFOPLIST_KEY_CLKComplicationPrincipalClass = FreeAPSWatch_WatchKit_Extension.ComplicationController;
+				INFOPLIST_KEY_NSHealthClinicalHealthRecordsShareUsageDescription = "Bla bla Record Health";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Bla bla Share Health";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Bla bla Update Health";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2821,7 +2845,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = "$(APP_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_IDENTIFIER).watchkitapp.watchkitextension";
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
