@@ -113,7 +113,7 @@ extension PreferencesEditor {
                     displayName: "Enable Dynamic ISF",
                     type: .boolean(keypath: \.enableChris),
                     infoText: NSLocalizedString(
-                        "Change ISF with every loop cycle. New ISF will be based on current BG, TDD if insulin (past 24 hours or a weighted average) and an Adjustment Factor (default is 1). Dynamic ISF and CR ratios will be limited by your autosens.min/max limits. Dynamic ratio replaces the autosens.ratio: New ISF = Static ISF / Dynamic ratio",
+                        "Changes ISF with every loop cycle. New ISF will be based on current BG, TDD of insulin (past 24 hours or a weighted average) and an Adjustment Factor (default is 1). Dynamic ISF and CR ratios will be limited by your autosens.min/max limits. Dynamic ratio replaces the autosens.ratio: New ISF = Static ISF / Dynamic ratio",
                         comment: "Enable Dynamic ISF"
                     ),
                     settable: self
@@ -140,8 +140,8 @@ extension PreferencesEditor {
                     displayName: "Weighted Average of TDD. Weight of past 24 hours:",
                     type: .decimal(keypath: \.weightPercentage),
                     infoText: NSLocalizedString(
-                        "Has to be > 0 and <= 1.\nDefault is 0.65 (65 %) * past 24 hours. The rest will be from average of total data (14 days) of all TDD calculations (0.35). To only use past 24 hours, set this to 1.\nTo avoid sudden fluctuations, an average of the past 2 hours of TDD calcs is used instead of just the current TDD (past 24 hours at this moment).",
-                        comment: "Weight of past 24 hours of TDD"
+                        "Has to be > 0 and <= 1.\nDefault is 0.65 (65 %) * past 24 hours. The rest will be from average of total data (up to 14 days) of all TDD calculations (0.35). To only use past 24 hours, set this to 1.\nTo avoid sudden fluctuations, for instance after a big mesl, an average of the past 2 hours of TDD calcs is used instead of just the current TDD (past 24 hours at this moment).",
+                        comment: "Weight of past 24 hours of insulin"
                     ),
                     settable: self
                 ),
@@ -149,8 +149,8 @@ extension PreferencesEditor {
                     displayName: "Enable TDD-adjusted basal",
                     type: .boolean(keypath: \.tddAdjBasal),
                     infoText: NSLocalizedString(
-                        "Enable adjustment of basal based on the ratio of 24 h : 7 day average TDD",
-                        comment: "Enable adjustment of basal based on the ratio of 24 h : 7 day average TDD"
+                        "Enable adjustment of basal based on the ratio of current TDD / 7 day average TDD",
+                        comment: "Enable adjustment of basal based on the ratio of current TDD / 7 day average TDD"
                     ),
                     settable: self
                 ),
