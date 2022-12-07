@@ -19,7 +19,7 @@ struct DailyStats: JSON, Equatable {
     var TIR: String
     var BG_Average: String
     var HbA1c: String
-    var Loop_Cycles: String
+    var LoopStats: [LoopCycles]
 
     init(
         createdAt: Date,
@@ -40,7 +40,7 @@ struct DailyStats: JSON, Equatable {
         TIR: String,
         BG_Average: String,
         HbA1c: String,
-        Loop_Cycles: String
+        LoopStats: [LoopCycles]
     ) {
         self.createdAt = createdAt
         self.iPhone = iPhone
@@ -60,7 +60,7 @@ struct DailyStats: JSON, Equatable {
         self.TIR = TIR
         self.BG_Average = BG_Average
         self.HbA1c = HbA1c
-        self.Loop_Cycles = Loop_Cycles
+        self.LoopStats = LoopStats
     }
 
     static func == (lhs: DailyStats, rhs: DailyStats) -> Bool {
@@ -92,6 +92,36 @@ extension DailyStats {
         case TIR
         case BG_Average
         case HbA1c
-        case Loop_Cycles
+        case LoopStats
+    }
+}
+
+struct LoopCycles: JSON, Equatable {
+    var success_rate: Decimal
+    var loops: Int
+    var errors: Int
+    var median_interval: Decimal
+    var avg_interval: Decimal
+    var min_interval: Decimal
+    var max_interval: Decimal
+    var median_duration: Decimal
+    var avg_duration: Decimal
+    var min_duration: Decimal
+    var max_duration: Decimal
+}
+
+extension LoopCycles {
+    private enum CodingKeys: String, CodingKey {
+        case success_rate
+        case loops
+        case errors
+        case median_interval
+        case avg_interval
+        case min_interval
+        case max_interval
+        case median_duration
+        case avg_duration
+        case min_duration
+        case max_duration
     }
 }

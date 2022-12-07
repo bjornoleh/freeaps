@@ -1,21 +1,25 @@
 import Foundation
 
 struct LoopStats: JSON, Equatable {
-    var createdAt: Date
+    var start: Date
+    var end: Date?
+    var duration: Double?
     var loopStatus: String
 
     init(
-        createdAt: Date,
+        start: Date,
         loopStatus: String
     ) {
-        self.createdAt = createdAt
+        self.start = start
         self.loopStatus = loopStatus
     }
 }
 
 extension LoopStats {
     private enum CodingKeys: String, CodingKey {
-        case createdAt
+        case start
+        case end
+        case duration
         case loopStatus
     }
 }

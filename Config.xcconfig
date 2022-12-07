@@ -1,5 +1,5 @@
 APP_DISPLAY_NAME = FreeAPS X
-APP_VERSION = 0.2.8.61_bo_statistics
+APP_VERSION = 0.2.8.62_bo_updated_stats+removed_aISF
 APP_BUILD_NUMBER = 1
 BRANCH = bo
 DEVELOPER_TEAM = ##TEAM_ID##
