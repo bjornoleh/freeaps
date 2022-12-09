@@ -974,7 +974,7 @@ Enact a temp Basal or a temp target */
 /* ---------------------------------------
   DASH strings
 */
-"Attach Pod" = "Attach Pod";
+"Attach Pod" = "Pod anlegen";
 
 "Deactivate Pod" = "Pod deaktivieren";
 
@@ -987,7 +987,7 @@ Enact a temp Basal or a temp target */
 "Previous Pod Information" = "Previous Pod Information";
 
 /* Text for confidence reminders navigation link */
-"Confidence Reminders" = "Confidence Reminders";
+"Confidence Reminders" = "Pumpe Bestätigungstöne";
 
 "Confidence reminders are beeps from the pod which can be used to acknowledge selected commands." = "Confidence reminders are beeps from the pod which can be used to acknowledge selected commands.";
 
@@ -1034,10 +1034,10 @@ Enact a temp Basal or a temp target */
 "Low Reservoir" = "Low Reservoir";
 
 /* Value text for no expiration reminder */
-"No Reminder" = "No Reminder";
+"No Reminder" = "Keine Erinnerung";
 
 /* */
-"Scheduled Reminder" = "Scheduled Reminder";
+"Scheduled Reminder" = "Erinnerungen festlegen";
 
 /* */
 "Low Reservoir Reminder" = "Low Reservoir Reminder";
@@ -1089,10 +1089,10 @@ Enact a temp Basal or a temp target */
 "Insert Cannula" = "Kanüle einsetzen";
 
 /* */
-"Check Cannula" = "Check Cannula";
+"Check Cannula" = "Kanüle prüfen";
 
 /* */
-"Setup Complete" = "Setup Complete";
+"Setup Complete" = "Setup vollständig";
 
 /* */
 "Insulin Suspended" = "Insulin Suspended";
@@ -1107,7 +1107,7 @@ Enact a temp Basal or a temp target */
 "Resuming insulin delivery..." = "Resuming insulin delivery...";
 
 /* Alert title for suspend error */
-"Failed to Suspend Insulin Delivery" = "Failed to Suspend Insulin Delivery";
+"Failed to Suspend Insulin Delivery" = "Unterbrechung Insulinagabe fehlgeschlagen";
 
 /* --------------------------------------
 
