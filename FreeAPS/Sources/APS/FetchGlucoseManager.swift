@@ -34,7 +34,8 @@ final class BaseFetchGlucoseManager: FetchGlucoseManager, Injectable {
         case .xdrip:
             glucoseSource = AppGroupSource(from: "xDrip")
         case .dexcomG5,
-             .dexcomG6:
+             .dexcomG6,
+             .dexcomG7:
             glucoseSource = dexcomSource
         case .nightscout:
             glucoseSource = nightscoutManager
@@ -96,7 +97,7 @@ final class BaseFetchGlucoseManager: FetchGlucoseManager, Injectable {
             .publisher(for: \.dexcomTransmitterID)
             .removeDuplicates()
             .sink { id in
-                guard [.dexcomG5, .dexcomG6].contains(self.settingsManager.settings.cgm) else { return }
+                guard [.dexcomG5, .dexcomG6, .dexcomG7].contains(self.settingsManager.settings.cgm) else { return }
                 if id != self.dexcomSource.transmitterID {
                     self.dexcomSource = DexcomSource()
                 }
