@@ -60,10 +60,9 @@ struct TagCloudView: View {
             case textTag where textTag.contains("W.avg:"),
                  textTag where textTag.contains("14day:"):
                 return .gray
-            case textTag where textTag.contains("Parabolic Fit"):
-                return .loopRed
             case textTag where textTag.contains("TDD:"),
-                 textTag where textTag.contains("Original formula"),
+                 textTag where textTag.contains("tdd_factor"),
+                 textTag where textTag.contains("Sigmoid function"),
                  textTag where textTag.contains("Logarithmic formula"),
                  textTag where textTag.contains("Autosens/Dynamic Limit:"),
                  textTag where textTag.contains("Dynamic ISF/CR"),
