@@ -5,6 +5,7 @@ enum CGMType: String, JSON, CaseIterable, Identifiable {
 
     case nightscout
     case xdrip
+    case dexcomG7
     case dexcomG6
     case dexcomG5
     case simulator
@@ -20,6 +21,8 @@ enum CGMType: String, JSON, CaseIterable, Identifiable {
             return "xDrip"
         case .glucoseDirect:
             return "Glucose Direct"
+        case .dexcomG7:
+            return "Dexcom G7"
         case .dexcomG6:
             return "Dexcom G6"
         case .dexcomG5:
@@ -42,6 +45,8 @@ enum CGMType: String, JSON, CaseIterable, Identifiable {
             return URL(string: "xdripswift://")!
         case .glucoseDirect:
             return URL(string: "libredirect://")!
+        case .dexcomG7:
+            return URL(string: "dexcomg7://")!
         case .dexcomG6:
             return URL(string: "dexcomg6://")!
         case .dexcomG5:
@@ -72,6 +77,8 @@ enum CGMType: String, JSON, CaseIterable, Identifiable {
                 "Shared app group for direct connection with Libre 1 transmitters or European Libre 2 sensors",
                 comment: "Shared app group for direct connection with Libre 1 transmitters or European Libre 2 sensors"
             )
+        case .dexcomG7:
+            return NSLocalizedString("Native G7 app", comment: "Native G7 app")
         case .dexcomG6:
             return NSLocalizedString("Native G6 app", comment: "Native G6 app")
         case .dexcomG5:

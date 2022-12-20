@@ -25,7 +25,7 @@ extension CGM {
                         }
                     }
                 }
-                if [.dexcomG5, .dexcomG6].contains(state.cgm) {
+                if [.dexcomG5, .dexcomG6, .dexcomG7].contains(state.cgm) {
                     Section(header: Text("Transmitter ID")) {
                         TextField("XXXXXX", text: $state.transmitterID, onCommit: {
                             UIApplication.shared.endEditing()
