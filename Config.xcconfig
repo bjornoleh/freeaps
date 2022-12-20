@@ -1,5 +1,5 @@
 APP_DISPLAY_NAME = FreeAPS X
-APP_VERSION = 0.2.8.71_bo_sigmoid+stats_bdb
+APP_VERSION = 0.2.8.74_bo_sigmoid+stats_bdb+fix-low-TT
 APP_BUILD_NUMBER = 1
 BRANCH = bo
 DEVELOPER_TEAM = ##TEAM_ID##
