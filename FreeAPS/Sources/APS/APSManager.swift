@@ -1158,7 +1158,7 @@ final class BaseAPSManager: APSManager, Injectable {
             total: Decimal(totalDays_.hypers)
         )
 
-        let TimeInRange = TIRs(TIR: [tir], Hypos: [hypo], Hypers: [hyper])
+        let TimeInRange = TIRs(TIR: tir, Hypos: hypo, Hypers: hyper)
 
         let avgs = Average(
             day: roundDecimal(bg_1, 1),
@@ -1168,7 +1168,7 @@ final class BaseAPSManager: APSManager, Injectable {
             total: roundDecimal(bg_total, 1)
         )
 
-        let avg = Averages(Average: [avgs], Median: [median])
+        let avg = Averages(Average: avgs, Median: median)
 
         let dailystat = Statistics(
             createdAt: Date(),

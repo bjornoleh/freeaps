@@ -103,8 +103,8 @@ struct LoopCycles: JSON, Equatable {
 }
 
 struct Averages: JSON, Equatable {
-    var Average: [Average]
-    var Median: [Median]
+    var Average: Average
+    var Median: Median
 }
 
 struct Average: JSON, Equatable {
@@ -132,9 +132,9 @@ struct Hbs: JSON, Equatable {
 }
 
 struct TIRs: JSON, Equatable {
-    var TIR: [TIR]
-    var Hypos: [Hypos]
-    var Hypers: [Hypers]
+    var TIR: TIR
+    var Hypos: Hypos
+    var Hypers: Hypers
 }
 
 struct TIR: JSON, Equatable {
