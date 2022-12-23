@@ -1,7 +1,7 @@
 import Foundation
 
 struct Statistics: JSON, Equatable {
-    var createdAt: Date
+    var created_at: Date
     var iPhone: String
     var iOS: String
     var Build_Version: String
@@ -20,7 +20,7 @@ struct Statistics: JSON, Equatable {
     var Statistics: Stats
 
     init(
-        createdAt: Date,
+        created_at: Date,
         iPhone: String,
         iOS: String,
         Build_Version: String,
@@ -38,7 +38,7 @@ struct Statistics: JSON, Equatable {
         GlucoseStorage_Days: Decimal,
         Statistics: Stats
     ) {
-        self.createdAt = createdAt
+        self.created_at = created_at
         self.iPhone = iPhone
         self.iOS = iOS
         self.Build_Version = Build_Version
@@ -58,17 +58,17 @@ struct Statistics: JSON, Equatable {
     }
 
     static func == (lhs: Statistics, rhs: Statistics) -> Bool {
-        lhs.createdAt == rhs.createdAt
+        lhs.created_at == rhs.created_at
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(createdAt)
+        hasher.combine(created_at)
     }
 }
 
 extension Statistics {
     private enum CodingKeys: String, CodingKey {
-        case createdAt
+        case created_at
         case iPhone
         case iOS
         case Build_Version
