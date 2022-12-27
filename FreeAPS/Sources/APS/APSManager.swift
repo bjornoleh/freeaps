@@ -1187,8 +1187,13 @@ final class BaseAPSManager: APSManager, Injectable {
             TDD: roundDecimal(currentTDD, 2),
             Carbs_24h: carbTotal,
             GlucoseStorage_Days: Decimal(daysBG),
-            Statistics: Stats(Distribution: [TimeInRange], Glucose: [avg], HbA1c: [hbs], LoopCycles: [loopstat])
-            // LoopStats: [loopstat]
+            Statistics: Stats(
+                Distribution: TimeInRange,
+                Glucose: avg,
+                HbA1c: hbs,
+                LoopCycles: loopstat,
+                Insulin: insulin
+            )
         )
 
         storage.transaction { storage in

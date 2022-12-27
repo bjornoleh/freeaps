@@ -162,10 +162,11 @@ struct Hypers: JSON, Equatable {
 }
 
 struct Stats: JSON, Equatable {
-    var Distribution: [TIRs]
-    var Glucose: [Averages]
-    var HbA1c: [Hbs]
-    var LoopCycles: [LoopCycles]
+    var Distribution: TIRs
+    var Glucose: Averages
+    var HbA1c: Hbs
+    var LoopCycles: LoopCycles
+    var Insulin: Ins
 }
 
 extension LoopCycles {
