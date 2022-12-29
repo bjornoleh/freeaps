@@ -24,12 +24,12 @@ DEVICE_ID = ENV["DEVICE_ID"]
 ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "120"
 
 platform :ios do
-  desc "Build Loop"
-  lane :build_loop do
+  desc "Build FreeAPS X"
+  lane :build_fax do
     setup_ci if ENV['CI']
     
     update_project_team(
-      path: "#{GITHUB_WORKSPACE}/Loop/Loop.xcodeproj",
+      path: "#{GITHUB_WORKSPACE}/freeaps/FreeAPS.xcodeproj",
       teamid: "#{TEAMID}"
     )
 
@@ -40,14 +40,14 @@ platform :ios do
     )
 
     previous_build_number = latest_testflight_build_number(
-      app_identifier: "com.#{TEAMID}.loopkit.Loop",
+      app_identifier: "ru.artpancreas.#{TEAMID}.FreeAPS",
       api_key: api_key,
     )
 
     current_build_number = previous_build_number + 1
 
     increment_build_number(
-      xcodeproj: "#{GITHUB_WORKSPACE}/Loop/Loop.xcodeproj",
+      xcodeproj: "#{GITHUB_WORKSPACE}/freeaps/FreeAPS.xcodeproj",
       build_number: current_build_number
     )      
     
@@ -55,24 +55,21 @@ platform :ios do
       type: "appstore",
       git_basic_authorization: Base64.strict_encode64("#{GITHUB_REPOSITORY_OWNER}:#{GH_PAT}"),
       app_identifier: [
-        "com.#{TEAMID}.loopkit.Loop", 
-        "com.#{TEAMID}.loopkit.Loop.statuswidget", 
-        "com.#{TEAMID}.loopkit.Loop.LoopWatch.watchkitextension", 
-        "com.#{TEAMID}.loopkit.Loop.LoopWatch", 
-        "com.#{TEAMID}.loopkit.Loop.Loop-Intent-Extension",
-        "com.#{TEAMID}.loopkit.Loop.SmallStatusWidget"
+        "ru.artpancreas.#{TEAMID}.FreeAPS",
+        "ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp",
+        "ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp.watchkitextension"
       ]
     )
 
     previous_build_number = latest_testflight_build_number(
-      app_identifier: "com.#{TEAMID}.loopkit.Loop",
+      app_identifier: "ru.artpancreas.#{TEAMID}.FreeAPS",
       api_key: api_key,
     )
 
     current_build_number = previous_build_number + 1
 
     increment_build_number(
-      xcodeproj: "#{GITHUB_WORKSPACE}/Loop/Loop.xcodeproj",
+      xcodeproj: "#{GITHUB_WORKSPACE}/freeaps/FreeAPS.xcodeproj",
       build_number: current_build_number
     )
     
@@ -81,57 +78,30 @@ platform :ios do
     ]
 
     update_code_signing_settings(
-      path: "#{GITHUB_WORKSPACE}/Loop/Loop.xcodeproj",
-      profile_name: mapping["com.#{TEAMID}.loopkit.Loop"],
+      path: "#{GITHUB_WORKSPACE}/freeaps/FreeAPS.xcodeproj",
+      profile_name: mapping["ru.artpancreas.#{TEAMID}.FreeAPS"],
       code_sign_identity: "iPhone Distribution",
-      targets: ["Loop"]
+      targets: ["FreeAPS"]
     )
 
     update_code_signing_settings(
-      path: "#{GITHUB_WORKSPACE}/Loop/Loop.xcodeproj",
+      path: "#{GITHUB_WORKSPACE}/freeaps/FreeAPS.xcodeproj",
+      profile_name: mapping["ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp.watchkitextension"],
       code_sign_identity: "iPhone Distribution",
-      targets: ["LoopCore", "LoopCore-watchOS", "LoopUI"]
-    )
-
-    update_code_signing_settings(
-      path: "#{GITHUB_WORKSPACE}/Loop/Loop.xcodeproj",
-      profile_name: mapping["com.#{TEAMID}.loopkit.Loop.statuswidget"],
-      code_sign_identity: "iPhone Distribution",
-      targets: ["Loop Status Extension"]
+      targets: ["FreeAPSWatch WatchKit Extension"]
     )
     
     update_code_signing_settings(
-      path: "#{GITHUB_WORKSPACE}/Loop/Loop.xcodeproj",
-      profile_name: mapping["com.#{TEAMID}.loopkit.Loop.LoopWatch.watchkitextension"],
+      path: "#{GITHUB_WORKSPACE}/freeaps/FreeAPS.xcodeproj",
+      profile_name: mapping["ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp"],
       code_sign_identity: "iPhone Distribution",
-      targets: ["WatchApp Extension"]
-    )
-    
-    update_code_signing_settings(
-      path: "#{GITHUB_WORKSPACE}/Loop/Loop.xcodeproj",
-      profile_name: mapping["com.#{TEAMID}.loopkit.Loop.LoopWatch"],
-      code_sign_identity: "iPhone Distribution",
-      targets: ["WatchApp"]
-    )
-    
-    update_code_signing_settings(
-      path: "#{GITHUB_WORKSPACE}/Loop/Loop.xcodeproj",
-      profile_name: mapping["com.#{TEAMID}.loopkit.Loop.Loop-Intent-Extension"],
-      code_sign_identity: "iPhone Distribution",
-      targets: ["Loop Intent Extension"]
-    )
-    
-    update_code_signing_settings(
-      path: "#{GITHUB_WORKSPACE}/Loop/Loop.xcodeproj",
-      profile_name: mapping["com.#{TEAMID}.loopkit.Loop.SmallStatusWidget"],
-      code_sign_identity: "iPhone Distribution",
-      targets: ["SmallStatusWidgetExtension"]
+      targets: ["FreeAPSWatch"]
     )
 
     gym(
       export_method: "app-store",
-      scheme: "Loop (Workspace)",
-      output_name: "Loop.ipa",
+      scheme: "FreeAPS X",
+      output_name: "FAX.ipa",
       configuration: "Release",
       destination: 'generic/platform=iOS',
       buildlog_path: 'buildlog'
@@ -154,7 +124,7 @@ platform :ios do
     upload_to_testflight(
       api_key: api_key,
       skip_submission: false,
-      ipa: "Loop.ipa",
+      ipa: "FAX.ipa",
       skip_waiting_for_build_processing: true,
     )
   end
@@ -177,29 +147,17 @@ platform :ios do
       }
     end
 
-    configure_bundle_id("Loop", "com.#{TEAMID}.loopkit.Loop", [
+    configure_bundle_id("FreeAPS", "ru.artpancreas.#{TEAMID}.FreeAPS", [
       Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS,
-      Spaceship::ConnectAPI::BundleIdCapability::Type::HEALTHKIT,
-      Spaceship::ConnectAPI::BundleIdCapability::Type::PUSH_NOTIFICATIONS,
-      Spaceship::ConnectAPI::BundleIdCapability::Type::SIRIKIT
+      Spaceship::ConnectAPI::BundleIdCapability::Type::HEALTHKIT
     ])
 
-    configure_bundle_id("Loop Intent Extension", "com.#{TEAMID}.loopkit.Loop.Loop-Intent-Extension", [
-      Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS
+    configure_bundle_id("FreeAPSWatch WatchKit Extension", "ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp.watchkitextension", [
+      Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS,
+      Spaceship::ConnectAPI::BundleIdCapability::Type::HEALTHKIT
     ])
-
-    configure_bundle_id("Loop Status Extension", "com.#{TEAMID}.loopkit.Loop.statuswidget", [
-      Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS
-    ])
-
-    configure_bundle_id("WatchApp", "com.#{TEAMID}.loopkit.Loop.LoopWatch", [])
-
-    configure_bundle_id("WatchApp Extension", "com.#{TEAMID}.loopkit.Loop.LoopWatch.watchkitextension", [
-      Spaceship::ConnectAPI::BundleIdCapability::Type::HEALTHKIT,
-      Spaceship::ConnectAPI::BundleIdCapability::Type::SIRIKIT
-    ])
-
-    configure_bundle_id("Small Status Widget", "com.#{TEAMID}.loopkit.Loop.SmallStatusWidget", [
+    
+    configure_bundle_id("FreeAPSWatch", "ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp", [
       Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS
     ])
     
@@ -221,12 +179,9 @@ platform :ios do
       force: true,
       git_basic_authorization: Base64.strict_encode64("#{GITHUB_REPOSITORY_OWNER}:#{GH_PAT}"),
       app_identifier: [
-        "com.#{TEAMID}.loopkit.Loop", 
-        "com.#{TEAMID}.loopkit.Loop.statuswidget", 
-        "com.#{TEAMID}.loopkit.Loop.LoopWatch.watchkitextension", 
-        "com.#{TEAMID}.loopkit.Loop.LoopWatch", 
-        "com.#{TEAMID}.loopkit.Loop.Loop-Intent-Extension",
-        "com.#{TEAMID}.loopkit.Loop.SmallStatusWidget",
+        "ru.artpancreas.#{TEAMID}.FreeAPS",
+        "ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp.watchkitextension",
+        "ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp",
       ]
     )
   end
