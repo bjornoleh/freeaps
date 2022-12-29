@@ -1,5 +1,5 @@
 APP_DISPLAY_NAME = FreeAPS X
-APP_VERSION = 0.2.8.75_bo_stats_json+oref0-target+insulin
+APP_VERSION = 0.2.9
 APP_BUILD_NUMBER = 1
 BRANCH = bo
 DEVELOPER_TEAM = ##TEAM_ID##
