@@ -63,12 +63,14 @@ _Please note that in default builds of FreeAPS X, the app group is actually iden
     * FreeAPS watchkitapp
     * FreeAPS watchkitapp watchkitextension
 1. Click on the identifier's name.
-1. On the "App Groups" capabilies, click on the "Configure" button.
+1. On the "App Groups" capabilities, click on the "Configure" button.
 1. Select the "Loop App Group" _(yes, "Loop App Group" is correct)_
 1. Click "Continue".
 1. Click "Save".
 1. Click "Confirm".
 1. Remember to do this for each of the identifiers above.
+1. Additionally, for the FreeAPS identifier, please also add the "NFC Tag Reading" capability, following the same instructions as when adding the "App Groups" capabilities above.
+
 
 ## Create FreeAPS X App in App Store Connect
 
