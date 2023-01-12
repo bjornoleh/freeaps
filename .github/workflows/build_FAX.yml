@@ -1,6 +1,8 @@
 name: Build FAX
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 17 * */2 *' # Runs at 17:00 UTC every day in Jan, Mar, May, Jul, Sep and Nov.
 
 jobs:
   build:
