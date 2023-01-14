@@ -502,7 +502,7 @@ extension Home {
                 }
             }
         }
-        
+
         var legendPanel: some View {
             HStack(alignment: .center) {
 //                Group {
@@ -516,38 +516,18 @@ extension Home {
                     Text("COB")
                         .font(.system(size: 14, weight: .regular)).foregroundColor(.loopYellow)
                 }
-                .frame(maxWidth: .infinity, maxHeight: 130, alignment: .center)
-            }
-        }
-
-        @ViewBuilder private func averageTIRhca1c(
-            _ hba1c_all: String,
-            _ average_: String,
-            _ median_: String,
-            _ tir_low: String,
-            _ tir_high: String,
-            _ tir_: String,
-            _ hba1c_: String,
-            _ sd_: String,
-            _ cv_: String
-        ) -> some View {
-            HStack {
                 Group {
                     Circle().fill(Color.insulin).frame(width: 8, height: 8)
                         .padding(.leading, 8)
                     Text("IOB")
                         .font(.system(size: 14, weight: .regular)).foregroundColor(.insulin)
                 }
-            }
-            HStack {
                 Group {
                     Circle().fill(Color.uam).frame(width: 8, height: 8)
                         .padding(.leading, 8)
                     Text("UAM")
                         .font(.system(size: 14, weight: .regular)).foregroundColor(.uam)
                 }
-            }
-            HStack {
                 Group {
                     Circle().fill(Color.zt).frame(width: 8, height: 8)
                         .padding(.leading, 8)
@@ -564,79 +544,7 @@ extension Home {
 //                    .font(.system(size: 16, weight: .regular)).foregroundColor(.secondary)
 //                }
             }
-
-            if state.settingsManager.preferences.displayLoops {
-                HStack {
-                    Group {
-                        Text("Loops").font(.caption2).foregroundColor(.secondary)
-                        Text(
-                            tirFormatter
-                                .string(from: (state.statistics?.Statistics.LoopCycles.loops ?? 0) as NSNumber) ?? ""
-                        ).font(.footnote)
-                        Text("Average Interval").font(.caption2)
-                            .foregroundColor(.secondary)
-                        Text(
-                            targetFormatter
-                                .string(from: (state.statistics?.Statistics.LoopCycles.avg_interval ?? 0) as NSNumber) ??
-                                ""
-                        ).font(.footnote)
-                        Text("Median Duration").font(.caption2)
-                            .foregroundColor(.secondary)
-                        Text(
-                            numberFormatter
-                                .string(
-                                    from: (state.statistics?.Statistics.LoopCycles.median_duration ?? 0) as NSNumber
-                                ) ?? ""
-                        ).font(.footnote)
-                    }
-                }
-            }
-        }
-
-        var legendPanel: some View {
-            ZStack {
-                HStack(alignment: .center) {
-                    Group {
-                        Circle().fill(Color.loopGreen).frame(width: 8, height: 8)
-                        Text("BG")
-                            .font(.system(size: 12, weight: .bold)).foregroundColor(.loopGreen)
-                    }
-                    Group {
-                        Circle().fill(Color.insulin).frame(width: 8, height: 8)
-                            .padding(.leading, 8)
-                        Text("IOB")
-                            .font(.system(size: 12, weight: .bold)).foregroundColor(.insulin)
-                    }
-                    Group {
-                        Circle().fill(Color.zt).frame(width: 8, height: 8)
-                            .padding(.leading, 8)
-                        Text("ZT")
-                            .font(.system(size: 12, weight: .bold)).foregroundColor(.zt)
-                    }
-                    Group {
-                        Circle().fill(Color.loopYellow).frame(width: 8, height: 8)
-                            .padding(.leading, 8)
-                        Text("COB")
-                            .font(.system(size: 12, weight: .bold)).foregroundColor(.loopYellow)
-                    }
-                    Group {
-                        Circle().fill(Color.uam).frame(width: 8, height: 8)
-                            .padding(.leading, 8)
-                        Text("UAM")
-                            .font(.system(size: 12, weight: .bold)).foregroundColor(.uam)
-                    }
-
-                    if let eventualBG = state.eventualBG {
-                        Text(
-                            "⇢ " + numberFormatter.string(
-                                from: (state.units == .mmolL ? eventualBG.asMmolL : Decimal(eventualBG)) as NSNumber
-                            )!
-                        )
-                        .font(.system(size: 12, weight: .bold)).foregroundColor(.secondary)
-                    }
-                }
-                .frame(maxWidth: .infinity)
-            }
+            .frame(maxWidth: .infinity, maxHeight: 30)
         }
 
         var mainChart: some View {
