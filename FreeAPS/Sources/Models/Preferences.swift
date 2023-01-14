@@ -120,7 +120,6 @@ extension Preferences {
         case threshold_setting
         case enableSMB_high_bg
         case enableSMB_high_bg_target
-        case threshold_setting
         case high
         case low
         case updateInterval

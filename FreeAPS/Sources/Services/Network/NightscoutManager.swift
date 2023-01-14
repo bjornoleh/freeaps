@@ -300,36 +300,8 @@ final class BaseNightscoutManager: NightscoutManager, Injectable {
                 .store(in: &self.lifetime)
         }
 
-        // uploadBatteryAge(battery: battery)
         uploadPodAge()
     }
-
-    /* func uploadBatteryAge(battery: Battery?) {
-         let uploadedBatteryAge = storage.retrieve(OpenAPS.Nightscout.uploadedBatteryAge, as: [NigtscoutTreatment].self) ?? []
-         let batteryDate = uploadedBatteryAge.last?.createdAt ?? Date.distantPast
-
-         if let battery = battery, let percent = battery.percent, percent > 95,
-            abs(batteryDate.timeIntervalSinceNow) > TimeInterval(hours: 48)
-         {
-             let batteryTreatment = NigtscoutTreatment(
-                 duration: nil,
-                 rawDuration: nil,
-                 rawRate: nil,
-                 absolute: nil,
-                 rate: nil,
-                 eventType: .nsBatteryChange,
-                 createdAt: Date(),
-                 enteredBy: NigtscoutTreatment.local,
-                 bolus: nil,
-                 insulin: nil,
-                 notes: "\(percent)%",
-                 carbs: nil,
-                 targetTop: nil,
-                 targetBottom: nil
-             )
-             uploadTreatments([batteryTreatment], fileToSave: OpenAPS.Nightscout.uploadedBatteryAge)
-         }
-     } */
 
     func uploadPodAge() {
         let uploadedPodAge = storage.retrieve(OpenAPS.Nightscout.uploadedPodAge, as: [NigtscoutTreatment].self) ?? []
@@ -403,6 +375,14 @@ final class BaseNightscoutManager: NightscoutManager, Injectable {
                 value: item.rate,
                 timeAsSeconds: item.minutes * 60
             )
+        }
+
+        var nsUnits = ""
+        switch settingsManager.settings.units {
+        case .mgdL:
+            nsUnits = "mg/dl"
+        case .mmolL:
+            nsUnits = "mmol"
         }
 
         var carbs_hr: Decimal = 0

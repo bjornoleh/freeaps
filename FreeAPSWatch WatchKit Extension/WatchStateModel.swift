@@ -9,7 +9,6 @@ class WatchStateModel: NSObject, ObservableObject {
     @Published var glucose = "--"
     @Published var trend = "→"
     @Published var delta = "+0"
-    @Published var eventualBG = "--"
     @Published var lastLoopDate: Date?
     @Published var glucoseDate: Date?
     @Published var bolusIncrement: Decimal?
