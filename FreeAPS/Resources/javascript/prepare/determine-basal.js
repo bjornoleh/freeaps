@@ -3,12 +3,11 @@
 function generate(iob, currenttemp, glucose, profile, autosens = null, meal = null, microbolusAllowed = false, reservoir = null, clock = new Date(), pump_history, preferences, basalProfile, tdd, tdd_averages) {
 
     try {
-        console.log("Pumphistory: %o", pump_history);
         var middlewareReason = middleware(iob, currenttemp, glucose, profile, autosens, meal, reservoir, clock, pump_history, preferences, basalProfile, tdd, tdd_averages);
         console.log("Middleware reason: " + (middlewareReason || "Nothing changed"));
     } catch (error) {
         console.log("Invalid middleware: " + error);
-    }
+    };
 
     var glucose_status = freeaps_glucoseGetLast(glucose);
     var autosens_data = null;

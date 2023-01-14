@@ -404,13 +404,6 @@ final class BaseNightscoutManager: NightscoutManager, Injectable {
                 timeAsSeconds: item.minutes * 60
             )
         }
-        var nsUnits = ""
-        switch settingsManager.settings.units {
-        case .mgdL:
-            nsUnits = "mg/dl"
-        case .mmolL:
-            nsUnits = "mmol"
-        }
 
         var carbs_hr: Decimal = 0
         if let isf = sensitivities.sensitivities.map(\.sensitivity).first,

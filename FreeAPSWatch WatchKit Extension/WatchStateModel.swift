@@ -22,10 +22,11 @@ class WatchStateModel: NSObject, ObservableObject {
     @Published var isf: Decimal?
     @Published var tempTargets: [TempTargetWatchPreset] = []
     @Published var bolusAfterCarbs = true
-
     @Published var isCarbsViewActive = false
     @Published var isTempTargetViewActive = false
     @Published var isBolusViewActive = false
+    @Published var displayHR = false
+    @Published var eventualBG = ""
     @Published var isConfirmationViewActive = false {
         didSet {
             confirmationTimeout = nil
@@ -162,6 +163,7 @@ class WatchStateModel: NSObject, ObservableObject {
         bolusAfterCarbs = state.bolusAfterCarbs ?? true
         lastUpdate = Date()
         eventualBG = state.eventualBG ?? ""
+        displayHR = state.displayHR ?? false
     }
 }
 

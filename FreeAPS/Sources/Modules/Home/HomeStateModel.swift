@@ -13,6 +13,8 @@ extension Home {
 
         @Published var glucose: [BloodGlucose] = []
         @Published var suggestion: Suggestion?
+        @Published var statistics: Statistics?
+        @Published var displayStatistics = false
         @Published var enactedSuggestion: Suggestion?
         @Published var recentGlucose: BloodGlucose?
         @Published var glucoseDelta: Int?
@@ -45,6 +47,10 @@ extension Home {
         @Published var carbsRequired: Decimal?
         @Published var allowManualTemp = false
         @Published var units: GlucoseUnits = .mmolL
+        @Published var low: Decimal = 4
+        @Published var high: Decimal = 10
+        @Published var displaySD = false
+        @Published var displayLoops = false
         @Published var pumpDisplayState: PumpDisplayState?
         @Published var alarm: GlucoseAlarm?
         @Published var animatedBackground = false
@@ -61,8 +67,15 @@ extension Home {
             setupCarbs()
             setupBattery()
             setupReservoir()
+            setupStatistics()
 
             suggestion = provider.suggestion
+            statistics = provider.statistics
+            displayStatistics = settingsManager.settings.displayStatistics
+            low = settingsManager.preferences.low
+            high = settingsManager.preferences.high
+            displaySD = settingsManager.preferences.displaySD
+            displayLoops = settingsManager.preferences.displayLoops
             enactedSuggestion = provider.enactedSuggestion
             units = settingsManager.settings.units
             allowManualTemp = !settingsManager.settings.closedLoop
@@ -71,7 +84,6 @@ extension Home {
             carbsRequired = suggestion?.carbsReq
             alarm = provider.glucoseStorage.alarm
             manualTempBasal = apsManager.isManualTempBasal
-
             setStatusTitle()
             setupCurrentTempTarget()
 
@@ -289,9 +301,11 @@ extension Home {
                let timestamp = enactedSuggestion.timestamp,
                enactedSuggestion.deliverAt == suggestion.deliverAt, enactedSuggestion.recieved == true
             {
-                statusTitle = "Enacted at \(dateFormatter.string(from: timestamp))"
+                statusTitle = NSLocalizedString("Enacted at", comment: "Headline in enacted pop up") + " " + dateFormatter
+                    .string(from: timestamp)
             } else if let suggestedDate = suggestion.deliverAt {
-                statusTitle = "Suggested at \(dateFormatter.string(from: suggestedDate))"
+                statusTitle = NSLocalizedString("Suggested at", comment: "Headline in suggested pop up") + " " + dateFormatter
+                    .string(from: suggestedDate)
             } else {
                 statusTitle = "Suggested"
             }
@@ -304,6 +318,13 @@ extension Home {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.reservoir = self.provider.pumpReservoir()
+            }
+        }
+
+        private func setupStatistics() {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.statistics = self.provider.statistics
             }
         }
 
@@ -350,6 +371,7 @@ extension Home.StateModel:
 {
     func glucoseDidUpdate(_: [BloodGlucose]) {
         setupGlucose()
+        setupStatistics()
     }
 
     func suggestionDidUpdate(_ suggestion: Suggestion) {
@@ -360,11 +382,17 @@ extension Home.StateModel:
 
     func settingsDidChange(_ settings: FreeAPSSettings) {
         allowManualTemp = !settings.closedLoop
+        displayStatistics = settingsManager.settings.displayStatistics
         closedLoop = settingsManager.settings.closedLoop
+        low = settingsManager.preferences.low
+        high = settingsManager.preferences.high
+        displaySD = settingsManager.preferences.displaySD
+        displayLoops = settingsManager.preferences.displayLoops
         units = settingsManager.settings.units
         animatedBackground = settingsManager.settings.animatedBackground
         manualTempBasal = apsManager.isManualTempBasal
         setupGlucose()
+        setupStatistics()
     }
 
     func pumpHistoryDidUpdate(_: [PumpHistoryEvent]) {
@@ -392,6 +420,7 @@ extension Home.StateModel:
     func enactedSuggestionDidUpdate(_ suggestion: Suggestion) {
         enactedSuggestion = suggestion
         setStatusTitle()
+        setupStatistics()
     }
 
     func pumpBatteryDidChange(_: Battery) {
