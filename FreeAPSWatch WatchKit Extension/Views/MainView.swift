@@ -12,6 +12,12 @@ struct MainView: View {
     @State var isTargetsActive = false
     @State var isBolusActive = false
 
+    @GestureState var isDetectingLongPress = false
+    @State var completedLongPress = false
+
+    private var healthStore = HKHealthStore()
+    let heartRateQuantity = HKUnit(from: "count/min")
+
     var body: some View {
         ZStack(alignment: .topLeading) {
             if state.timerDate.timeIntervalSince(state.lastUpdate) > 10 {
@@ -74,7 +80,7 @@ struct MainView: View {
 
                 VStack(spacing: 0) {
                     HStack {
-                        Circle().stroke(color, lineWidth: 6).frame(width: 30, height: 30).padding(10)
+                        Circle().stroke(color, lineWidth: 5).frame(width: 26, height: 26).padding(10)
                     }
 
                     if state.lastLoopDate != nil {
@@ -119,6 +125,19 @@ struct MainView: View {
             }
             Spacer()
         }.padding()
+    }
+
+    var longPress: some Gesture {
+        LongPressGesture(minimumDuration: 1)
+            .updating($isDetectingLongPress) { currentState, gestureState,
+                _ in
+                gestureState = currentState
+            }
+            .onEnded { _ in
+                if completedLongPress {
+                    completedLongPress = false
+                } else { completedLongPress = true }
+            }
     }
 
     var buttons: some View {
