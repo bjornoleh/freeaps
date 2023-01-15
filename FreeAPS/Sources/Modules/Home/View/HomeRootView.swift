@@ -700,7 +700,7 @@ extension Home {
                     mainChart
                     legendPanel
                         .background(Color.secondary.opacity(0.05))
-                    Divider().background(Color.gray)
+                    //  Divider().background(Color.gray)
                     statPanel()
                     bottomPanel(geo)
                 }
