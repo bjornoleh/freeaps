@@ -1,3 +1,4 @@
+import HealthKit
 import SwiftDate
 import SwiftUI
 
@@ -11,6 +12,10 @@ struct MainView: View {
     @State var isCarbsActive = false
     @State var isTargetsActive = false
     @State var isBolusActive = false
+    @State private var pulse = 0
+
+    private var healthStore = HKHealthStore()
+    let heartRateQuantity = HKUnit(from: "count/min")
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -21,7 +26,7 @@ struct MainView: View {
                             .frame(width: 14, height: 14)
                             .padding(2)
                     }
-                    Text("Updating...").font(.caption).foregroundColor(.secondary)
+                    Text("Updating...").font(.caption2).foregroundColor(.secondary)
                 }
             }
             VStack {
@@ -57,18 +62,12 @@ struct MainView: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading) {
                     HStack {
-                        Text(state.glucose).font(.largeTitle)
-                            .scaledToFill()
-                            .minimumScaleFactor(0.5)
-                            .padding(.top, 4)
+                        Text(state.glucose).font(.title)
                         Text(state.trend)
                             .scaledToFill()
                             .minimumScaleFactor(0.5)
                     }
-                    Text(state.delta).font(.caption)
-                        .scaledToFill()
-                        .minimumScaleFactor(0.5)
-                        .foregroundColor(.secondary)
+                    Text(state.delta).font(.caption2).foregroundColor(.gray)
                 }
                 Spacer()
 
@@ -78,39 +77,50 @@ struct MainView: View {
                     }
 
                     if state.lastLoopDate != nil {
-                        Text(timeString).font(.caption)
-                            .scaledToFill()
-                            .minimumScaleFactor(0.5)
-                            .foregroundColor(.secondary)
+                        Text(timeString).font(.caption2).foregroundColor(.gray)
                     } else {
-                        Text("--").font(.caption)
+                        Text("--").font(.caption2).foregroundColor(.gray)
                     }
                 }
             }
             Spacer()
             HStack(alignment: .firstTextBaseline) {
-                HStack {
-                    Text(iobFormatter.string(from: (state.cob ?? 0) as NSNumber)! + " g")
-                        .font(.caption)
-                        .scaledToFill()
-                        .foregroundColor(.loopYellow)
-                        .minimumScaleFactor(0.5)
-
-                }.minimumScaleFactor(0.5)
+                Text(iobFormatter.string(from: (state.cob ?? 0) as NSNumber)!)
+                    .font(.caption2)
+                    .scaledToFill()
+                    .foregroundColor(Color.white)
+                    .minimumScaleFactor(0.5)
+                Text("g").foregroundColor(.loopGreen)
+                    .font(.caption2)
+                    .scaledToFill()
+                    .foregroundColor(.loopGreen)
+                    .minimumScaleFactor(0.5)
                 Spacer()
-                HStack {
-                    Text(iobFormatter.string(from: (state.iob ?? 0) as NSNumber)! + " U")
-                        .font(.caption)
-                        .scaledToFill()
-                        .foregroundColor(.insulin)
-                        .minimumScaleFactor(0.5)
-                }
+                Text(iobFormatter.string(from: (state.iob ?? 0) as NSNumber)!)
+                    .font(.caption2)
+                    .scaledToFill()
+                    .foregroundColor(Color.white)
+                    .minimumScaleFactor(0.5)
 
-                if let eventualBG = state.eventualBG.nonEmpty {
+                Text("U").foregroundColor(.insulin)
+                    .font(.caption2)
+                    .scaledToFill()
+                    .foregroundColor(.loopGreen)
+                    .minimumScaleFactor(0.5)
+
+                if !state.displayHR {
+                    Spacer()
+                    HStack {
+                        Text("❤️" + " \(pulse)")
+                            .fontWeight(.regular)
+                            .font(.system(size: 18)).foregroundColor(Color.white)
+                    }
+
+                } else if let eventualBG = state.eventualBG.nonEmpty {
                     Spacer()
                     HStack {
                         Text(eventualBG)
-                            .font(.caption)
+                            .font(.caption2)
                             .scaledToFill()
                             .foregroundColor(.secondary)
                             .minimumScaleFactor(0.5)
@@ -118,6 +128,7 @@ struct MainView: View {
                 }
             }
             Spacer()
+                .onAppear(perform: start)
         }.padding()
     }
 
@@ -131,7 +142,25 @@ struct MainView: View {
                     .renderingMode(.template)
                     .resizable()
                     .frame(width: 24, height: 24)
-                    .foregroundColor(.loopYellow)
+                    .foregroundColor(.loopGreen)
+            }
+
+            NavigationLink(isActive: $state.isTempTargetViewActive) {
+                TempTargetsView()
+                    .environmentObject(state)
+            } label: {
+                VStack {
+                    Image("target", bundle: nil)
+                        .renderingMode(.template)
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(.loopYellow)
+                    if let until = state.tempTargets.compactMap(\.until).first, until > Date() {
+                        Text(until, style: .timer)
+                            .scaledToFill()
+                            .font(.system(size: 8))
+                    }
+                }
             }
 
             NavigationLink(isActive: $state.isBolusViewActive) {
@@ -144,24 +173,48 @@ struct MainView: View {
                     .frame(width: 24, height: 24)
                     .foregroundColor(.insulin)
             }
+        }
+    }
 
-            NavigationLink(isActive: $state.isTempTargetViewActive) {
-                TempTargetsView()
-                    .environmentObject(state)
-            } label: {
-                VStack {
-                    Image("target", bundle: nil)
-                        .renderingMode(.template)
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(.loopGreen)
-                    if let until = state.tempTargets.compactMap(\.until).first, until > Date() {
-                        Text(until, style: .relative)
-                            .scaledToFill().fixedSize()
-                            .font(.system(size: 8))
-                    }
-                }
+    func start() {
+        autorizeHealthKit()
+        startHeartRateQuery(quantityTypeIdentifier: .heartRate)
+    }
+
+    func autorizeHealthKit() {
+        let healthKitTypes: Set = [
+            HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
+        ]
+        healthStore.requestAuthorization(toShare: healthKitTypes, read: healthKitTypes) { _, _ in }
+    }
+
+    private func startHeartRateQuery(quantityTypeIdentifier: HKQuantityTypeIdentifier) {
+        let devicePredicate = HKQuery.predicateForObjects(from: [HKDevice.local()])
+        let updateHandler: (HKAnchoredObjectQuery, [HKSample]?, [HKDeletedObject]?, HKQueryAnchor?, Error?) -> Void = {
+            _, samples, _, _, _ in
+            guard let samples = samples as? [HKQuantitySample] else {
+                return
             }
+            self.process(samples, type: quantityTypeIdentifier)
+        }
+        let query = HKAnchoredObjectQuery(
+            type: HKObjectType.quantityType(forIdentifier: quantityTypeIdentifier)!,
+            predicate: devicePredicate,
+            anchor: nil,
+            limit: HKObjectQueryNoLimit,
+            resultsHandler: updateHandler
+        )
+        query.updateHandler = updateHandler
+        healthStore.execute(query)
+    }
+
+    private func process(_ samples: [HKQuantitySample], type: HKQuantityTypeIdentifier) {
+        var lastHeartRate = 0.0
+        for sample in samples {
+            if type == .heartRate {
+                lastHeartRate = sample.quantity.doubleValue(for: heartRateQuantity)
+            }
+            pulse = Int(lastHeartRate)
         }
     }
 
@@ -204,7 +257,6 @@ struct ContentView_Previews: PreviewProvider {
         state.delta = "+888"
         state.iob = 100.38
         state.cob = 112.123
-        state.eventualBG = "⇢ 8,888"
         state.lastLoopDate = Date().addingTimeInterval(-200)
         state
             .tempTargets =

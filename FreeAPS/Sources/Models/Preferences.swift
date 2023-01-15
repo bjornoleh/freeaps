@@ -54,6 +54,13 @@ struct Preferences: JSON {
     var maxCRratio: Decimal = 1
     var tddAdjBasal: Bool = false
     var threshold_setting: Decimal = 65
+    var enableSMB_high_bg: Bool = false
+    var enableSMB_high_bg_target: Decimal = 110
+    var high: Decimal = 10
+    var low: Decimal = 4
+    var updateInterval: Decimal = 30
+    var overrideHbA1cUnit: Bool = false
+    var displayLoops: Bool = false
 }
 
 extension Preferences {
@@ -110,6 +117,13 @@ extension Preferences {
         case maxCRratio
         case tddAdjBasal
         case threshold_setting
+        case enableSMB_high_bg
+        case enableSMB_high_bg_target
+        case high
+        case low
+        case updateInterval
+        case overrideHbA1cUnit
+        case displayLoops
     }
 }
 

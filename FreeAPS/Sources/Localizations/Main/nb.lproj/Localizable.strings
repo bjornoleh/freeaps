@@ -1109,6 +1109,114 @@ Enact a temp Basal or a temp target */
 /* Alert title for suspend error */
 "Failed to Suspend Insulin Delivery" = "Insulintilførselen kunne ikke settes på pause";
 
+//* -----------------------------------------------------------------------*/
+/* ----------------------Statistics strings -------------------------------*/
+/* Headline Statistics */
+
+
+"Statistics" = "Statistikk";
+
+/* Option in preferences */
+"Display Statistics" = "Vis statistikk";
+
+/* infoText: Description for Display Statistics */
+"Displays Statistics under the chart view" = "Viser statistikk under diagramvisningen";
+
+/* Low Glucose Limit option in preferences */
+"Low Glucose Limit" = "Grense for lavt BS";
+
+/* High Glucose Limit option in preferences */
+"High Glucose Limit" = "Grense for høyt BS";
+
+/* infoText: Description for Low Glucose Limit */
+"BG Under This Value Will Be Displayed As Low Glucose Percentage" = "Blodsukker under denne verdien vil vises som lav glukoseprosent";
+/* infoText: Description for High Glucose Limit */
+"BG Under This Value Will Be Displayed As High Glucose Percentage" = "Blodsukker under denne verdien vil vises som høy glukoseprosent";
+
+/* When statistics.json was last updated */
+"Updated" = "Oppdatert";
+
+/* Average BG = */
+"Average" = "Gj.snitt";
+
+/* Median BG */
+"Median" = "Median";
+
+/* Normal BG (within TIR) */
+"Normal" = "Normalt";
+
+/* Title High BG in statPanel */
+"High (>" = "Høyt (>";
+
+/* Title Low BG in statPanel */
+"Low (<" = "Lavt (<";
+
+/* SD */
+"SD" = "SD";
+
+/* CV */
+"CV" = "CV";
+
+/* Estimated HbA1c */
+"HbA1c" = "HbA1c";
+
+/* Total number of days of data for HbA1c estimation, part 1/2*/
+"All" = "Alle";
+
+/* Total number of days of data for HbA1c estimation, part 2/2*/
+"days" = "dager";
+
+/* Nr of Loops in statPanel */
+"Loops" = "Loops";
+
+/* Loop Errors in statPanel */
+"Errors" = "Feil";
+
+/* Average loop interval */
+"Interval" = "Intervall";
+
+/* Median loop interval */
+"Duration" = "Varighet";
+
+/* "Display SD */
+"Display SD instead of CV" = "Vis SD i stedet for CV";
+
+/* Description for display SD */
+"Display Standard Deviation (SD) instead of Coefficient of Variation (CV) in statPanel" = "Vis standardavvik (SD) i stedet for variasjonskoeffisient (CV) i statistikkpanel";
+
+/* How often to update the statistics */
+"Update every number of minutes:" = "Tid mellom oppdatering (i minutter):";
+
+/* Description for update interval for statistics */
+"Default is 30 minutes. How often to update and save the statistics.json and to upload last array, when enabled, to Nightscout. A lower interval than for glucose updates (5 min) is pointless." = "Standard er 30 minutter. Hvor ofte skal statistics.json oppdateres og lagres og, hvis aktivert, data lates opp til Nightscout. Et lavere intervall enn for BS (5 minutter) er meningsløst.";
+
+/* Duration displayed in statPanel */
+"Past 24 Hours " = "Siste 24 timer ";
+
+/* Duration displayed in statPanel */
+"Past Week " = "Siste uke ";
+
+/* Duration displayed in statPanel */
+"Past Month " = "Siste måned ";
+
+/* Duration displayed in statPanel */
+"Past 90 Days " = "Siste 90 dager ";
+
+/* Duration displayed in statPanel */
+"All Past Days of Data " = "Alle tidligere dager med data ";
+
+/* "Display Loop statistics in statPanel */
+"Display Loop Cycle statistics" = "Vis statistikk for loop-sykluser";
+
+/* Description for Display Loop statistics */
+"Displays Loop statistics in the statPanel in Home View" = "Viser Loop-statistikk i statPanel på hjemmeskjermen";
+
+/* Display % */
+"Override HbA1c unit" = "Overstyre HbA1c-enhet";
+
+/* Description for Override HbA1c unit */
+"Change default HbA1c unit in statPanlel. The unit in statPanel will be updateded with next statistics.json update" = "Endre enhet for HbA1c i statPanel. Enheten i statPanel vil bli oppdatert neste gang statistikken oppdateres";
+
 /* --------------------------------------
 
   Infotexts from openaps.docs and androidaps.docs
@@ -1213,7 +1321,7 @@ Enact a temp Basal or a temp target */
 "Defaults to start at 30. This is the maximum minutes of basal that can be delivered by UAM as a single SMB when IOB exceeds COB. This gives the ability to make UAM more or less aggressive if you choose. It is recommended that the value is set to start at 30, in line with the default, and if you choose to increase this value, do so in no more than 15 minute increments, keeping a close eye on the effects of the changes. Reducing the value will cause UAM to dose less insulin for each SMB. It is not recommended to set this value higher than 60 mins, as this may affect the ability for the algorithm to safely zero temp. It is also recommended that pushover is used when setting the value to be greater than default, so that alerts are generated for any predicted lows or highs." = "Standardverdi er 30. Dette er maksimalt antall minutter basal som kan bli levert av UAM som én enkelt SMB når IOB er mer enn COB. Dette gir muligheten til å gjøre UAM mer eller mindre aggressiv hvis du ønsker det. Det er anbefalt at verdien starter på 30, og at du ikke endrer med mer enn 15 minutter av gangen. Hvis du reduserer verdien vil UAM dosere mindre insulin for hver SMB. Det er ikke anbefalt å sette verdien høyere enn 60 min, da det kan påvirke algoritmens mulighet til trygt å sette 0-mål. Det er også anbefalt at pushover benyttes dersom du setter en verdi høyere enn standard. Dette gir varsler for enhver antatt lav eller høy verdi.";
 
 /* "SMB Interval" */
-"Minimum duration in minutes between two enacted SMBs" = "Minimum varighet i minutter mellom to SMB'er";
+"Minimum duration in minutes for new SMB since last SMB or manual bolus" = "Minimum varighet i minutter for ny SMB, etter siste SMB eller manuell bolus";
 
 /* "Bolus Increment" */
 "Smallest SMB / SMB increment in oref0. Minimum amount for Medtronic pumps is 0.1 U, whereas for Omnipod it’s 0.05 U. The default value is 0.1." = "Minste mulige endring i SMB-dose i oref0. For Medtronic er minste mulig endring 0,1 U. For Omnipod er minste mulige endring 0,05 E.";
