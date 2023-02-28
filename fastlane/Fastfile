@@ -40,7 +40,7 @@ platform :ios do
     )
 
     previous_build_number = latest_testflight_build_number(
-      app_identifier: "ru.artpancreas.#{TEAMID}.FreeAPS",
+      app_identifier: "ru.artpancreas.#{TEAMID}.FreeAPS-bdb",
       api_key: api_key,
     )
 
@@ -55,14 +55,14 @@ platform :ios do
       type: "appstore",
       git_basic_authorization: Base64.strict_encode64("#{GITHUB_REPOSITORY_OWNER}:#{GH_PAT}"),
       app_identifier: [
-        "ru.artpancreas.#{TEAMID}.FreeAPS",
-        "ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp",
-        "ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp.watchkitextension"
+        "ru.artpancreas.#{TEAMID}.FreeAPS-bdb",
+        "ru.artpancreas.#{TEAMID}.FreeAPS-bdb.watchkitapp",
+        "ru.artpancreas.#{TEAMID}.FreeAPS-bdb.watchkitapp.watchkitextension"
       ]
     )
 
     previous_build_number = latest_testflight_build_number(
-      app_identifier: "ru.artpancreas.#{TEAMID}.FreeAPS",
+      app_identifier: "ru.artpancreas.#{TEAMID}.FreeAPS-bdb",
       api_key: api_key,
     )
 
@@ -79,21 +79,21 @@ platform :ios do
 
     update_code_signing_settings(
       path: "#{GITHUB_WORKSPACE}/FreeAPS.xcodeproj",
-      profile_name: mapping["ru.artpancreas.#{TEAMID}.FreeAPS"],
+      profile_name: mapping["ru.artpancreas.#{TEAMID}.FreeAPS-bdb"],
       code_sign_identity: "iPhone Distribution",
       targets: ["FreeAPS"]
     )
 
     update_code_signing_settings(
       path: "#{GITHUB_WORKSPACE}/FreeAPS.xcodeproj",
-      profile_name: mapping["ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp.watchkitextension"],
+      profile_name: mapping["ru.artpancreas.#{TEAMID}.FreeAPS-bdb.watchkitapp.watchkitextension"],
       code_sign_identity: "iPhone Distribution",
       targets: ["FreeAPSWatch WatchKit Extension"]
     )
     
     update_code_signing_settings(
       path: "#{GITHUB_WORKSPACE}/FreeAPS.xcodeproj",
-      profile_name: mapping["ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp"],
+      profile_name: mapping["ru.artpancreas.#{TEAMID}.FreeAPS-bdb.watchkitapp"],
       code_sign_identity: "iPhone Distribution",
       targets: ["FreeAPSWatch"]
     )
@@ -147,17 +147,17 @@ platform :ios do
       }
     end
 
-    configure_bundle_id("FreeAPS", "ru.artpancreas.#{TEAMID}.FreeAPS", [
+    configure_bundle_id("FreeAPS", "ru.artpancreas.#{TEAMID}.FreeAPS-bdb", [
       Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS,
       Spaceship::ConnectAPI::BundleIdCapability::Type::HEALTHKIT
     ])
 
-    configure_bundle_id("FreeAPSWatch WatchKit Extension", "ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp.watchkitextension", [
+    configure_bundle_id("FreeAPSWatch WatchKit Extension", "ru.artpancreas.#{TEAMID}.FreeAPS-bdb.watchkitapp.watchkitextension", [
       Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS,
       Spaceship::ConnectAPI::BundleIdCapability::Type::HEALTHKIT
     ])
     
-    configure_bundle_id("FreeAPSWatch", "ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp", [
+    configure_bundle_id("FreeAPSWatch", "ru.artpancreas.#{TEAMID}.FreeAPS-bdb.watchkitapp", [
       Spaceship::ConnectAPI::BundleIdCapability::Type::APP_GROUPS
     ])
     
@@ -179,9 +179,9 @@ platform :ios do
       force: true,
       git_basic_authorization: Base64.strict_encode64("#{GITHUB_REPOSITORY_OWNER}:#{GH_PAT}"),
       app_identifier: [
-        "ru.artpancreas.#{TEAMID}.FreeAPS",
-        "ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp.watchkitextension",
-        "ru.artpancreas.#{TEAMID}.FreeAPS.watchkitapp",
+        "ru.artpancreas.#{TEAMID}.FreeAPS-bdb",
+        "ru.artpancreas.#{TEAMID}.FreeAPS-bdb.watchkitapp.watchkitextension",
+        "ru.artpancreas.#{TEAMID}.FreeAPS-bdb.watchkitapp",
       ]
     )
   end
